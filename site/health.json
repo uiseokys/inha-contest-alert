@@ -4,30 +4,29 @@
   "build": {
     "version": "7.0.0",
     "fingerprint": "f1b571df8d37",
-    "commit": "7cff69ff004ec1c38e3c13aa18288e0dcf339b38",
-    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35756327549",
-    "run_id": "35756327549"
+    "commit": "cfcabbde7149121347540f0aaec9654b50576337",
+    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35757451818",
+    "run_id": "35757451818"
   },
-  "generated_at": "2026-09-23T01:54:05.938209+09:00",
+  "generated_at": "2026-09-23T01:58:27.871123+09:00",
   "collection": {
     "version": "7.0.0",
     "fingerprint": "f1b571df8d37",
-    "commit": "7cff69ff004ec1c38e3c13aa18288e0dcf339b38",
-    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35756327549",
-    "run_id": "35756327549",
+    "commit": "cfcabbde7149121347540f0aaec9654b50576337",
+    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35757451818",
+    "run_id": "35757451818",
     "status": "complete",
-    "attempted_at": "2026-09-23T01:51:51.131569+09:00",
-    "finished_at": "2026-09-23T01:54:05.927393+09:00",
+    "attempted_at": "2026-09-23T01:57:55.778604+09:00",
+    "finished_at": "2026-09-23T01:58:27.859906+09:00",
     "enabled_sources": 8,
     "ok_sources": 8
   },
-  "last_usable_at": "2026-09-23T01:54:05.927393+09:00",
-  "last_complete_at": "2026-09-23T01:54:05.927393+09:00",
+  "last_usable_at": "2026-09-23T01:58:27.859906+09:00",
+  "last_complete_at": "2026-09-23T01:58:27.859906+09:00",
   "notification": {
-    "status": "accepted",
-    "day": "2026-09-22",
-    "at": "2026-09-22T16:20:58.567206+09:00",
-    "accepted_at": "2026-09-22T16:21:00.506694+09:00"
+    "status": "reserved",
+    "day": "2026-09-23",
+    "at": "2026-09-23T01:54:06.152995+09:00"
   },
   "notification_note": "ntfy 수락은 휴대폰 표시 성공이 아닙니다."
 }
