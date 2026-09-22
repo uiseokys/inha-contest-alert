@@ -13,6 +13,7 @@ from urllib.robotparser import RobotFileParser
 import requests
 from bs4 import BeautifulSoup
 from .core import canonical,parse_listing,detail_fields,merge_items
+from .details import PARSER_VERSION,schedule_links
 
 AGENT='ContestNoticeMonitor/0.2'
 class FetchError(RuntimeError):
@@ -160,26 +161,74 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
         for item in all_records:
             old=state['items'].get(item['id'],{})
             attempted=old.get('detail_attempted_at') or old.get('detail_checked_at','')
-            if not attempted or attempted[:10]<(now.date()-timedelta(days=2)).isoformat():
-                grouped[item['source_id']].append((attempted,item))
-        queues=[deque(x[1] for x in sorted(rows,key=lambda row:row[0])) for rows in grouped.values() if rows]
+            missing=not (old.get('registration_start') and old.get('deadline'))
+            upgraded=old.get('date_parser_version')!=PARSER_VERSION
+            due_day=now.date().isoformat() if missing else (now.date()-timedelta(days=2)).isoformat()
+            if upgraded or not attempted or attempted[:10]<due_day:
+                grouped[item['source_id']].append((0 if missing else 1,attempted,item))
+        queues=[deque(x[2] for x in sorted(rows,key=lambda row:(row[0],row[1]))) for rows in grouped.values() if rows]
         due=[];budget=config.get('max_detail_requests',30)
         while queues and len(due)<budget:
             for queue in queues:
                 if queue and len(due)<budget:due.append(queue.popleft())
             queues=[q for q in queues if q]
+        # Extra requests are bounded independently of the number of notices.
+        # This keeps the existing 18-minute workflow and free-host usage modest.
+        extra_left=config.get('max_extra_detail_requests',18)
+        browser_left=config.get('max_browser_detail_requests',8)
+        stop_at=time.monotonic()+config.get('detail_time_budget_seconds',360)
         for item in due:
             report=state['sources'][item['source_id']]
+            if time.monotonic()>=stop_at:
+                report['detail_deferred']=report.get('detail_deferred',0)+1;continue
             item['detail_attempted_at']=stamp
+            item['date_parser_version']=PARSER_VERSION
             source=source_map[item['source_id']]
+            def needs_dates(fields):
+                return not (fields.get('registration_start') and fields.get('deadline'))
+            def blend(previous,extra):
+                # Keep information already established; report mutually
+                # inconsistent overview/schedule dates rather than choosing one.
+                mismatch=any(previous.get(k) and extra.get(k) and previous[k]!=extra[k]
+                             for k in ('registration_start','deadline'))
+                result=dict(previous)
+                for k,v in extra.items():
+                    if v is not None and (v!='' or k=='date_note'):result[k]=v
+                if mismatch:
+                    result.update(registration_start=None,deadline=None,registration_ambiguous=True,
+                                  date_status='conflict',date_note='개요와 일정의 접수 날짜가 서로 다릅니다. 원문을 확인하세요.',
+                                  date_evidence=(str(previous.get('date_evidence',''))+' / '+str(extra.get('date_evidence','')))[:400])
+                return result
             try:
                 html=client.get_text(item['url'])
                 fields=detail_fields(html,item['url'],source.get('kind',''))
-                if not fields and config.get('browser_fallback',False):
-                    html=client.browser_html(item['url'])
-                    fields=detail_fields(html,item['url'],source.get('kind',''))
-                if fields:
-                    item.update(fields);item['detail_checked_at']=stamp;item['detail_status']='ok'
+                links=schedule_links(html,item['url'])
+                # Rendering is needed for absent dates, not merely absent ALL fields.
+                if needs_dates(fields) and not links and config.get('browser_fallback',False) and browser_left>0 and time.monotonic()<stop_at:
+                    browser_left-=1
+                    try:
+                        html=client.browser_html(item['url'])
+                        fields=blend(fields,detail_fields(html,item['url'],source.get('kind','')))
+                        links=schedule_links(html,item['url'])
+                    except FetchError:
+                        report['detail_render_errors']=report.get('detail_render_errors',0)+1
+                for link in links[:1]:
+                    if not needs_dates(fields) or extra_left<=0 or time.monotonic()>=stop_at:break
+                    extra_left-=1
+                    try:
+                        more=client.get_text(link)
+                        extra=detail_fields(more,link,source.get('kind',''))
+                        if needs_dates(extra) and config.get('browser_fallback',False) and browser_left>0 and time.monotonic()<stop_at:
+                            browser_left-=1
+                            try:extra=blend(extra,detail_fields(client.browser_html(link),link,source.get('kind','')))
+                            except FetchError:report['detail_render_errors']=report.get('detail_render_errors',0)+1
+                        fields=blend(fields,extra)
+                    except FetchError:report['schedule_errors']=report.get('schedule_errors',0)+1
+                fields['date_status']=fields.get('date_status') or ('complete' if not needs_dates(fields) else 'partial' if fields.get('deadline') or fields.get('registration_start') else 'missing')
+                item.update(fields)
+                substantive=set(fields)-{'detail_title','detail_source_url','date_status','date_note'}
+                if substantive:
+                    item['detail_checked_at']=stamp;item['detail_status']='ok'
                 else:
                     item['detail_status']='unconfirmed'
                     report['detail_unconfirmed']=report.get('detail_unconfirmed',0)+1
@@ -187,6 +236,11 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
                 item['detail_status']='error'
                 report['detail_errors']=report.get('detail_errors',0)+1
         merge_items(state,all_records,now)
+        for sid,report in state['sources'].items():
+            current=[i for i in state['items'].values() if i['source_id']==sid and i.get('last_seen','')[:10]==now.date().isoformat()]
+            report['dates_complete']=sum(bool(i.get('registration_start') and i.get('deadline')) for i in current)
+            report['dates_partial']=sum(bool(i.get('registration_start') or i.get('deadline')) and not bool(i.get('registration_start') and i.get('deadline')) for i in current)
+            report['dates_missing']=len(current)-report['dates_complete']-report['dates_partial']
         state['initialized_sources']=sorted(set(state['initialized_sources'])|set(successful))
         from .daily import capture_snapshot
         capture_snapshot(state, now)

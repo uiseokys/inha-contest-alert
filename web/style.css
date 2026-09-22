@@ -279,3 +279,21 @@ footer p { margin: var(--space-4) 0 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* v4: same card anatomy on every source; full title remains in details. */
+.contest h3 { min-height: 3.2em; }
+.contest h3 a { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.6; overflow-wrap: anywhere; }
+.registration-line { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-7); padding: var(--space-7); background: var(--color-surface-canvas); border-radius: var(--radius-md); }
+.date-pair { display: flex; flex-direction: column; min-width: 0; gap: var(--space-2); }
+.date-label { color: var(--color-text-muted); font-size: var(--font-xs); font-weight: var(--font-weight-base); }
+.date-value { font-size: var(--font-sm); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.date-value.is-unknown { color: var(--color-text-muted); font-weight: var(--font-weight-base); }
+.organizer-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sort-guidance { font-size: var(--font-xs); color: var(--color-text-muted); margin: var(--space-7) 0 0; line-height: 1.8; }
+.date-evidence-link { margin-top: var(--space-7); }
+@media (min-width: 961px) {
+  main { padding-top: var(--layout-1); }
+  .hero { margin-bottom: var(--space-7); }
+  .panel { margin-top: var(--space-7); }
+  .sort-guidance { margin-top: var(--space-1); }
+}

@@ -3,7 +3,7 @@ from __future__ import annotations
 import csv,html,io,json,re
 from datetime import datetime,timedelta
 from pathlib import Path
-from .core import status_of,canonical,DETAIL_FIELDS
+from .core import status_of,canonical,DETAIL_FIELDS,clean_title
 from .daily import compare_day, comparison_lines
 
 LABEL={'active':'기한 남음/접수 표시','upcoming':'접수 예정','closed':'마감/종료','unknown':'마감 미확인'}
@@ -19,11 +19,23 @@ def public_data(state:dict,now:datetime,demo:bool=False)->dict:
     items=[]
     for original in state['items'].values():
         item={k:v for k,v in original.items() if k in ('id','title','url','source_id','source_name','group','posted_at','deadline','registration_start','platform_status','first_seen','last_seen','last_changed') + DETAIL_FIELDS}
+        item['title']=clean_title(item.get('detail_title') or item.get('title',''))
         item['status']=status_of(item,now.date());item['recent_new']=item['id'] in recent
         item['daily_new']=item['id'] in daily_new
         items.append(item)
-    items.sort(key=lambda x:(x.get('posted_at') or x['first_seen'][:10],x['first_seen']),reverse=True)
-    return {'version':3,'daily_comparison':comparison,'updated_at':state.get('updated_at'),'demo':demo,'items':items,'sources':list(state['sources'].values())}
+    items.sort(key=lambda x:deadline_sort_key(x,now.date()))
+    return {'version':4,'daily_comparison':comparison,'updated_at':state.get('updated_at'),'demo':demo,'items':items,'sources':list(state['sources'].values())}
+
+def deadline_sort_key(item, today):
+    """Known remaining time descending, unknown after it, closed last."""
+    from datetime import date
+    end=item.get('deadline')
+    closed=status_of(item,today)=='closed'
+    if closed:return (2,0,clean_title(item.get('title','')))
+    if not end:return (1,0,clean_title(item.get('title','')))
+    try:remaining=(date.fromisoformat(end)-today).days
+    except ValueError:return (1,0,clean_title(item.get('title','')))
+    return (0,-remaining,clean_title(item.get('title','')))
 
 def md_text(text:str)->str:
     return html.escape(str(text)).replace('|','\\|').replace('\n',' ').replace('[','\\[').replace(']','\\]').replace('`','\\`')

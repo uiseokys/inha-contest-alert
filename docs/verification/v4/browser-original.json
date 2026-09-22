@@ -1,0 +1,14 @@
+[
+  {
+    "viewport": "desktop",
+    "checks": 10,
+    "result": "PASS",
+    "page_errors": []
+  },
+  {
+    "viewport": "mobile",
+    "checks": 10,
+    "result": "PASS",
+    "page_errors": []
+  }
+]

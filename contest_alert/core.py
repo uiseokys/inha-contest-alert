@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit, unquote
 from bs4 import BeautifulSoup
 
-DATE = re.compile(r'(?<!\d)(20\d{2})[.\-/년]\s*(\d{1,2})[.\-/월]\s*(\d{1,2})(?:일)?(?!\d)')
+DATE = re.compile(r'(?<!\d)(20\d{2})\s*[.\-/년]\s*(\d{1,2})\s*[.\-/월]\s*(\d{1,2})\s*(?:일)?(?!\d)')
 CONTEST = re.compile(r'공모|경진|해커톤|데이터톤|아이디어톤|챌린지|콘테스트|캡스톤|competition|hackathon|challenge|contest|awards',re.I)
 AI = re.compile(r'인공\s*지능|데이터|빅데이터|통계|머신\s*러닝|딥\s*러닝|컴퓨터\s*비전|자연어|(?<![A-Za-z0-9])(?:ai|aiot|ml|llm|rag|data|machine learning|deep learning)(?![A-Za-z0-9])',re.I)
 EXCLUDE = re.compile(r'수상\s*(?:소식|결과|실적)|입상\s*소식|수상자\s*발표|수상팀\s*발표|수강신청|정규\s*수업',re.I)
@@ -18,7 +18,7 @@ PATTERNS = {
     'campuspick': r'/contest/view\?(?:[^#]*&)?id=\d+(?:&|$)',
     'aifactory': r'/(?:ko/)?competitions/\d+',
 }
-DETAIL_FIELDS = ('deadline','registration_start','registration_text','registration_ambiguous',
+DETAIL_FIELDS = ('detail_title','title_raw','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
                  'event_start','event_end','event_ambiguous','schedule_text','organizer','eligibility',
                  'benefits','summary','website_url','application_url','detail_source_url',
                  'detail_checked_at','detail_attempted_at','detail_status')
@@ -79,10 +79,26 @@ def relevant(title: str, mode: str) -> bool:
 
 
 def clean_title(text: str) -> str:
+    """Remove UI decorations, never summarize or arbitrarily truncate a title."""
+    text=re.sub(r'[\u200b-\u200d\ufeff]','',str(text))
     text=re.sub(r'\s+',' ',text).strip()
-    text=re.sub(r'^(?:경진대회\s*)?(?:진행중|종료|참가 접수중)\s*','',text)
-    text=re.sub(r'\s*(?:새글|NEW)\s*$','',text,flags=re.I)
-    return text[:240]
+    text=re.sub(r'^(?:(?:경진대회\s+)?(?:진행중|종료|참가\s*접수중)\s+|\[(?:공지|홍보|모집|NEW)\]\s*)','',text,flags=re.I)
+    text=re.sub(r'\s*(?:[|｜]\s*|\s[-–—]\s*)(?:DACON|데이콘|캠퍼스픽|에브리커리어|인공지능팩토리|AI\s*Factory)\s*$','',text,flags=re.I)
+    text=re.sub(r'\s+(?:새글|NEW)\s*$','',text,flags=re.I)
+    # Counters, dates and tag rows must not become part of the contest name.
+    text=re.split(r'\s+(?:알고리즘\s*[|｜]|(?:채용|LG Aimers|SCPC)\s*[|｜]|참가\s*신청중|참가\s*접수중|(?:관심|조회|조회수|스크랩)\s*[:：]?\s*\d|D\s*[-−]\s*\d+(?:\s|$))',text,maxsplit=1,flags=re.I)[0]
+    return text.strip()
+
+
+def listing_title(a) -> str:
+    for selector in ('[class~="title"], [class~="subject"], [class*="card-title"], [class*="contest-title"]', 'h1,h2,h3,h4', '[class*="title"],[class*="subject"]', 'strong'):
+        node=a.select_one(selector)
+        if node and len(node.get_text(' ',strip=True))>=4:
+            return clean_title(node.get_text(' ',strip=True))
+    lines=[x.strip() for x in a.get_text('\n',strip=True).splitlines() if len(x.strip())>=4]
+    # An unstructured card's first non-status text is normally the title.
+    lines=[x for x in lines if not re.fullmatch(r'(?:접수중|진행중|종료|마감|D[-−]\d+|관심\s*\d+)',x)]
+    return clean_title(lines[0] if lines else a.get_text(' ',strip=True))
 
 
 def parse_listing(html: str, source: dict, page_url: str|None=None) -> tuple[list[dict],int]:
@@ -95,8 +111,7 @@ def parse_listing(html: str, source: dict, page_url: str|None=None) -> tuple[lis
         href=a.get('href','')
         url=canonical(urljoin(base,href))
         if not url or urlsplit(url).hostname!=host or not pattern.search(url):continue
-        node=a.select_one('h1,h2,h3,h4,strong,[class*="title"],[class*="subject"]')
-        title=clean_title((node or a).get_text(' ',strip=True))
+        title=listing_title(a)
         if source['kind'] in ('dacon','aifactory'):
             # A card without a dedicated title node can include changing counters.
             title=re.split(r'\s+(?:알고리즘\s*\||참가신청중|참가\s*접수중|마감\s+\d|연습\s+\d)',title,maxsplit=1)[0]
@@ -114,7 +129,7 @@ def parse_listing(html: str, source: dict, page_url: str|None=None) -> tuple[lis
             elif re.search(r'접수\s*마감|경진대회\s*종료|\s마감\s|\s연습\s',rowtext):status='closed'
         start,deadline=registration_dates(rowtext)
         item={'id':hashlib.sha256(url.encode()).hexdigest()[:20], 'url':url,'title':title,
-              'source_id':source['id'],'source_name':source['name'],'group':source.get('group','external'),
+              'title_raw':title, 'source_id':source['id'],'source_name':source['name'],'group':source.get('group','external'),
               'posted_at':posted,'deadline':deadline,'registration_start':start,'platform_status':status}
         found[url]=item
         relevance_text[url]=(title+' '+rowtext) if source['kind']=='campuspick' else title
@@ -138,12 +153,14 @@ def merge_items(state: dict, records: list[dict], now: datetime) -> None:
         item={k:record[k] for k in PERSIST if k in record}
         if old:
             for k in DETAIL_FIELDS + ('posted_at',):
+                if k=='date_note' and k in record:continue
                 if k not in item or item[k] is None or item[k]=='':
                     if k in old:item[k]=old[k]
             if record.get('registration_ambiguous'):
                 item['deadline']=item['registration_start']=None
             if record.get('event_ambiguous'):
                 item['event_start']=item['event_end']=None
+            item['title']=clean_title(item.get('detail_title') or item.get('title',''))
             changed=any(item.get(k)!=old.get(k) for k in CHANGE_FIELDS)
             item['first_seen']=old['first_seen']
             item['last_changed']=stamp if changed else old['last_changed']
@@ -152,6 +169,7 @@ def merge_items(state: dict, records: list[dict], now: datetime) -> None:
             item['first_seen']=item['last_changed']=stamp
             kind='new' if record['source_id'] in initialized else 'initial'
             state['changes'].append({'id':rid,'kind':kind,'at':stamp})
+        item['title']=clean_title(item.get('detail_title') or item.get('title',''))
         item['last_seen']=old['last_seen'] if old and record.get('_preserve_last_seen') else stamp
         state['items'][rid]=item
     state['initialized_sources']=sorted(initialized|{r['source_id'] for r in records})

@@ -23,7 +23,7 @@ $('sourceNote').textContent=failed.length?failed.length+'곳 확인 필요':'설
 const sourceNames=new Map(sources.map(s=>[s.name,s.name]));DATA.items.forEach(i=>sourceNames.set(i.source_name,i.source_name));
 for(const name of [...sourceNames.keys()].sort()){$('sourceFilter').appendChild(new Option(name,name));}
 const healthLabels={ok:'정상',partial:'부분 실패',error:'수집 실패',disabled:'직접 확인',pending:'미확인'};
-for(const s of sources){const row=el('div','health-row');const title=el('div','health-title');title.append(outLink(s.url,s.name+' ↗'),el('span',s.status,healthLabels[s.status]||s.status));row.append(title,el('p','',s.message||'첫 수집 전'));if(s.detail_errors)row.append(el('p','',`상세 페이지 확인 실패 ${s.detail_errors}건 · 날짜는 원문 확인`));if(s.detail_unconfirmed)row.append(el('p','',`상세정보 추출 미확인 ${s.detail_unconfirmed}건 · 원문 직접 확인`));$('sourceHealth').append(row);}
+for(const s of sources){const row=el('div','health-row');const title=el('div','health-title');title.append(outLink(s.url,s.name+' ↗'),el('span',s.status,healthLabels[s.status]||s.status));row.append(title,el('p','',s.message||'첫 수집 전'));if(s.detail_errors)row.append(el('p','',`상세 페이지 확인 실패 ${s.detail_errors}건 · 날짜는 원문 확인`));if(s.detail_unconfirmed)row.append(el('p','',`상세정보 추출 미확인 ${s.detail_unconfirmed}건 · 원문 직접 확인`));if(s.dates_complete!==undefined)row.append(el('p','','접수 시작·마감 확인 '+s.dates_complete+'건 · 일부 확인 '+s.dates_partial+'건 · 미확인 '+s.dates_missing+'건'));if(s.detail_deferred)row.append(el('p','','이번 실행의 상세 확인 예산 초과 '+s.detail_deferred+'건 · 다음 수집에서 이어서 확인'));$('sourceHealth').append(row);}
 if(!sources.length)$('sourceHealth').append(el('p','','첫 실행 후 수집 상태가 표시됩니다.'));
 function renderComparison(){
   const c=DATA.daily_comparison||{status:'baseline',new_count:null,new_ids:[],by_source:[]};
@@ -59,13 +59,18 @@ function detailPanel(item){
   summary.append(el('span','','일정·참가 정보 펼치기'),el('small',item.detail_status==='error'?'detail-warning':'',state));panel.append(summary);
   panel.addEventListener('toggle',()=>{summary.querySelector('span').textContent=panel.open?'일정·참가 정보 접기':'일정·참가 정보 펼치기';});
   const grid=el('dl','details-grid');
+  fact(grid,'대회명 (전체)',item.title,true);
   fact(grid,'접수기간',period(item.registration_start,item.deadline));
   fact(grid,'대회·행사기간',period(item.event_start,item.event_end));
   if(item.registration_text)fact(grid,'접수기간 원문 표기',item.registration_text,true);
   fact(grid,'주최 / 주관',item.organizer);fact(grid,'참가 대상 / 팀 구성',item.eligibility);
   fact(grid,'상금 / 혜택',item.benefits);fact(grid,'대회 주제',item.summary);
   if(item.schedule_text)fact(grid,'세부 일정 안내',item.schedule_text,true);
+  if(item.date_evidence)fact(grid,'날짜 근거 (원문)',item.date_evidence,true);
   panel.append(grid);
+  if(item.date_note)panel.append(el('p','detail-note',item.date_note));
+  if(safeURL(item.date_source_url))panel.append(outLink(item.date_source_url,'날짜 근거 페이지 ↗','date-evidence-link detail-link'));
+  if(!item.deadline)panel.append(el('p','detail-note',item.detail_status==='error'?'상세 페이지 접근에 실패해 마감일을 확인하지 못했습니다.':'텍스트·공개 일정에서 접수 마감일을 아직 확정하지 못했습니다. 포스터에만 적힌 날짜는 원문을 확인하세요.'));
   if(item.registration_ambiguous)panel.append(el('p','detail-warning','접수기간이 여러 개이거나 날짜를 확정할 수 없습니다. 원문에서 해당 트랙과 기간을 확인하세요.'));
   const actions=el('div','detail-actions');actions.append(outLink(item.url,'공고 원문 ↗','detail-link primary'));
   if(safeURL(item.website_url))actions.append(outLink(item.website_url,'안내 사이트 ↗','detail-link'));
@@ -81,9 +86,12 @@ function card(item){
   const row=el('article','contest');row.id='contest-'+item.id;
   const source=el('div','source-block');source.append(el('span','source-name',item.source_name),el('span','pill '+status(item),statusLabel(item)));
   const body=el('div','contest-body');const h=el('h3');h.append(outLink(item.url,item.title));
-  if(item.daily_new)h.append(el('span','new-badge','신규'));
-  body.append(h,el('p','registration-line','접수 '+period(item.registration_start,item.deadline)));
-  if(item.organizer)body.append(el('p','organizer-line','주최 / 주관 '+item.organizer));
+  h.querySelector('a').title=item.title;
+  if(item.daily_new)source.append(el('span','new-badge','신규'));
+  const reg=el('div','registration-line');
+  for(const [label,value] of [['접수 시작',item.registration_start],['접수 마감',item.deadline]]){const part=el('div','date-pair');part.append(el('span','date-label',label),el('span','date-value'+(value?'':' is-unknown'),value||'확인 필요'));reg.append(part);}
+  body.append(h,reg);
+  body.append(el('p','organizer-line','주최 / 주관 '+(item.organizer||'확인 필요')));
   const meta=el('div','metadata');meta.append(el('span','',item.posted_at?'게시 '+item.posted_at:'게시일 미확인'),el('span','','첫 확인 '+(item.first_seen||'').slice(0,10)));body.append(meta);
   const due=el('div','deadline');
   if(item.deadline){const d=days(item.deadline);due.append(el('strong',d>=0&&d<=7?'urgent':'',d<0?'마감일 지남':d===0?'오늘 마감일':'D−'+d),el('small','',item.deadline));}
@@ -91,13 +99,13 @@ function card(item){
   const open=outLink(item.url,'↗','open-link');open.setAttribute('aria-label',item.title+' 공고 원문 열기 (새 탭)');
   row.append(source,body,due,open,detailPanel(item));return row;
 }
-function update(){const query=$('searchInput').value.trim().toLowerCase();const source=$('sourceFilter').value;const state=$('statusFilter').value;const onlyNew=$('newOnly').checked;filtered=DATA.items.filter(i=>{const s=status(i);return(selectedGroup==='all'||i.group===selectedGroup)&&(source==='all'||i.source_name===source)&&(state==='all'||(state==='review'?s!=='closed':s===state))&&(!onlyNew||i.daily_new)&&(!query||[i.title,i.source_name,i.organizer,i.eligibility,i.summary,i.benefits].filter(Boolean).join(' ').toLowerCase().includes(query));});filtered.sort((a,b)=>{if($('sortFilter').value==='deadline'){return(a.deadline||'9999').localeCompare(b.deadline||'9999');}return(b.posted_at||b.first_seen||'').localeCompare(a.posted_at||a.first_seen||'');});$('items').replaceChildren(...filtered.map(card));$('resultCount').textContent=filtered.length+'개 공고';$('empty').hidden=filtered.length!==0;$('csvButton').disabled=filtered.length===0;$('loading').hidden=true;}
+function update(){const query=$('searchInput').value.trim().toLowerCase();const source=$('sourceFilter').value;const state=$('statusFilter').value;const onlyNew=$('newOnly').checked;filtered=DATA.items.filter(i=>{const s=status(i);return(selectedGroup==='all'||i.group===selectedGroup)&&(source==='all'||i.source_name===source)&&(state==='all'||(state==='review'?s!=='closed':s===state))&&(!onlyNew||i.daily_new)&&(!query||[i.title,i.source_name,i.organizer,i.eligibility,i.summary,i.benefits].filter(Boolean).join(' ').toLowerCase().includes(query));});filtered.sort((a,b)=>{const mode=$('sortFilter').value;if(mode==='remaining'||mode==='deadline'){const group=i=>status(i)==='closed'?2:(i.deadline?0:1);const tier=group(a)-group(b);if(tier)return tier;if(group(a)===0){const byDate=mode==='remaining'?b.deadline.localeCompare(a.deadline):a.deadline.localeCompare(b.deadline);if(byDate)return byDate;}return a.title.localeCompare(b.title,'ko');}return(b.posted_at||b.first_seen||'').localeCompare(a.posted_at||a.first_seen||'');});$('items').replaceChildren(...filtered.map(card));$('resultCount').textContent=filtered.length+'개 공고';$('empty').hidden=filtered.length!==0;$('csvButton').disabled=filtered.length===0;$('loading').hidden=true;}
 $('newOnly').addEventListener('change',()=>{if($('newOnly').checked)$('statusFilter').value='all';});
 for(const id of ['searchInput','sourceFilter','statusFilter','sortFilter','newOnly'])$(id).addEventListener(id==='searchInput'?'input':'change',update);
 for(const button of document.querySelectorAll('[data-group]'))button.addEventListener('click',()=>{selectedGroup=button.dataset.group;document.querySelectorAll('[data-group]').forEach(b=>{const yes=b===button;b.classList.toggle('selected',yes);b.setAttribute('aria-pressed',String(yes));});update();});
 $('csvButton').addEventListener('click',()=>{const quote=value=>{let s=String(value??'');if(/^[\s]*[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';};const rows=[['공고명','출처','접수시작일','접수마감일','접수기간 원문','대회시작일','대회종료일','일정안내','주최기관','참가대상','혜택','주제','안내사이트','신청링크','상태','공고원문','상세확인일'],...filtered.map(i=>[i.title,i.source_name,i.registration_start,i.deadline,i.registration_text,i.event_start,i.event_end,i.schedule_text,i.organizer,i.eligibility,i.benefits,i.summary,safeURL(i.website_url),safeURL(i.application_url),statusLabel(i),safeURL(i.url),i.detail_checked_at])];const blob=new Blob(['\ufeff'+rows.map(r=>r.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='contests-'+today+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 function resetFilters(){
-  selectedGroup='all';$('searchInput').value='';$('sourceFilter').value='all';$('statusFilter').value='review';$('sortFilter').value='newest';$('newOnly').checked=false;
+  selectedGroup='all';$('searchInput').value='';$('sourceFilter').value='all';$('statusFilter').value='review';$('sortFilter').value='remaining';$('newOnly').checked=false;
   document.querySelectorAll('[data-group]').forEach(b=>{const active=b.dataset.group==='all';b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
   update();
 }

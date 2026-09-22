@@ -1,0 +1,48 @@
+[
+  {
+    "width": 320,
+    "result": "PASS",
+    "checks": 22,
+    "page_errors": []
+  },
+  {
+    "width": 390,
+    "result": "PASS",
+    "checks": 22,
+    "page_errors": []
+  },
+  {
+    "width": 768,
+    "result": "PASS",
+    "checks": 22,
+    "page_errors": []
+  },
+  {
+    "width": 1280,
+    "result": "PASS",
+    "checks": 22,
+    "page_errors": []
+  },
+  {
+    "width": 1600,
+    "result": "PASS",
+    "checks": 22,
+    "page_errors": []
+  },
+  {
+    "state": "baseline",
+    "result": "PASS"
+  },
+  {
+    "state": "gap",
+    "result": "PASS"
+  },
+  {
+    "state": "unobserved",
+    "result": "PASS"
+  },
+  {
+    "state": "stale",
+    "result": "PASS"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "full": {
+    "tests": 129,
+    "failed": 0,
+    "javascript": "PASS",
+    "render": "PASS",
+    "preservation": "empty real state verified"
+  },
+  "update": {
+    "tests": 129,
+    "failed": 0,
+    "javascript": "PASS",
+    "render": "PASS",
+    "preservation": "PASS"
+  }
+}
