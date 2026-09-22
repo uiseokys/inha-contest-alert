@@ -297,3 +297,9 @@ footer p { margin: var(--space-4) 0 0; }
   .panel { margin-top: var(--space-7); }
   .sort-guidance { margin-top: var(--space-1); }
 }
+
+/* v6: kind controls use the existing design tokens. */
+.kind-control{display:flex;align-items:center;gap:var(--space-7);font-size:var(--font-sm);margin-top:var(--layout-1);color:var(--color-text-muted)}
+.kind-control select{min-height:var(--control-height);max-width:100%;border:1px solid var(--color-border-control);border-radius:var(--radius-md);background:var(--color-surface-content);padding:var(--space-4) var(--space-7)}
+.kind-label{display:block;font-size:var(--font-xs);color:var(--color-text-muted);margin-top:var(--space-4)}
+.organizer-line{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}

@@ -1,0 +1,22 @@
+[
+  {
+    "width": 320,
+    "passed": true,
+    "page_errors": []
+  },
+  {
+    "width": 390,
+    "passed": true,
+    "page_errors": []
+  },
+  {
+    "width": 768,
+    "passed": true,
+    "page_errors": []
+  },
+  {
+    "width": 1440,
+    "passed": true,
+    "page_errors": []
+  }
+]

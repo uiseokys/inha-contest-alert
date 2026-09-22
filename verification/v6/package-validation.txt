@@ -1,0 +1,14 @@
+PASS: protected state/config/workflow/README bytes identical after upgrade ZIP
+
+PASS: upgrade python -m unittest discover -s tests -q
+----------------------------------------------------------------------
+Ran 190 tests in 0.338s
+
+OK
+
+PASS: upgrade node --check web/app.js
+
+
+PASS: item IDs/claims/prior snapshots preserved, canonical-only public data, private marker absent
+
+PASS: fresh complete ZIP, 190 tests, render, empty production state and no demo

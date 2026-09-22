@@ -1,0 +1,13 @@
+======================================================================
+FAIL: test_insurance_organizer_name_is_not_legal_prose (test_v6.FinalReviewRegressions.test_insurance_organizer_name_is_not_legal_prose)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/v6-work/inha-contest-alert/tests/test_v6.py", line 126, in test_insurance_organizer_name_is_not_legal_prose
+    self.assertEqual(record.get('organizer'),'DB손해보험')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'DB손해보험'
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.048s
+
+FAILED (failures=1)

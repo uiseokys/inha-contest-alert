@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 from .core import canonical,parse_listing,detail_fields,merge_items,preferred_title
 from .details import PARSER_VERSION,schedule_links
 from .quality import effective_config,apply_policy,classify
+from .repair import reuse_existing_ids
 
 AGENT='ContestNoticeMonitor/0.2'
 class FetchError(RuntimeError):
@@ -24,6 +25,16 @@ class FetchError(RuntimeError):
 def robots_allowed(text:str,url:str)->bool:
     rp=RobotFileParser();rp.parse(text.splitlines())
     return rp.can_fetch(AGENT,url)
+
+
+def wait_for_public_content(page,url:str)->None:
+    """Wait for rendered notice text or public listing links, at most eight seconds."""
+    is_detail=bool(re.search(r'/contest/view|/competitions/(?:official/|open/)?\d+|artclView|[?&]vid=',url))
+    page.wait_for_function(r'''detail => {
+        const text=document.body?.innerText||'';
+        if(detail)return /(?:접수|참가\s*(?:기간|접수)|신청|모집)[\s\S]{0,180}?20\d{2}\s*[.년\/-]\s*\d{1,2}/.test(text);
+        return [...document.querySelectorAll('a[href]')].some(a=>/artclView|[?&]vid=|\/contest\/view|\/competitions\/(?:official\/|open\/)?\d+/.test(a.getAttribute('href')));
+    }''',arg=is_detail,timeout=8000)
 
 
 class Client:
@@ -79,9 +90,14 @@ class Client:
                 page.route('**/*',lambda route:route.abort() if route.request.resource_type in ('image','media','font') else route.continue_())
                 response=page.goto(url,wait_until='domcontentloaded',timeout=25000)
                 if response and response.status in (401,403,429):raise FetchError('browser_denied',f'HTTP {response.status}; 우회하지 않음')
-                if '/contest' in urlsplit(url).path and 'campuspick.com' in urlsplit(url).netloc:
-                    page.wait_for_timeout(5000)
-                else:page.wait_for_timeout(2500)
+                try:
+                    wait_for_public_content(page,url)
+                except Exception as exc:
+                    from playwright.sync_api import TimeoutError as PlaywrightTimeout
+                    if not isinstance(exc,PlaywrightTimeout):raise
+                    # Returning the available HTML does not claim dates exist.
+                    # The parser reports missing fields separately.
+
                 return page.content()
             finally:page.close()
         except FetchError:raise
@@ -129,6 +145,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
                         html=client.browser_html(url);selected,count=parse_listing(html,source,url);extra=discover_pages(html,url)
                     report['recognized']+=count;report['pages']+=1
                     empty_valid=empty_valid or bool(re.search(r'등록된\s*게시물이\s*없|검색된\s*결과가\s*없',BeautifulSoup(html,'html.parser').get_text(' ',strip=True)))
+                    reuse_existing_ids(selected,state)
                     for item in selected:
                         old=state['items'].get(item['id'])
                         cutoff=(now.date()-timedelta(days=config.get('lookback_days',120))).isoformat()
@@ -152,7 +169,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
         source_map={src['id']:src for src in config['sources'] if src.get('enabled',True)}
         ids={i['id'] for i in all_records}
         for old in state['items'].values():
-            if old['id'] in ids or old['source_id'] not in successful:continue
+            if old.get('duplicate_of') or old['id'] in ids or old['source_id'] not in successful:continue
             end=old.get('deadline')
             recent_seen=old.get('last_seen','')[:10]>=(now.date()-timedelta(days=14)).isoformat()
             recently_ended=bool(end and end>=(now.date()-timedelta(days=7)).isoformat())
@@ -163,6 +180,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
         grouped={sid:[] for sid in source_map}
         for item in all_records:
             old=state['items'].get(item['id'],{})
+            if classify(dict(old,**item))['relevance_status']=='excluded':continue
             attempted=old.get('detail_attempted_at') or old.get('detail_checked_at','')
             missing=not (old.get('registration_start') and old.get('deadline'))
             upgraded=old.get('date_parser_version')!=PARSER_VERSION
@@ -170,7 +188,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
             if upgraded or not attempted or attempted[:10]<due_day:
                 topic_known=classify(dict(state['items'].get(item['id'],{}),**item))['relevance_status']=='included'
                 # Unchecked generic candidates must eventually be examined too.
-                priority=0 if not attempted else (1 if topic_known and not old.get('deadline') else 2)
+                priority=0 if topic_known and not old.get('deadline') else (1 if not attempted else 2)
                 grouped[item['source_id']].append((priority,attempted,item))
         queues=[deque(x[2] for x in sorted(rows,key=lambda row:(row[0],row[1]))) for rows in grouped.values() if rows]
         due=[];budget=config.get('max_detail_requests',30)
@@ -178,6 +196,10 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
             for queue in queues:
                 if queue and len(due)<budget:due.append(queue.popleft())
             queues=[q for q in queues if q]
+        for queue in queues:
+            for pending in queue:
+                report=state['sources'][pending['source_id']]
+                report['detail_deferred']=report.get('detail_deferred',0)+1
         # Extra requests are bounded independently of the number of notices.
         # This keeps the existing 18-minute workflow and free-host usage modest.
         extra_left=config.get('max_extra_detail_requests',18)
@@ -236,7 +258,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
                     except FetchError:report['schedule_errors']=report.get('schedule_errors',0)+1
                 fields['date_status']=fields.get('date_status') or ('complete' if not needs_dates(fields) else 'partial' if fields.get('deadline') or fields.get('registration_start') else 'missing')
                 item.update(fields)
-                substantive={k for k,v in fields.items() if v and k not in {'detail_title','detail_source_url','date_status','date_note','_topic_text'}}
+                substantive={k for k,v in fields.items() if v and k not in {'detail_title','detail_source_url','date_status','date_note','_topic_text','detail_parser_version'}}
                 if substantive:
                     item['detail_checked_at']=stamp;item['detail_status']='ok'
                 else:
@@ -252,8 +274,9 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
         apply_policy(state,config)
         for sid,report in state['sources'].items():
             all_source=[i for i in state['items'].values() if i['source_id']==sid]
-            current=[i for i in all_source if i.get('relevance_status')=='included' and i.get('last_seen','')[:10]==now.date().isoformat()]
+            current=[i for i in all_source if i.get('relevance_status')=='included' and not i.get('duplicate_of') and i.get('last_seen','')[:10]==now.date().isoformat()]
             report['retained']=len(current)
+            report['duplicates_hidden']=sum(bool(i.get('duplicate_of')) for i in all_source)
             report['excluded']=sum(i.get('relevance_status')=='excluded' for i in all_source)
             report['topic_pending']=sum(i.get('relevance_status')=='pending' for i in all_source)
             report['dates_complete']=sum(bool(i.get('registration_start') and i.get('deadline')) for i in current)

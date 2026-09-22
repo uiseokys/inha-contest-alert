@@ -1,0 +1,16 @@
+======================================================================
+FAIL: test_competition_platform_topic_title_still_classified_as_contest (test_v6.FinalReviewRegressions.test_competition_platform_topic_title_still_classified_as_contest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/v6-work/inha-contest-alert/tests/test_v6.py", line 129, in test_competition_platform_topic_title_still_classified_as_contest
+    self.assertEqual(classify(row).get('opportunity_kind'),'contest')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'other' != 'contest'
+- other
++ contest
+
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.048s
+
+FAILED (failures=1)

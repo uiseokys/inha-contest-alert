@@ -26,7 +26,7 @@ def public_data(state:dict,now:datetime,demo:bool=False)->dict:
         item['daily_new']=item['id'] in daily_new
         items.append(item)
     items.sort(key=lambda x:deadline_sort_key(x,now.date()))
-    return {'version':5,'daily_comparison':comparison,'updated_at':state.get('updated_at'),'demo':demo,'items':items,'sources':list(state['sources'].values())}
+    return {'version':6,'daily_comparison':comparison,'updated_at':state.get('updated_at'),'demo':demo,'items':items,'sources':list(state['sources'].values())}
 
 def deadline_sort_key(item, today):
     """Known remaining time descending, unknown after it, closed last."""

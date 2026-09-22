@@ -8,16 +8,16 @@ from .core import DATE,dates,canonical,clean_title,generic_title
 
 from .extraction import normalize_text,reorder_timeline,structured_registration,time_value
 
-PARSER_VERSION=5
+PARSER_VERSION=6
 LABELS={
- 'registration':r'(?:(?:접수|신청|모집|응모)\s*)?마감\s*일\s*시|(?:접수|신청|모집)\s*(?:시작|종료)\s*일\s*시|(?:(?:참가|참여|작품|참가자)\s*)?(?:접수|신청|모집|응모|공모|지원)\s*(?:기간|일정|기한|시작(?:일)?|개시(?:일)?|종료(?:일)?|마감(?:일)?)|(?:참가|참여)\s*기간|(?:접수|응모|공모|신청)(?=\s*[:：])|(?:registration|application|submission)\s*(?:period|deadline|opens?|closes?|start(?:s| date)?|end(?:s| date)?)',
+ 'registration':r'참가\s*접수(?=\s*(?:[:：]|\n|20\d{2}|$))|(?:(?:접수|신청|모집|응모)\s*)?마감\s*일\s*시|(?:접수|신청|모집)\s*(?:시작|종료)\s*일\s*시|(?:(?:참가|참여|작품|참가자)\s*)?(?:접수|신청|모집|응모|공모|지원)\s*(?:기간|일정|기한|시작(?:일)?|개시(?:일)?|종료(?:일)?|마감(?:일)?)|(?:참가|참여)\s*기간|(?:접수|응모|공모|신청)(?=\s*[:：])|(?:registration|application|submission)\s*(?:period|deadline|opens?|closes?|start(?:s| date)?|end(?:s| date)?)',
  'event':r'(?:대회|행사|본선|해커톤|활동|개최)\s*(?:기간|일시|일정|일자)|event\s*(?:dates?|period)',
  'organizer':r'주최\s*[/·ㆍ및]+\s*주관|주최(?:\s*기관)?|주관(?:\s*기관)?',
  'eligibility':r'대상(?=\s*[:：])|참가\s*(?:대상|자격)|참여\s*(?:대상|자격)|지원\s*(?:대상|자격)|신청\s*자격|응모\s*(?:대상|자격)|모집\s*대상',
  'benefits':r'상금\s*(?:및|/|·)\s*혜택|시상\s*(?:내역|내용|규모)|총\s*상금|상금|혜택',
  'summary':r'참여\s*주제|프로그램\s*(?:주제|내용)|공모\s*주제|대회\s*주제|공모\s*내용|주제|주요\s*내용',
  'schedule':r'상세\s*일정|진행\s*일정|주요\s*일정|추진\s*일정|세부\s*일정',
- 'stop':r'결과\s*발표|학습\s*데이터셋\s*공개|코드\s*제출|순위\s*발표|접수처|(?:공식\s*)?홈페이지|참가\s*신청(?=\s*[:：])|공식\s*사이트|신청\s*방법|접수\s*방법|문의(?:처)?|유의\s*사항|첨부\s*파일|발표\s*일시|심사\s*(?:기간|일정)|팀\s*병합\s*마감|(?:소스\s*코드|리더보드|결과물|보고서|작품|2차\s*평가\s*자료)\s*제출(?:\s*마감)?|최종\s*(?:순위|결과)\s*발표|시상식|대회\s*(?:종료|시작)|운영|설명|대회\s*설명',
+ 'stop':r'참가자\s*수|조회\s*수|소개(?=\s*(?:\n|$))|(?:팀\s*병합|팀명\s*변경)\s*기간|평가\s*방법|평가\s*기준|동의사항|참가\s*방법|대회명|신청\s*안내|담당자|선발\s*결과|결과\s*발표|학습\s*데이터셋\s*공개|코드\s*제출|순위\s*발표|접수처|(?:공식\s*)?홈페이지|참가\s*신청(?=\s*[:：])|공식\s*사이트|신청\s*방법|접수\s*방법|문의(?:처)?|유의\s*사항|첨부\s*파일|발표\s*일시|심사\s*(?:기간|일정)|팀\s*병합\s*마감|(?:소스\s*코드|리더보드|결과물|보고서|작품|2차\s*평가\s*자료)\s*제출(?:\s*마감)?|최종\s*(?:순위|결과)\s*발표|시상식|대회\s*(?:종료|시작)|운영|설명|대회\s*설명',
 }
 LABEL_RE=re.compile(r'(?<![가-힣A-Za-z0-9])(?:'+'|'.join('(?P<'+k+'>'+v+')' for k,v in LABELS.items())+r')(?=\s|[:：]|$)[ \t]*[:：]?[ \t]*',re.I)
 SHORT=re.compile(r'(?<![\d./-])(\d{1,2})\s*[./월-]\s*(\d{1,2})\s*(?:일)?(?!\d)')
@@ -32,7 +32,20 @@ def compact(text: str,limit: int=240)->str:
 def entries(text:str)->list[tuple[str,str,str]]:
     text=normalize_text(text)
     text=re.sub(r'[\[【]([^\]\n】]{1,40})[\]】]',r' \1 ',text)
-    matches=list(LABEL_RE.finditer(text));out=[]
+    matches=[];out=[]
+    for m in LABEL_RE.finditer(text):
+        label=m.group(m.lastgroup)
+        before=text[text.rfind('\n',0,m.start())+1:m.start()].strip(' \t•·○■□●*-0123456789.)')
+        after=text[m.end():]
+        if m.lastgroup in ('organizer','benefits','summary','event','eligibility'):
+            # A field is a heading or a colon-labelled value, not prose such as
+            # '주최 측', '상금 지급', or '대회 기간 중에는'.
+            if before and not re.search(r'[:：]',m.group()):continue
+            if re.match(r'(?:측|자(?:는|의|에게)|중(?:에|에는)?|동안|지급(?:과|을)?|환수|취소|관련|안내)(?:\s|$)',after):continue
+        if m.lastgroup=='registration' and re.fullmatch(r'접수|신청|응모|공모',label):
+            first=after.split('\n',1)[0]
+            if not DATE.search(first) and not SHORT.search(first) and not re.match(r'^[~～∼]',first):continue
+        matches.append(m)
     for idx,m in enumerate(matches):
         if m.lastgroup=='stop':continue
         end=matches[idx+1].start() if idx+1<len(matches) else len(text)
@@ -40,7 +53,10 @@ def entries(text:str)->list[tuple[str,str,str]]:
         raw=re.split(r'\n\s*\n',raw,maxsplit=1)[0]
         # Drop prose after a line break, but retain split dates and range tokens.
         raw=re.split(r'\n\s*(?:※|\*|•|○|■|□|-(?=\s*[가-힣A-Za-z])|\d+[.)](?=\s*[가-힣A-Za-z]))\s*(?!\d)',raw,maxsplit=1)[0]
+        if m.lastgroup in ('organizer','benefits','eligibility','summary'):
+            raw=re.split(r'\n(?:평가|동의|규칙|참가 방법|제출|문의|주의|유의|개요|일정|진행 방식|첨부)(?:[^\n]{0,35})(?:\n|$)',raw,maxsplit=1)[0]
         value=compact(raw,400)
+        if not re.search(r'[가-힣A-Za-z0-9]',value):continue
         if m.lastgroup=='benefits' and re.fullmatch(r'총\s*상금',m.group('benefits')) and value:value='총상금 '+value
         if value:out.append((m.lastgroup,m.group(m.lastgroup),value))
     return out
@@ -131,6 +147,8 @@ def registration_times(text:str,reference_year:int|None=None)->dict:
 
 
 def _content(soup:BeautifulSoup,kind:str):
+    if kind in ('dacon','aifactory','campuspick'):
+        return soup.body or soup.select_one('#__nuxt,#__next,#app') or soup
     for selector in ('.contest-detail','.contest-view','.contest_view','.competition-content','.mb-view-content','.mb-board-view-content','#mb_content','.mb-content', '[id$=\"_content\"].content', '.artclViewBody','.view-content','.view-content-box','.mb-content','.artclView','article','main','#container','.contest-view','.contest_view','.competition-content','.contest-detail'):
         node=soup.select_one(selector)
         if node is not None:return node
@@ -200,6 +218,11 @@ def schedule_links(html:str,page_url:str)->list[str]:
             if 'campuspick.com' in (host or '') and canonical(url)!=base:continue
             if re.search(r'calendar|login|member|download',urlsplit(url).path,re.I):continue
         if url!=page_url and url not in out:out.append(url)
+    if host in ('dacon.io','www.dacon.io'):
+        match=re.match(r'(/competitions/(?:official|open)/\d+)',urlsplit(page_url).path)
+        if match:
+            known='https://'+host+match[1]+'/overview/schedule'
+            if resource_url(page_url).rstrip('/')!=known and known not in out:out.insert(0,known)
     return out[:2]
 
 
@@ -226,6 +249,28 @@ def _json_events(soup:BeautifulSoup,page_url:str)->list[dict]:
     return candidates if len(candidates)==1 else []
 
 
+def title_registration(title:str,page_url:str='')->dict:
+    """Parse only a recruitment-labelled title window with its own explicit year."""
+    text=normalize_text(title)
+    years=set(re.findall(r'(?<!\d)(20\d{2})(?!\d)',text))
+    if len(years)!=1:return {}
+    year=int(next(iter(years)))
+    marker=list(re.finditer(r'참여\s*신청|참가\s*신청|접수|모집|응모|지원',text))
+    if not marker:return {}
+    tail=text[marker[-1].end():]
+    if re.search(r'대회\s*기간|행사\s*기간|교육\s*기간|시험\s*일',tail):return {}
+    datepart=r'\d{1,2}\s*[./월]\s*\d{1,2}\s*(?:일|\.)?(?:\s*\([월화수목금토일]\))?'
+    found=re.search(r'('+datepart+r')?\s*[~～∼]\s*('+datepart+r')',tail)
+    if not found:return {}
+    evidence=found.group().strip()
+    start,end=registration_from_text('접수기간: '+evidence,year)
+    if not end:return {}
+    return dict(registration_start=start,deadline=end,registration_text=evidence,
+                registration_ambiguous=False,date_status='complete' if start else 'partial',
+                date_source_url=resource_url(page_url),date_evidence=title,
+                date_note='공고 제목에 명시된 연도와 신청·모집 기간을 확인했습니다.')
+
+
 def parse_details(html:str,page_url:str='',source_kind:str='',context_title:str='')->dict:
     soup=BeautifulSoup(html,'html.parser');content=_content(soup,source_kind)
     title=_title(soup,content);years=set(re.findall(r'(?<!\d)(20\d{2})(?!\d)',title or context_title))
@@ -235,6 +280,8 @@ def parse_details(html:str,page_url:str='',source_kind:str='',context_title:str=
     if content is not None:
         for node in content.select('script,style,nav,header,footer,aside,input,button,select,textarea,del,s,.comments,.comment-list,.related,.recommend,.recommendations,.mb-prev-next,.mb-neighbor,.sidebar,.breadcrumbs,.breadcrumb,.post-navigation,.pagination,[role=\"navigation\"],[hidden],[aria-hidden=\"true\"]'):
             node.decompose()
+        for node in list(content.find_all(class_=re.compile(r'(?:related|recommend|suggest|breadcrumb|pagination|login-modal)',re.I))):
+            if node.parent is not None:node.decompose()
         for block in content.select('p,tr,li,dd'):
             raw=block.get_text(' ',strip=True)
             if len(raw)<700 and any(k=='registration' for k,_,_ in entries(raw)):
@@ -272,6 +319,8 @@ def parse_details(html:str,page_url:str='',source_kind:str='',context_title:str=
                    date_status='complete' if start and end else 'partial' if start or end else 'unconfirmed',date_note='')
         if reference_year and not dates(raw):out['date_note']=f'원문 제목의 {reference_year}년을 기준으로 월·일을 해석했습니다.'
         if start is None and end is None:out['date_note']='날짜 형식·연도·부문별 기간을 확정하지 못했습니다. 원문 확인이 필요합니다.'
+    if not values.get('registration'):
+        out.update(title_registration(context_title or title,page_url))
     if values.get('event'):
         pairs=list(dict.fromkeys(date_range(v,allow_single=True,reference_year=reference_year) for v in values['event']))
         if len(pairs)==1 and pairs[0]!=(None,None):out['event_start'],out['event_end']=pairs[0]
@@ -310,5 +359,6 @@ def parse_details(html:str,page_url:str='',source_kind:str='',context_title:str=
         out.update(registration_times(text,reference_year))
     if out.get('registration_time_ambiguous'):
         out['date_note']=(out.get('date_note','')+' 접수 시각 표기가 서로 달라 시간을 확정하지 않았습니다.').strip()
+    if out and content is not None:out['detail_parser_version']=PARSER_VERSION
     if out and page_url:out['detail_source_url']=canonical(page_url)
     return out

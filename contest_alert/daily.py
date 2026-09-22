@@ -88,7 +88,9 @@ The returned object is safe for the public dashboard (no claims or secrets).
         return result
     result['status'] = 'comparable' if base_day == yesterday else 'gap'
     items = state.get('items', {})
-    candidate_ids = set(items) - set(base.get('ids', []))
+    aliases=state.get('identity_aliases',{})
+    base_ids={aliases.get(rid,rid) for rid in base.get('ids', [])}
+    candidate_ids = set(items) - base_ids
     changes = [c for c in state.get('changes', [])
                if c.get('id') in items and
                (stamp := _time(c.get('at'))) and base_time < stamp <= observed]

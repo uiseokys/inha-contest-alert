@@ -146,7 +146,9 @@ class FinalReviewV4Tests(unittest.TestCase):
         self.assertIsNone(f.get('event_end'))
     def test_different_contest_schedule_link_never_followed(self):
         h='<a href="/competitions/official/999/overview/schedule">일정</a>'
-        self.assertEqual(details.schedule_links(h,'https://dacon.io/competitions/official/100/overview/'),[])
+        # v6 also checks the verified same-event schedule path; it must never follow event 200.
+        links=details.schedule_links(h,'https://dacon.io/competitions/official/100/overview/')
+        self.assertEqual(links,['https://dacon.io/competitions/official/100/overview/schedule'])
     def test_date_parser_version_does_not_make_new_contest(self):
         r={'id':'x','title':'AI 대회','source_id':'cp','url':'https://x.example/1'}
         state=core.empty_state();core.merge_items(state,[r],NOW)

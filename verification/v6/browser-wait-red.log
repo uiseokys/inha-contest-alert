@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/mnt/data/v6-work/inha-contest-alert/tools/check_render_wait_v6.py", line 13, in <module>
+    assert page.evaluate('Boolean(window.ready)'), 'Event banner alone was incorrectly considered a ready registration schedule'
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Event banner alone was incorrectly considered a ready registration schedule

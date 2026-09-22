@@ -18,7 +18,7 @@ PATTERNS = {
     'campuspick': r'/contest/view\?(?:[^#]*&)?id=\d+(?:&|$)',
     'aifactory': r'/(?:ko/)?competitions/\d+',
 }
-DETAIL_FIELDS = ('detail_title','title_raw','listing_title','relevance_status','relevance_evidence','relevance_reason','relevance_version','deadline_time','registration_start_time','registration_time_ambiguous','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
+DETAIL_FIELDS = ('opportunity_kind','duplicate_of','detail_parser_version','detail_title','title_raw','listing_title','relevance_status','relevance_evidence','relevance_reason','relevance_version','deadline_time','registration_start_time','registration_time_ambiguous','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
                  'event_start','event_end','event_ambiguous','schedule_text','organizer','eligibility',
                  'benefits','summary','website_url','application_url','detail_source_url',
                  'detail_checked_at','detail_attempted_at','detail_status')
@@ -47,6 +47,7 @@ def canonical(url: str) -> str:
                 except (ValueError,UnicodeError):
                     pass
         drop={'jsessionid','utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid','mode'}
+        if re.search(r'/bbs/[^/]+/\d+/\d+/artclView\.do',p.path):drop.add('layout')
         kept=sorted((k,v) for k,v in pairs if k.lower() not in drop and not k.lower().startswith('utm_'))
         path=re.sub(r';jsessionid=[^/?;]*','',p.path,flags=re.I) or '/'
         # Different navigation tabs of the same DACON event share one identity.

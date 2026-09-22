@@ -1,0 +1,22 @@
+test_aifactory_registration_label_without_period_suffix (test_v6.LiveFailures.test_aifactory_registration_label_without_period_suffix) ... ok
+test_bad_old_metadata_removed_without_deleting_item (test_v6.LiveFailures.test_bad_old_metadata_removed_without_deleting_item) ... ok
+test_dacon_date_tab_text_without_container (test_v6.LiveFailures.test_dacon_date_tab_text_without_container) ... ok
+test_dacon_schedule_discovery_outside_content (test_v6.LiveFailures.test_dacon_schedule_discovery_outside_content) ... ok
+test_dacon_schedule_known_path_when_shell_has_no_link (test_v6.LiveFailures.test_dacon_schedule_known_path_when_shell_has_no_link) ... ok
+test_event_prose_not_competing_date_range (test_v6.LiveFailures.test_event_prose_not_competing_date_range) ... ok
+test_existing_duplicate_records_preserved_but_public_once (test_v6.LiveFailures.test_existing_duplicate_records_preserved_but_public_once) ... ok
+test_genuine_ai_program_is_kept (test_v6.LiveFailures.test_genuine_ai_program_is_kept) ... ok
+test_layout_does_not_change_article_identity (test_v6.LiveFailures.test_layout_does_not_change_article_identity) ... ok
+test_metadata_labels_outside_first_article (test_v6.LiveFailures.test_metadata_labels_outside_first_article) ... ok
+test_not_recursing_schedule_itself (test_v6.LiveFailures.test_not_recursing_schedule_itself) ... ok
+test_other_sites_layout_query_is_not_blindly_removed (test_v6.LiveFailures.test_other_sites_layout_query_is_not_blindly_removed) ... ok
+test_prose_organizer_and_benefits_do_not_pollute_fields (test_v6.LiveFailures.test_prose_organizer_and_benefits_do_not_pollute_fields) ... ok
+test_results_not_new_opportunities (test_v6.LiveFailures.test_results_not_new_opportunities) ... ok
+test_title_only_end_date_uses_explicit_year (test_v6.LiveFailures.test_title_only_end_date_uses_explicit_year) ... ok
+test_title_registration_window_survives_missing_body (test_v6.LiveFailures.test_title_registration_window_survives_missing_body) ... ok
+test_yearless_title_does_not_use_machine_year (test_v6.LiveFailures.test_yearless_title_does_not_use_machine_year) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.034s
+
+OK
