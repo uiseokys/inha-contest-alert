@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "daily_comparison": {
+    "status": "baseline",
+    "date": "2026-09-22",
+    "as_of": null,
+    "base_date": null,
+    "base_at": null,
+    "new_count": null,
+    "new_ids": [],
+    "updated_count": 0,
+    "updated_ids": [],
+    "initial_count": 0,
+    "initial_ids": [],
+    "unverified_count": 0,
+    "unverified_ids": [],
+    "by_source": [],
+    "partial": false,
+    "baseline_count": 0
+  },
+  "updated_at": null,
+  "demo": false,
+  "items": [],
+  "sources": [],
+  "repo_url": "",
+  "page_url": ""
+}

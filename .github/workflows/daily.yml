@@ -1,0 +1,119 @@
+name: Daily contest dashboard
+
+on:
+  schedule:
+    # 02:40 UTC = 11:40 Asia/Seoul. ntfy delivers the prepared digest at 12:00 KST.
+    - cron: '40 2 * * *'
+  workflow_dispatch:
+    inputs:
+      send_today:
+        description: '오늘 알림도 보내기 (시험용 즉시 발송, 이미 오늘 시도했으면 생략)'
+        required: false
+        type: boolean
+        default: false
+
+# A manual refresh and a scheduled run must not overwrite each other's state.
+concurrency:
+  group: contest-daily-state
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: write
+    outputs:
+      site_ready: ${{ steps.upload.outcome == 'success' }}
+    env:
+      PAGE_URL: ${{ vars.PAGE_URL }}
+      ENABLE_PAGES: ${{ vars.ENABLE_PAGES }}
+    steps:
+      - name: Read latest persistent state
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Offline tests
+        run: python -m unittest discover -s tests -v
+      - name: Collect public notices and build the dashboard
+        run: python -m contest_alert collect
+      - name: Reserve today's single notification attempt
+        id: reserve
+        continue-on-error: true
+        if: github.event_name == 'schedule' || inputs.send_today == true
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NOTIFY_MODE: ${{ github.event_name == 'schedule' && 'scheduled' || 'manual' }}
+        run: python -m contest_alert prepare --mode "$NOTIFY_MODE"
+      - name: Save snapshot and reservation BEFORE sending
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/state.json README.md site/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update contest snapshot and daily state'
+            git pull --rebase origin "$DEFAULT_BRANCH"
+            git push origin HEAD:"$DEFAULT_BRANCH"
+          fi
+      - name: Submit one message to ntfy (or schedule it for noon)
+        id: notify
+        if: steps.reserve.outputs.send == 'true'
+        continue-on-error: true
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python -m contest_alert send
+      - name: Persist ntfy acceptance or failure, without any topic or response body
+        if: always() && steps.reserve.outputs.send == 'true' && steps.notify.outcome != 'skipped'
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git add data/state.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record daily notification attempt result'
+            git pull --rebase origin "$DEFAULT_BRANCH"
+            git push origin HEAD:"$DEFAULT_BRANCH"
+          fi
+      - name: Upload only the public website
+        id: upload
+        if: vars.ENABLE_PAGES != 'false'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+          retention-days: 1
+      - name: Make a failed ntfy attempt visible in Actions
+        if: always() && (steps.notify.outcome == 'failure' || steps.reserve.outcome == 'failure')
+        run: |
+          echo 'ntfy publish failed. Check Secrets, phone subscription and source status. No automatic retry was sent.'
+          exit 1
+
+  deploy:
+    needs: update
+    if: always() && vars.ENABLE_PAGES != 'false' && needs.update.outputs.site_ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4

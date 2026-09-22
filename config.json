@@ -1,0 +1,80 @@
+{
+  "browser_fallback": true,
+  "max_pages_per_source": 2,
+  "max_detail_requests": 30,
+  "lookback_days": 120,
+  "sources": [
+    {
+      "id": "ds_contest",
+      "name": "데이터사이언스학과 · 대회",
+      "group": "inha",
+      "kind": "k2web",
+      "mode": "contest",
+      "url": "https://datascience.inha.ac.kr/datascience/11588/subview.do"
+    },
+    {
+      "id": "ds_notice",
+      "name": "데이터사이언스학과 · 공지",
+      "group": "inha",
+      "kind": "k2web",
+      "mode": "contest",
+      "url": "https://datascience.inha.ac.kr/datascience/3125/subview.do"
+    },
+    {
+      "id": "ai_notice",
+      "name": "인공지능공학과 · 공지",
+      "group": "inha",
+      "kind": "k2web",
+      "mode": "contest",
+      "url": "https://doai.inha.ac.kr/doai/3046/subview.do"
+    },
+    {
+      "id": "aix",
+      "name": "인공지능융합연구센터",
+      "group": "inha",
+      "kind": "mangboard",
+      "mode": "contest",
+      "url": "https://aix.inha.ac.kr/news/notice/"
+    },
+    {
+      "id": "sw",
+      "name": "SW중심대학사업단",
+      "group": "inha",
+      "kind": "k2web",
+      "mode": "contest",
+      "url": "https://swuniv.inha.ac.kr/"
+    },
+    {
+      "id": "inha",
+      "name": "인하대학교 · 교내 공지",
+      "group": "inha",
+      "kind": "k2web",
+      "mode": "contest",
+      "url": "https://www.inha.ac.kr/"
+    },
+    {
+      "id": "dacon",
+      "name": "DACON",
+      "group": "external",
+      "kind": "dacon",
+      "mode": "platform",
+      "url": "https://dacon.io/competitions"
+    },
+    {
+      "id": "aifactory",
+      "name": "인공지능팩토리",
+      "group": "external",
+      "kind": "aifactory",
+      "mode": "platform",
+      "url": "https://aifactory.space/ko/competition"
+    },
+    {
+      "id": "campuspick",
+      "name": "캠퍼스픽 · AI/데이터",
+      "group": "external",
+      "kind": "campuspick",
+      "mode": "ai_platform",
+      "url": "https://www.campuspick.com/contest"
+    }
+  ]
+}

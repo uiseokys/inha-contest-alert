@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="인하대·캠퍼스픽·AI 대회 플랫폼의 공고, 접수기간, 참가 정보와 어제 대비 신규 공고를 한곳에서 확인합니다.">
+  <title>공모전 모아보기 · Contest Monitor</title>
+  <style>/*__STYLE__*/</style>
+</head>
+<body>
+<a class="skip-link" href="#mainContent">본문으로 바로가기</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="프로젝트 탐색">
+    <a class="brand" href="#overview" aria-label="공모전 모아보기 개요"><span class="brand-mark" aria-hidden="true">C<span>·</span></span><span>CONTEST<br><strong>MONITOR</strong></span></a>
+    <p class="sidebar-caption">인하 · AI · 데이터</p>
+    <nav aria-label="페이지 섹션">
+      <a class="nav-item current" aria-current="location" href="#overview"><span aria-hidden="true">01</span>대시보드</a>
+      <a class="nav-item" href="#opportunities"><span aria-hidden="true">02</span>공고 모아보기</a>
+      <a class="nav-item" href="#source-status"><span aria-hidden="true">03</span>수집 상태</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a id="repoLink" class="repo-link" hidden>GitHub에서 보기 <span aria-hidden="true">↗</span></a>
+      <div class="sidebar-note"><strong>하루 한 번, 점심 브리핑.</strong><p>공개된 기회를 모으고<br>새로 확인한 소식을 전합니다.</p></div>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="workspace-top"><span>대회 탐색 <span aria-hidden="true">/</span> 대시보드</span><span class="top-tag">PUBLIC NOTICES</span><a id="repoLinkMobile" class="mobile-repo" hidden>GitHub <span aria-hidden="true">↗</span></a></header>
+    <main id="mainContent" tabindex="-1">
+      <div id="demoBanner" class="banner demo" hidden><strong>디자인 미리보기</strong> 아래 공고·날짜·건수는 모두 가상 데이터이며 실제 모집 공고가 아닙니다.</div>
+      <div id="staleBanner" class="banner warn" hidden role="status"></div>
+      <section class="hero" id="overview" aria-labelledby="pageTitle">
+        <div class="hero-copy"><h1 id="pageTitle">공모전 모아보기<span class="title-dot" aria-hidden="true">.</span></h1><p>관심 있는 대회의 일정과 참가 정보를 한눈에.<br>인하대·캠퍼스픽·AI 대회 플랫폼을 함께 살펴보세요.</p></div>
+        <aside class="schedule" aria-label="일일 알림 일정"><div class="schedule-heading"><span class="clock-mark" aria-hidden="true">◷</span><span>일일 알림 목표</span></div><strong>12:00 <small>한국시간</small></strong><p>11:40 수집 시작 · ntfy 정오 예약</p><p class="schedule-note">서비스 상태에 따라 지연·누락될 수 있습니다.</p></aside>
+      </section>
+      <section class="stats" aria-label="공고 요약">
+        <button type="button" class="stat stat-featured" id="showNew" aria-label="비교 기준 이후 신규 공고만 보기"><span id="newCountLabel">어제 대비 신규</span><strong><span id="newCount">—</span><small>건</small></strong><span class="stat-note" id="newCountNote">첫 수집 후 비교 기준 저장</span><span class="stat-action" aria-hidden="true">↗</span></button>
+        <div class="stat"><span>검토할 공고</span><strong><span id="totalCount">0</span><small>건</small></strong><span class="stat-note">마감 미확인 항목 포함</span></div>
+        <div class="stat"><span>7일 이내 마감</span><strong><span id="dueCount">0</span><small>건</small></strong><span class="stat-note">마감일이 확인된 공고</span></div>
+        <div class="stat"><span>목록 수집 정상</span><strong id="sourceCount">0 / 0</strong><span class="stat-note" id="sourceNote">아직 수집 전</span></div>
+      </section>
+      <section class="comparison" aria-label="어제 대비 신규 집계 기준">
+        <div class="comparison-heading"><h2 id="comparisonTitle">어제 대비 비교 준비 중</h2><span class="basis-tag">공고 주소 기준</span></div>
+        <p id="comparisonRange" class="comparison-range"></p><div id="dailySourceCounts" class="source-chips" aria-label="출처별 신규 공고 수"></div>
+        <p id="comparisonNote" class="comparison-note">전날 저장한 목록과 비교합니다. 실제 게시일이나 고유한 대회 수와는 다를 수 있습니다.</p>
+      </section>
+      <section class="panel" id="opportunities" aria-labelledby="listTitle">
+        <div class="panel-heading"><div><h2 id="listTitle">공고 모아보기</h2><p id="updatedAt">아직 수집 전</p></div><button class="secondary" id="csvButton" type="button">CSV 저장 <span aria-hidden="true">↓</span></button></div>
+        <div class="group-tabs" role="group" aria-label="출처 구분"><button type="button" class="tab selected" data-group="all" aria-pressed="true">전체</button><button type="button" class="tab" data-group="inha" aria-pressed="false">인하대 게시판</button><button type="button" class="tab" data-group="external" aria-pressed="false">교외 플랫폼</button></div>
+        <div class="controls">
+          <label class="search"><span aria-hidden="true">⌕</span><input type="search" id="searchInput" placeholder="대회명·주최기관·참가 대상 검색" aria-label="대회명, 주최기관, 참가 대상 검색"></label>
+          <label class="select-label"><span class="sr-only">출처 선택</span><select id="sourceFilter"><option value="all">모든 출처</option></select></label>
+          <label class="select-label"><span class="sr-only">상태 선택</span><select id="statusFilter"><option value="review">마감 제외</option><option value="all">전체 상태</option><option value="active">기한 남음 / 접수 표시</option><option value="unknown">마감 미확인</option><option value="upcoming">접수 예정</option><option value="closed">마감 / 종료</option></select></label>
+          <label class="select-label"><span class="sr-only">정렬</span><select id="sortFilter"><option value="newest">최신순</option><option value="deadline">마감일순</option></select></label>
+        </div>
+        <div class="results-meta"><span id="resultCount" aria-live="polite">0개 공고</span><label class="new-toggle"><input type="checkbox" id="newOnly"><span id="newOnlyLabel">어제 대비 신규만</span></label></div>
+        <div id="loading" class="loading" role="status">저장된 공고 목록을 불러오는 중입니다.</div>
+        <noscript><p class="banner warn">이 목록을 검색하고 상세정보를 보려면 JavaScript를 허용하세요. GitHub README에서도 공고 표를 확인할 수 있습니다.</p></noscript>
+        <div id="items" class="items"></div>
+        <div id="empty" class="empty" hidden><span class="empty-symbol" aria-hidden="true">⌕</span><h3>조건에 맞는 공고가 없습니다.</h3><p>검색어나 필터를 바꿔보세요.<br>수집 오류가 없는지는 아래에서 확인할 수 있습니다.</p><button id="resetFilters" type="button" class="secondary">검색·필터 초기화</button></div>
+        <p class="list-note">인하대 게시판에는 교외 대회 홍보도 포함됩니다. 접수기간과 대회기간은 구분해 표시하며, 최종 정보는 원문이 기준입니다.</p>
+      </section>
+      <details class="health" id="source-status" open><summary><span>출처별 수집 상태</span><span class="health-hint">‘새 공고 없음’과 ‘수집 실패’는 다릅니다.</span></summary><div id="sourceHealth"></div></details>
+      <footer><strong>CONTEST MONITOR</strong><p>개인용 공개 공고 모음 · 지정 게시판의 일부 페이지만 확인합니다.</p><p>목록은 일일 수집 또는 수동 실행 때 갱신됩니다. 이 페이지를 열어도 새 수집이 시작되지는 않습니다.</p></footer>
+    </main>
+  </div>
+</div>
+<script id="app-data" type="application/json">/*__DATA__*/</script><script>/*__APP__*/</script>
+</body></html>
