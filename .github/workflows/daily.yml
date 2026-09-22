@@ -48,16 +48,32 @@ jobs:
       - name: Offline tests
         run: python -m unittest discover -s tests -v
       - name: Collect public notices and build the dashboard
+        id: collect
+        continue-on-error: true
         run: python -m contest_alert collect
+      - name: Persist failed collection metadata with the previous valid snapshot
+        if: always() && steps.collect.outcome == 'failure'
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/state.json README.md site/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record failed collection without sending notifications'
+            git pull --rebase origin "$DEFAULT_BRANCH"
+            git push origin HEAD:"$DEFAULT_BRANCH"
+          fi
       - name: Reserve today's single notification attempt
         id: reserve
         continue-on-error: true
-        if: github.event_name == 'schedule' || inputs.send_today == true
+        if: steps.collect.outcome == 'success' && (github.event_name == 'schedule' || inputs.send_today == true)
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           NOTIFY_MODE: ${{ github.event_name == 'schedule' && 'scheduled' || 'manual' }}
         run: python -m contest_alert prepare --mode "$NOTIFY_MODE"
       - name: Save snapshot and reservation BEFORE sending
+        if: steps.collect.outcome == 'success'
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
@@ -81,7 +97,7 @@ jobs:
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          git add data/state.json
+          git add data/state.json README.md site/
           if ! git diff --cached --quiet; then
             git commit -m 'Record daily notification attempt result'
             git pull --rebase origin "$DEFAULT_BRANCH"
@@ -94,10 +110,10 @@ jobs:
         with:
           path: site
           retention-days: 1
-      - name: Make a failed ntfy attempt visible in Actions
-        if: always() && (steps.notify.outcome == 'failure' || steps.reserve.outcome == 'failure')
+      - name: Make collection or ntfy failure visible in Actions
+        if: always() && (steps.collect.outcome == 'failure' || steps.notify.outcome == 'failure' || steps.reserve.outcome == 'failure')
         run: |
-          echo 'ntfy publish failed. Check Secrets, phone subscription and source status. No automatic retry was sent.'
+          echo 'Collection or ntfy step failed. Check source reports and workflow logs. No automatic notification retry was sent.'
           exit 1
 
   deploy:
