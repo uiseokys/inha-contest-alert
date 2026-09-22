@@ -10,6 +10,7 @@ from datetime import datetime,timedelta
 from zoneinfo import ZoneInfo
 import requests
 from .core import status_of
+from .quality import visible_state
 from .daily import compare_day, comparison_lines
 
 KST=ZoneInfo('Asia/Seoul')
@@ -26,6 +27,7 @@ def utf8_clip(text:str,limit:int)->str:
     return text.encode('utf-8')[:limit].decode('utf-8',errors='ignore')
 
 def digest(state:dict,now:datetime,page_url:str)->str:
+    state=visible_state(state)
     today=now.astimezone(KST).date();cursor=state.get('digest_cursor','')
     changes=[x for x in state['changes'] if x['at']>cursor and x['id'] in state['items']]
     new=list(dict.fromkeys(c['id'] for c in changes if c['kind']=='new'))

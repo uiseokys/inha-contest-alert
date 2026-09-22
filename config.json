@@ -50,7 +50,8 @@
       "group": "inha",
       "kind": "k2web",
       "mode": "contest",
-      "url": "https://www.inha.ac.kr/"
+      "url": "https://www.inha.ac.kr/",
+      "enabled": false
     },
     {
       "id": "dacon",
@@ -76,5 +77,6 @@
       "mode": "ai_platform",
       "url": "https://www.campuspick.com/contest"
     }
-  ]
+  ],
+  "strict_ai_data": true
 }

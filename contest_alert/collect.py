@@ -12,8 +12,9 @@ from urllib.parse import urlsplit,urljoin
 from urllib.robotparser import RobotFileParser
 import requests
 from bs4 import BeautifulSoup
-from .core import canonical,parse_listing,detail_fields,merge_items
+from .core import canonical,parse_listing,detail_fields,merge_items,preferred_title
 from .details import PARSER_VERSION,schedule_links
+from .quality import effective_config,apply_policy,classify
 
 AGENT='ContestNoticeMonitor/0.2'
 class FetchError(RuntimeError):
@@ -104,6 +105,8 @@ def discover_pages(html:str,base:str)->list[str]:
 
 
 def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->dict:
+    config=effective_config(config)
+    apply_policy(state,config)
     own=client is None;client=client or Client(config.get('browser_fallback',False))
     all_records=[];successful=[];stamp=now.isoformat()
     try:
@@ -111,7 +114,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
             report={'name':source['name'],'url':source['url'],'group':source.get('group','external'),
                     'status':'pending','message':'','checked_at':stamp,'recognized':0,'retained':0,'pages':0}
             if not source.get('enabled',True):
-                report.update(status='disabled',message='설정에서 자동 수집 제외; 원문 바로가기로 확인')
+                report.update(status='disabled',message=source.get('disabled_reason','설정에서 자동 수집 제외; 원문 바로가기로 확인'))
                 state['sources'][source['id']]=report;continue
             queue=deque([source['url']]);visited=set();records={};errors=[];empty_valid=False
             while queue and len(visited)<config.get('max_pages_per_source',2):
@@ -165,7 +168,10 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
             upgraded=old.get('date_parser_version')!=PARSER_VERSION
             due_day=now.date().isoformat() if missing else (now.date()-timedelta(days=2)).isoformat()
             if upgraded or not attempted or attempted[:10]<due_day:
-                grouped[item['source_id']].append((0 if missing else 1,attempted,item))
+                topic_known=classify(dict(state['items'].get(item['id'],{}),**item))['relevance_status']=='included'
+                # Unchecked generic candidates must eventually be examined too.
+                priority=0 if not attempted else (1 if topic_known and not old.get('deadline') else 2)
+                grouped[item['source_id']].append((priority,attempted,item))
         queues=[deque(x[2] for x in sorted(rows,key=lambda row:(row[0],row[1]))) for rows in grouped.values() if rows]
         due=[];budget=config.get('max_detail_requests',30)
         while queues and len(due)<budget:
@@ -175,7 +181,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
         # Extra requests are bounded independently of the number of notices.
         # This keeps the existing 18-minute workflow and free-host usage modest.
         extra_left=config.get('max_extra_detail_requests',18)
-        browser_left=config.get('max_browser_detail_requests',8)
+        browser_left=config.get('max_browser_detail_requests',16)
         stop_at=time.monotonic()+config.get('detail_time_budget_seconds',360)
         for item in due:
             report=state['sources'][item['source_id']]
@@ -201,32 +207,36 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
                 return result
             try:
                 html=client.get_text(item['url'])
-                fields=detail_fields(html,item['url'],source.get('kind',''))
+                fields=detail_fields(html,item['url'],source.get('kind',''),preferred_title(item))
                 links=schedule_links(html,item['url'])
                 # Rendering is needed for absent dates, not merely absent ALL fields.
                 if needs_dates(fields) and not links and config.get('browser_fallback',False) and browser_left>0 and time.monotonic()<stop_at:
                     browser_left-=1
                     try:
                         html=client.browser_html(item['url'])
-                        fields=blend(fields,detail_fields(html,item['url'],source.get('kind','')))
+                        fields=blend(fields,detail_fields(html,item['url'],source.get('kind',''),preferred_title(item)))
                         links=schedule_links(html,item['url'])
                     except FetchError:
                         report['detail_render_errors']=report.get('detail_render_errors',0)+1
                 for link in links[:1]:
-                    if not needs_dates(fields) or extra_left<=0 or time.monotonic()>=stop_at:break
+                    if (not needs_dates(fields) and fields.get('deadline_time')) or extra_left<=0 or time.monotonic()>=stop_at:break
                     extra_left-=1
                     try:
                         more=client.get_text(link)
-                        extra=detail_fields(more,link,source.get('kind',''))
+                        kind='dacon' if urlsplit(link).hostname in ('dacon.io','www.dacon.io') else source.get('kind','')
+                        extra=detail_fields(more,link,kind,preferred_title(item))
                         if needs_dates(extra) and config.get('browser_fallback',False) and browser_left>0 and time.monotonic()<stop_at:
                             browser_left-=1
-                            try:extra=blend(extra,detail_fields(client.browser_html(link),link,source.get('kind','')))
+                            try:extra=blend(extra,detail_fields(client.browser_html(link),link,kind,preferred_title(item)))
                             except FetchError:report['detail_render_errors']=report.get('detail_render_errors',0)+1
+                        # Preserve the source article title; the linked platform
+                        # is date evidence, not a replacement for its identity.
+                        if fields.get('detail_title'):extra.pop('detail_title',None)
                         fields=blend(fields,extra)
                     except FetchError:report['schedule_errors']=report.get('schedule_errors',0)+1
                 fields['date_status']=fields.get('date_status') or ('complete' if not needs_dates(fields) else 'partial' if fields.get('deadline') or fields.get('registration_start') else 'missing')
                 item.update(fields)
-                substantive=set(fields)-{'detail_title','detail_source_url','date_status','date_note'}
+                substantive={k for k,v in fields.items() if v and k not in {'detail_title','detail_source_url','date_status','date_note','_topic_text'}}
                 if substantive:
                     item['detail_checked_at']=stamp;item['detail_status']='ok'
                 else:
@@ -235,9 +245,17 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
             except (FetchError,ValueError,TypeError,AttributeError):
                 item['detail_status']='error'
                 report['detail_errors']=report.get('detail_errors',0)+1
+        for item in all_records:
+            if config.get('strict_ai_data',True):
+                item.update(classify(dict(state['items'].get(item['id'],{}),**item)))
         merge_items(state,all_records,now)
+        apply_policy(state,config)
         for sid,report in state['sources'].items():
-            current=[i for i in state['items'].values() if i['source_id']==sid and i.get('last_seen','')[:10]==now.date().isoformat()]
+            all_source=[i for i in state['items'].values() if i['source_id']==sid]
+            current=[i for i in all_source if i.get('relevance_status')=='included' and i.get('last_seen','')[:10]==now.date().isoformat()]
+            report['retained']=len(current)
+            report['excluded']=sum(i.get('relevance_status')=='excluded' for i in all_source)
+            report['topic_pending']=sum(i.get('relevance_status')=='pending' for i in all_source)
             report['dates_complete']=sum(bool(i.get('registration_start') and i.get('deadline')) for i in current)
             report['dates_partial']=sum(bool(i.get('registration_start') or i.get('deadline')) and not bool(i.get('registration_start') and i.get('deadline')) for i in current)
             report['dates_missing']=len(current)-report['dates_complete']-report['dates_partial']

@@ -4,18 +4,20 @@ import json,re
 from datetime import date
 from urllib.parse import urljoin,urlsplit,urlunsplit
 from bs4 import BeautifulSoup
-from .core import DATE,dates,canonical,clean_title
+from .core import DATE,dates,canonical,clean_title,generic_title
 
-PARSER_VERSION=4
+from .extraction import normalize_text,reorder_timeline,structured_registration,time_value
+
+PARSER_VERSION=5
 LABELS={
- 'registration':r'(?:(?:참가|참여|작품|참가자)\s*)?(?:접수|신청|모집|응모|공모|지원)\s*(?:기간|일정|기한|시작(?:일)?|개시(?:일)?|종료(?:일)?|마감(?:일)?)|(?:참가|참여)\s*기간|(?:접수|응모|공모|신청)(?=\s*[:：])|(?:registration|application|submission)\s*(?:period|deadline|opens?|closes?|start(?:s| date)?|end(?:s| date)?)',
+ 'registration':r'(?:(?:접수|신청|모집|응모)\s*)?마감\s*일\s*시|(?:접수|신청|모집)\s*(?:시작|종료)\s*일\s*시|(?:(?:참가|참여|작품|참가자)\s*)?(?:접수|신청|모집|응모|공모|지원)\s*(?:기간|일정|기한|시작(?:일)?|개시(?:일)?|종료(?:일)?|마감(?:일)?)|(?:참가|참여)\s*기간|(?:접수|응모|공모|신청)(?=\s*[:：])|(?:registration|application|submission)\s*(?:period|deadline|opens?|closes?|start(?:s| date)?|end(?:s| date)?)',
  'event':r'(?:대회|행사|본선|해커톤|활동|개최)\s*(?:기간|일시|일정|일자)|event\s*(?:dates?|period)',
  'organizer':r'주최\s*[/·ㆍ및]+\s*주관|주최(?:\s*기관)?|주관(?:\s*기관)?',
- 'eligibility':r'참가\s*(?:대상|자격)|참여\s*(?:대상|자격)|지원\s*(?:대상|자격)|신청\s*자격|응모\s*(?:대상|자격)|모집\s*대상',
+ 'eligibility':r'대상(?=\s*[:：])|참가\s*(?:대상|자격)|참여\s*(?:대상|자격)|지원\s*(?:대상|자격)|신청\s*자격|응모\s*(?:대상|자격)|모집\s*대상',
  'benefits':r'상금\s*(?:및|/|·)\s*혜택|시상\s*(?:내역|내용|규모)|총\s*상금|상금|혜택',
- 'summary':r'공모\s*주제|대회\s*주제|공모\s*내용|주제|주요\s*내용',
+ 'summary':r'참여\s*주제|프로그램\s*(?:주제|내용)|공모\s*주제|대회\s*주제|공모\s*내용|주제|주요\s*내용',
  'schedule':r'상세\s*일정|진행\s*일정|주요\s*일정|추진\s*일정|세부\s*일정',
- 'stop':r'(?:공식\s*)?홈페이지|참가\s*신청(?=\s*[:：])|공식\s*사이트|신청\s*방법|접수\s*방법|문의(?:처)?|유의\s*사항|첨부\s*파일|발표\s*일시|심사\s*(?:기간|일정)|팀\s*병합\s*마감|(?:소스\s*코드|리더보드|결과물|보고서|작품|2차\s*평가\s*자료)\s*제출(?:\s*마감)?|최종\s*(?:순위|결과)\s*발표|시상식|대회\s*(?:종료|시작)|운영|설명|대회\s*설명',
+ 'stop':r'결과\s*발표|학습\s*데이터셋\s*공개|코드\s*제출|순위\s*발표|접수처|(?:공식\s*)?홈페이지|참가\s*신청(?=\s*[:：])|공식\s*사이트|신청\s*방법|접수\s*방법|문의(?:처)?|유의\s*사항|첨부\s*파일|발표\s*일시|심사\s*(?:기간|일정)|팀\s*병합\s*마감|(?:소스\s*코드|리더보드|결과물|보고서|작품|2차\s*평가\s*자료)\s*제출(?:\s*마감)?|최종\s*(?:순위|결과)\s*발표|시상식|대회\s*(?:종료|시작)|운영|설명|대회\s*설명',
 }
 LABEL_RE=re.compile(r'(?<![가-힣A-Za-z0-9])(?:'+'|'.join('(?P<'+k+'>'+v+')' for k,v in LABELS.items())+r')(?=\s|[:：]|$)[ \t]*[:：]?[ \t]*',re.I)
 SHORT=re.compile(r'(?<![\d./-])(\d{1,2})\s*[./월-]\s*(\d{1,2})\s*(?:일)?(?!\d)')
@@ -28,6 +30,7 @@ def compact(text: str,limit: int=240)->str:
 
 
 def entries(text:str)->list[tuple[str,str,str]]:
+    text=normalize_text(text)
     text=re.sub(r'[\[【]([^\]\n】]{1,40})[\]】]',r' \1 ',text)
     matches=list(LABEL_RE.finditer(text));out=[]
     for idx,m in enumerate(matches):
@@ -36,7 +39,7 @@ def entries(text:str)->list[tuple[str,str,str]]:
         raw=text[m.end():end].strip()
         raw=re.split(r'\n\s*\n',raw,maxsplit=1)[0]
         # Drop prose after a line break, but retain split dates and range tokens.
-        raw=re.split(r'\n\s*(?:※|\*|•|○|■|□)\s*(?!\d)',raw,maxsplit=1)[0]
+        raw=re.split(r'\n\s*(?:※|\*|•|○|■|□|-(?=\s*[가-힣A-Za-z])|\d+[.)](?=\s*[가-힣A-Za-z]))\s*(?!\d)',raw,maxsplit=1)[0]
         value=compact(raw,400)
         if m.lastgroup=='benefits' and re.fullmatch(r'총\s*상금',m.group('benefits')) and value:value='총상금 '+value
         if value:out.append((m.lastgroup,m.group(m.lastgroup),value))
@@ -52,6 +55,7 @@ def fields_from_text(text:str)->dict[str,list[str]]:
 
 def date_tokens(text:str,reference_year:int|None=None)->list[str|None]:
     """Only complete dates or short dates tied to an explicit same-page year."""
+    text=normalize_text(text)
     full=list(DATE.finditer(text));tokens=[]
     year=reference_year
     years={int(m[1]) for m in full}
@@ -103,8 +107,31 @@ def registration_from_text(text:str,reference_year:int|None=None)->tuple[str|Non
     return start,end
 
 
+def registration_times(text:str,reference_year:int|None=None)->dict:
+    candidates={'registration_start_time':set(),'deadline_time':set()}
+    for kind,label,value in entries(text):
+        if kind!='registration':continue
+        value=normalize_text(value)
+        full=list(DATE.finditer(value))
+        short=[m for m in SHORT.finditer(value) if not any(m.start()<f.end() and m.end()>f.start() for f in full)]
+        spans=sorted(full+short,key=lambda m:m.start())
+        ds=date_tokens(value,reference_year)
+        if len(ds)==2 and len(spans)==2 and all(ds):
+            st=time_value(value[spans[0].end():spans[1].start()])
+            en=time_value(value[spans[1].end():])
+            if st:candidates['registration_start_time'].add(st)
+            if en:candidates['deadline_time'].add(en)
+        elif len(ds)==1 and len(spans)==1:
+            t=time_value(value[spans[0].end():])
+            if t and re.search(r'마감|종료|기한|deadline|clos|end',label,re.I):candidates['deadline_time'].add(t)
+            elif t and re.search(r'시작|개시|open|start',label,re.I):candidates['registration_start_time'].add(t)
+    if any(len(values)>1 for values in candidates.values()):
+        return {'registration_time_ambiguous':True,'deadline_time':None,'registration_start_time':None}
+    return dict({key:next(iter(values)) for key,values in candidates.items() if values},registration_time_ambiguous=False)
+
+
 def _content(soup:BeautifulSoup,kind:str):
-    for selector in ('.artclViewBody','.view-content','.view-content-box','.mb-content','.artclView','article','main','#container','.contest-view','.contest_view','.competition-content','.contest-detail'):
+    for selector in ('.contest-detail','.contest-view','.contest_view','.competition-content','.mb-view-content','.mb-board-view-content','#mb_content','.mb-content', '[id$=\"_content\"].content', '.artclViewBody','.view-content','.view-content-box','.mb-content','.artclView','article','main','#container','.contest-view','.contest_view','.competition-content','.contest-detail'):
         node=soup.select_one(selector)
         if node is not None:return node
     if kind in ('dacon','aifactory','campuspick'):
@@ -113,18 +140,29 @@ def _content(soup:BeautifulSoup,kind:str):
 
 
 def _title(soup:BeautifulSoup,content)->str:
-    for selector in ('.artclViewTitle','.view-title','.contest-title','h1'):
-        node=soup.select_one(selector)
-        if node:
-            value=clean_title(node.get_text(' ',strip=True))
-            if len(value)>=4 and not re.fullmatch(r'공모전|경진대회|대회안내|대회 안내',value):return value
+    def usable(value):
+        value=clean_title(value)
+        return value if len(value)>=4 and not generic_title(value) else ''
+    # Actual bulletin subject before generic WordPress page headings and OG tags.
+    for selector in ('.artclViewTitle','.view-title','.mb-view-title','.mb-board-view-title','.mb-subject','#mb_subject','[itemprop="headline"]','.contest-title'):
+        for node in soup.select(selector):
+            if value:=usable(node.get_text(' ',strip=True)):return value
+    for row in soup.select('tr'):
+        cells=row.find_all(['th','td'],recursive=False)
+        if len(cells)>=2 and cells[0].get_text(strip=True)=='제목':
+            if value:=usable(cells[1].get_text(' ',strip=True)):return value
+    # MangBoard often exposes the subject as h3 inside the board form.
+    for node in soup.select('h1,h2,h3'):
+        if node.find_parent(['nav','header','footer','aside']):continue
+        if node.find_parent(class_=re.compile(r'related|recommend|comment',re.I)):continue
+        value=usable(node.get_text(' ',strip=True))
+        if value and (node.name=='h1' or re.search(r'공모|대회|경진|챌린지|해커톤|프로그램|교육|세미나|AI|데이터',value,re.I)):return value
     node=soup.select_one('meta[property="og:title"]')
     if node:
-        value=clean_title(node.get('content',''))
-        if len(value)>=4:return value
+        if value:=usable(node.get('content','')):return value
     if soup.title:
-        value=clean_title(soup.title.get_text(' ',strip=True))
-        if len(value)>=4 and re.search(r'공모|경진|챌린지|해커톤|competition|challenge',value,re.I):return value
+        value=usable(soup.title.get_text(' ',strip=True))
+        if value and re.search(r'공모|경진|챌린지|해커톤|competition|challenge',value,re.I):return value
     return ''
 
 
@@ -136,19 +174,32 @@ def resource_url(url:str)->str:
 
 
 def schedule_links(html:str,page_url:str)->list[str]:
-    """One-level same-contest navigation only; not other contests or global pages."""
+    """Follow same-event tabs and explicitly linked official platform schedules."""
     soup=BeautifulSoup(html,'html.parser');out=[];host=urlsplit(page_url).hostname
     base=canonical(page_url)
-    for a in soup.select('a[href]'):
-        label=a.get_text(' ',strip=True)
-        if not re.search(r'일정|접수\s*기간|schedule|timeline',label,re.I):continue
-        url=resource_url(urljoin(page_url,a['href']))
-        if not url or urlsplit(url).hostname!=host or url==page_url:continue
-        # For platform identities, never wander to a different contest.
-        if '/competitions/' in page_url and canonical(url)!=base:continue
-        if 'campuspick.com' in (host or '') and canonical(url)!=base:continue
-        if re.search(r'calendar|login|member|download',urlsplit(url).path,re.I):continue
-        if url not in out:out.append(url)
+    content=_content(soup,'') or soup
+    for a in content.select('a[href]'):
+        if a.find_parent(['nav','aside','header','footer']):continue
+        if a.find_parent(class_=re.compile(r'recommend|related|prev|next',re.I)):continue
+        label=a.get_text(' ',strip=True);url=resource_url(urljoin(page_url,a['href']))
+        if not url:continue
+        target=urlsplit(url).hostname
+        if target!=host:
+            # Only directly authored, application-labeled links to known public
+            # platforms; never generic websites/search/recommendation links.
+            nearby=a.parent.get_text(' ',strip=True)[:600] if a.parent else label
+            if not re.search(r'접수처|공식|신청|접수|참가|홈페이지',nearby):continue
+            if target in ('dacon.io','www.dacon.io') and re.search(r'/competitions/(?:official|open)/\d+',url):
+                m=re.search(r'(/competitions/(?:official|open)/\d+)',urlsplit(url).path)
+                url='https://'+target+m[1]+'/overview/schedule'
+            elif target in ('aifactory.space','www.aifactory.space') and re.search(r'/competitions/\d+',url):pass
+            else:continue
+        else:
+            if not re.search(r'일정|접수\s*기간|schedule|timeline',label,re.I):continue
+            if '/competitions/' in page_url and canonical(url)!=base:continue
+            if 'campuspick.com' in (host or '') and canonical(url)!=base:continue
+            if re.search(r'calendar|login|member|download',urlsplit(url).path,re.I):continue
+        if url!=page_url and url not in out:out.append(url)
     return out[:2]
 
 
@@ -175,19 +226,25 @@ def _json_events(soup:BeautifulSoup,page_url:str)->list[dict]:
     return candidates if len(candidates)==1 else []
 
 
-def parse_details(html:str,page_url:str='',source_kind:str='')->dict:
+def parse_details(html:str,page_url:str='',source_kind:str='',context_title:str='')->dict:
     soup=BeautifulSoup(html,'html.parser');content=_content(soup,source_kind)
-    title=_title(soup,content);years=set(re.findall(r'(?<!\d)(20\d{2})(?!\d)',title))
+    title=_title(soup,content);years=set(re.findall(r'(?<!\d)(20\d{2})(?!\d)',title or context_title))
     reference_year=int(next(iter(years))) if len(years)==1 else None
-    out={};texts=[]
+    out={};texts=[];raw_evidence=[]
+    structured=structured_registration(soup,page_url)
     if content is not None:
-        for node in content.select('script,style,nav,header,footer,form,.comments,.comment-list,.related,.recommend,.recommendations'):
+        for node in content.select('script,style,nav,header,footer,aside,input,button,select,textarea,del,s,.comments,.comment-list,.related,.recommend,.recommendations,.mb-prev-next,.mb-neighbor,.sidebar,.breadcrumbs,.breadcrumb,.post-navigation,.pagination,[role=\"navigation\"],[hidden],[aria-hidden=\"true\"]'):
             node.decompose()
+        for block in content.select('p,tr,li,dd'):
+            raw=block.get_text(' ',strip=True)
+            if len(raw)<700 and any(k=='registration' for k,_,_ in entries(raw)):
+                raw_evidence.append(raw)
+        reorder_timeline(soup,content)
         # Visible text + authored alternative text; never OCR or read pixels.
         for img in content.select('img[alt]'):
             alt=img.get('alt','')
             if re.search(r'접수|신청|모집|응모',alt) and DATE.search(alt):img.replace_with(alt)
-        visible=content.get_text('\n',strip=True)
+        visible=normalize_text(content.get_text('\n',strip=True))
         if source_kind=='dacon':
             # The summary timeline is date-before-label and often omits years.
             # Its next milestone must not overwrite the explicit period above.
@@ -203,6 +260,10 @@ def parse_details(html:str,page_url:str='',source_kind:str='')->dict:
         for extra in texts[1:]:
             if fields_from_text(extra).get('registration'):
                 text+='\n'+extra;values=fields_from_text(text);break
+    if structured:
+        # Explicit registration metadata is parsed together with visible fields.
+        # Conflicts stay ambiguous rather than silently overwriting a date.
+        text+='\n'+'\n'.join(structured);values=fields_from_text(text)
     if values.get('registration'):
         raw=' / '.join(values['registration']);start,end=registration_from_text(text,reference_year)
         out.update(registration_text=compact(raw,400),registration_start=start,deadline=end,
@@ -237,6 +298,17 @@ def parse_details(html:str,page_url:str='',source_kind:str='')->dict:
             if not url or re.match(r'/(?:login|download|linkclick|member)(?:/|$)',urlsplit(url).path):continue
             if re.search(r'(?:참가\s*)?(?:신청|접수|지원)\s*(?:하기|바로가기|사이트|링크|페이지)?$',label):out.setdefault('application_url',url)
             elif re.search(r'공식\s*(?:홈페이지|사이트)|홈페이지|대회\s*(?:사이트|안내)|관련\s*사이트',label):out.setdefault('website_url',url)
+    if out.get('date_evidence') and raw_evidence:
+        out['date_evidence']=compact(' / '.join(dict.fromkeys(raw_evidence)),400)
+        if re.search(r"[’‘'`]\s*\d{2}(?=\s*[.년/-])",out['date_evidence']):
+            out['date_note']=(out.get('date_note','')+' 원문의 두 자리 연도 표기를 20YY년으로 정규화했습니다.').strip()
+    if structured and out.get('deadline'):
+        out['date_note']=(out.get('date_note','')+' 해당 공고의 공개 구조화 접수 필드도 확인했습니다. 시간대가 명시된 값은 한국시간으로 변환했습니다.').strip()
     if title:out['detail_title']=title
+    if title or re.search(r'AI|데이터|인공지능|통계|머신러닝|딥러닝',text,re.I):out['_topic_text']=text[:12000]
+    if out.get('deadline') or out.get('registration_start'):
+        out.update(registration_times(text,reference_year))
+    if out.get('registration_time_ambiguous'):
+        out['date_note']=(out.get('date_note','')+' 접수 시각 표기가 서로 달라 시간을 확정하지 않았습니다.').strip()
     if out and page_url:out['detail_source_url']=canonical(page_url)
     return out

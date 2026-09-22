@@ -18,12 +18,12 @@ PATTERNS = {
     'campuspick': r'/contest/view\?(?:[^#]*&)?id=\d+(?:&|$)',
     'aifactory': r'/(?:ko/)?competitions/\d+',
 }
-DETAIL_FIELDS = ('detail_title','title_raw','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
+DETAIL_FIELDS = ('detail_title','title_raw','listing_title','relevance_status','relevance_evidence','relevance_reason','relevance_version','deadline_time','registration_start_time','registration_time_ambiguous','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
                  'event_start','event_end','event_ambiguous','schedule_text','organizer','eligibility',
                  'benefits','summary','website_url','application_url','detail_source_url',
                  'detail_checked_at','detail_attempted_at','detail_status')
 PERSIST = ('id','title','url','source_id','source_name','group','posted_at','platform_status') + DETAIL_FIELDS
-CHANGE_FIELDS = ('title','deadline','registration_start','platform_status','registration_text',
+CHANGE_FIELDS = ('title','deadline_time','registration_start_time','deadline','registration_start','platform_status','registration_text',
                  'event_start','event_end','schedule_text','organizer','eligibility','benefits',
                  'summary','website_url','application_url','registration_ambiguous','event_ambiguous')
 
@@ -73,6 +73,8 @@ def registration_dates(text: str) -> tuple[str|None,str|None]:
 
 def relevant(title: str, mode: str) -> bool:
     if EXCLUDE.search(title):return False
+    if mode=='candidate_platform':return True
+    if mode=='candidate':return bool(CONTEST.search(title) or re.search(r'대회|프로그램|부트캠프|교육|세미나|워크숍|특강',title))
     if mode=='platform':return True
     if mode=='ai_platform':return bool(AI.search(title))
     return bool(CONTEST.search(title) and (mode!='ai_contest' or AI.search(title)))
@@ -90,10 +92,25 @@ def clean_title(text: str) -> str:
     return text.strip()
 
 
+def generic_title(text: str) -> bool:
+    """Reject site/board chrome, not actual notice names."""
+    value=clean_title(text)
+    value=re.split(r'\s+[|｜–—-]\s*',value,maxsplit=1)[0].strip()
+    value=re.sub(r'\s+','',value).lower()
+    return not value or value in {'공지사항','공지','알림마당','새소식','게시판','공모전','경진대회','대회안내','대회','상세보기','글보기','목록','제목','notice','notices','news','competition','competitions','campuspick','캠퍼스픽','에브리커리어','인공지능융합연구센터','인하대학교인공지능융합연구센터','ai융합연구센터','인하대학교ai융합연구센터'}
+
+
+def preferred_title(item: dict) -> str:
+    for key in ('detail_title','listing_title','title','title_raw'):
+        value=clean_title(item.get(key) or '')
+        if not generic_title(value):return value
+    return ''
+
+
 def listing_title(a) -> str:
     for selector in ('[class~="title"], [class~="subject"], [class*="card-title"], [class*="contest-title"]', 'h1,h2,h3,h4', '[class*="title"],[class*="subject"]', 'strong'):
         node=a.select_one(selector)
-        if node and len(node.get_text(' ',strip=True))>=4:
+        if node and len(node.get_text(' ',strip=True))>=4 and not generic_title(node.get_text(' ',strip=True)):
             return clean_title(node.get_text(' ',strip=True))
     lines=[x.strip() for x in a.get_text('\n',strip=True).splitlines() if len(x.strip())>=4]
     # An unstructured card's first non-status text is normally the title.
@@ -129,17 +146,18 @@ def parse_listing(html: str, source: dict, page_url: str|None=None) -> tuple[lis
             elif re.search(r'접수\s*마감|경진대회\s*종료|\s마감\s|\s연습\s',rowtext):status='closed'
         start,deadline=registration_dates(rowtext)
         item={'id':hashlib.sha256(url.encode()).hexdigest()[:20], 'url':url,'title':title,
-              'title_raw':title, 'source_id':source['id'],'source_name':source['name'],'group':source.get('group','external'),
+              'title_raw':title, 'listing_title':title, 'source_id':source['id'],'source_name':source['name'],'group':source.get('group','external'),
               'posted_at':posted,'deadline':deadline,'registration_start':start,'platform_status':status}
+        if url in found and generic_title(title) and not generic_title(found[url]['title']):continue
         found[url]=item
         relevance_text[url]=(title+' '+rowtext) if source['kind']=='campuspick' else title
     selected=[i for i in found.values() if relevant(relevance_text[i['url']],source.get('mode','contest'))]
     return selected,len(found)
 
 
-def detail_fields(html: str, page_url: str = '', source_kind: str = '') -> dict:
+def detail_fields(html: str, page_url: str = '', source_kind: str = '', context_title: str = '') -> dict:
     from .details import parse_details
-    return parse_details(html,page_url,source_kind)
+    return parse_details(html,page_url,source_kind,context_title)
 
 
 def empty_state() -> dict:
@@ -150,6 +168,7 @@ def merge_items(state: dict, records: list[dict], now: datetime) -> None:
     stamp=now.isoformat(); initialized=set(state.get('initialized_sources',[]))
     for record in records:
         rid=record['id']; old=state['items'].get(rid)
+        if old and generic_title(old.get('detail_title','')):old.pop('detail_title',None)
         item={k:record[k] for k in PERSIST if k in record}
         if old:
             for k in DETAIL_FIELDS + ('posted_at',):
@@ -158,9 +177,14 @@ def merge_items(state: dict, records: list[dict], now: datetime) -> None:
                     if k in old:item[k]=old[k]
             if record.get('registration_ambiguous'):
                 item['deadline']=item['registration_start']=None
+                item['deadline_time']=item['registration_start_time']=None
+            if record.get('registration_time_ambiguous'):
+                item['deadline_time']=item['registration_start_time']=None
+            for date_key,time_key in [('deadline','deadline_time'),('registration_start','registration_start_time')]:
+                if record.get(date_key) and record[date_key]!=old.get(date_key):item[time_key]=record.get(time_key)
             if record.get('event_ambiguous'):
                 item['event_start']=item['event_end']=None
-            item['title']=clean_title(item.get('detail_title') or item.get('title',''))
+            item['title']=preferred_title(item) or '제목 확인 필요'
             changed=any(item.get(k)!=old.get(k) for k in CHANGE_FIELDS)
             item['first_seen']=old['first_seen']
             item['last_changed']=stamp if changed else old['last_changed']
@@ -169,7 +193,7 @@ def merge_items(state: dict, records: list[dict], now: datetime) -> None:
             item['first_seen']=item['last_changed']=stamp
             kind='new' if record['source_id'] in initialized else 'initial'
             state['changes'].append({'id':rid,'kind':kind,'at':stamp})
-        item['title']=clean_title(item.get('detail_title') or item.get('title',''))
+        item['title']=preferred_title(item) or '제목 확인 필요'
         item['last_seen']=old['last_seen'] if old and record.get('_preserve_last_seen') else stamp
         state['items'][rid]=item
     state['initialized_sources']=sorted(initialized|{r['source_id'] for r in records})

@@ -48,6 +48,8 @@ A missing day gets an explicitly dated fallback. First-time imports and sources
 without a complete previous observation are separated, not presented as new.
 The returned object is safe for the public dashboard (no claims or secrets).
 """
+    from .quality import visible_state
+    state = visible_state(state)
     local = now.astimezone(KST)
     day = local.date().isoformat()
     yesterday = (local.date() - timedelta(days=1)).isoformat()
