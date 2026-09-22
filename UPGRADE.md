@@ -1,6 +1,8 @@
-# v6 → v7 업데이트 — 1~4순위 개선
+# v6 → v7.0.1 수정 업데이트 — 누락 모듈 복구
 
 대상: 기존 `inha-contest-alert` 저장소. **새 저장소·ntfy 토픽·Pages 설정을 만들지 않습니다.** 이 파일은 적용 안내이며 원격 배포 완료 확인서가 아닙니다.
+
+이 수정본은 최초 v7 업데이트 ZIP에서 빠졌던 `contest_alert/extraction.py`, `contest_alert/quality.py`, `contest_alert/repair.py`를 포함합니다. 기존 v7 기능과 정오 알림 일정은 바꾸지 않습니다.
 
 ## 이번에는 `.github`도 업데이트해야 합니다
 
@@ -8,7 +10,7 @@
 
 ## 적용 순서
 
-1. `inha-contest-alert-v7-update.zip`을 풉니다. 안쪽 `inha-contest-alert` 폴더의 **내용물**을 기존 저장소의 같은 위치에 업로드합니다. ZIP 자체나 바깥 폴더 한 겹을 올리지 않습니다.
+1. `inha-contest-alert-v7.0.1-update.zip`을 풉니다. 안쪽 `inha-contest-alert` 폴더의 **내용물**을 기존 저장소의 같은 위치에 **병합하여 덮어씁니다. 기존 저장소 폴더를 먼저 지우거나 통째로 교체하지 마세요.** ZIP 자체나 바깥 폴더 한 겹을 올리지 않습니다.
 2. **`.github` 숨김 폴더까지 포함**해 올립니다. Mac Finder의 `Command + Shift + .`로 표시할 수 있습니다. 웹 업로드에서 빠지면 GitHub의 `Add file → Create new file`로 아래 두 경로를 각각 만들고 제공한 파일 내용을 전부 붙여 넣습니다. 기존 `daily.yml`은 편집해서 전체 내용을 교체합니다.
    - `.github/workflows/daily.yml`
    - `.github/workflows/diagnose.yml`
