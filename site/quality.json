@@ -1,0 +1,671 @@
+{
+  "version": 1,
+  "generated_at": "2026-09-23T01:54:05.938209+09:00",
+  "observation_at": "2026-09-23T01:51:51.131569+09:00",
+  "basis": "저장된 AI·데이터 관련 공고 주소 기준(마감 포함). 관리자 보정 포함 여부를 구분하며, 목록 접근 성공과 날짜 추출 성공은 별개입니다.",
+  "manual_count": 0,
+  "automatic_deadline_known": 8,
+  "total": 18,
+  "deadline_known": 8,
+  "deadline_time_known": 5,
+  "coverage": 44.4,
+  "sources": [
+    {
+      "id": "ds_contest",
+      "name": "데이터사이언스학과 · 대회",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 0,
+      "deadline_known": 0,
+      "start_and_end_known": 0,
+      "deadline_time_known": 0,
+      "attempted_this_run": 0,
+      "deadline_confirmed_this_run": 0,
+      "manual_count": 0,
+      "automatic_deadline_known": 0,
+      "deadline_coverage": null,
+      "reasons": {},
+      "samples": []
+    },
+    {
+      "id": "ds_notice",
+      "name": "데이터사이언스학과 · 공지",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 1,
+      "deadline_known": 1,
+      "start_and_end_known": 1,
+      "deadline_time_known": 0,
+      "attempted_this_run": 1,
+      "deadline_confirmed_this_run": 1,
+      "manual_count": 0,
+      "automatic_deadline_known": 1,
+      "deadline_coverage": 100.0,
+      "reasons": {
+        "confirmed": 1
+      },
+      "samples": [
+        {
+          "id": "a9338c28d67faa2bfa50",
+          "title": "[한국데이터산업진흥원]2026 데이터+AI 혁신 챌린지 통합경진대회 개최",
+          "url": "https://datascience.inha.ac.kr/bbs/datascience/746/191151/artclView.do",
+          "reason": "confirmed",
+          "label": "날짜 확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 266,
+          "evidence_hash": "dda2b0047d21751f",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 20635
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 266
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai_notice",
+      "name": "인공지능공학과 · 공지",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 0,
+      "deadline_known": 0,
+      "start_and_end_known": 0,
+      "deadline_time_known": 0,
+      "attempted_this_run": 0,
+      "deadline_confirmed_this_run": 0,
+      "manual_count": 0,
+      "automatic_deadline_known": 0,
+      "deadline_coverage": null,
+      "reasons": {},
+      "samples": []
+    },
+    {
+      "id": "aix",
+      "name": "인공지능융합연구센터",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 4,
+      "deadline_known": 1,
+      "start_and_end_known": 1,
+      "deadline_time_known": 1,
+      "attempted_this_run": 4,
+      "deadline_confirmed_this_run": 1,
+      "manual_count": 0,
+      "automatic_deadline_known": 1,
+      "deadline_coverage": 25.0,
+      "reasons": {
+        "no_explicit_date": 3,
+        "confirmed": 1
+      },
+      "samples": [
+        {
+          "id": "93b40e33a5034b9bef90",
+          "title": "[행사] WE·AX Project 공모 안내",
+          "url": "https://aix.inha.ac.kr/news/notice/?vid=109",
+          "reason": "no_explicit_date",
+          "label": "명시적인 접수 날짜 미확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": null,
+          "evidence_hash": null,
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 112599
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "ok",
+              "text_length": 113919
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed"
+            }
+          ]
+        },
+        {
+          "id": "8bdabc7eaa5fdc81735c",
+          "title": "[교육] 2026-2학기 인공지능융합세미나 개최 안내",
+          "url": "https://aix.inha.ac.kr/news/notice/?vid=108",
+          "reason": "no_explicit_date",
+          "label": "명시적인 접수 날짜 미확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": null,
+          "evidence_hash": null,
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 110613
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "ok",
+              "text_length": 111692
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed"
+            }
+          ]
+        },
+        {
+          "id": "c7155fa7b56de5f46645",
+          "title": "[행사] 2026 요기요x오라클 해커톤 행사 안내",
+          "url": "https://aix.inha.ac.kr/news/notice/?vid=106",
+          "reason": "no_explicit_date",
+          "label": "명시적인 접수 날짜 미확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 254,
+          "evidence_hash": "bc44d06a08e836c8",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 123292
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "ok",
+              "text_length": 124612
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 254
+            }
+          ]
+        },
+        {
+          "id": "9b3f043cd2a127294336",
+          "title": "2026 인하 인공지능 챌린지",
+          "url": "https://aix.inha.ac.kr/news/notice/?vid=107",
+          "reason": "confirmed",
+          "label": "날짜 확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 855,
+          "evidence_hash": "337b58a2d4e64266",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 123807
+            },
+            {
+              "stage": "schedule_http",
+              "outcome": "ok",
+              "text_length": 856768
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 855
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sw",
+      "name": "SW중심대학사업단",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 2,
+      "deadline_known": 2,
+      "start_and_end_known": 1,
+      "deadline_time_known": 0,
+      "attempted_this_run": 2,
+      "deadline_confirmed_this_run": 2,
+      "manual_count": 0,
+      "automatic_deadline_known": 2,
+      "deadline_coverage": 100.0,
+      "reasons": {
+        "confirmed": 1,
+        "partial_date": 1
+      },
+      "samples": [
+        {
+          "id": "a8d1c8bc81a78c82adad",
+          "title": "2026 SW·AI 해외 인턴십 프로그램 참여자 모집 (~8. 16. (일) 까지)",
+          "url": "https://swuniv.inha.ac.kr/bbs/swuniv/3113/187543/artclView.do",
+          "reason": "partial_date",
+          "label": "시작 또는 마감 일부만 확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 19656
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "ok",
+              "text_length": 19490
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 0
+            }
+          ]
+        },
+        {
+          "id": "9bf71550e1df76f86c69",
+          "title": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
+          "url": "https://swuniv.inha.ac.kr/bbs/swuniv/3113/188992/artclView.do",
+          "reason": "confirmed",
+          "label": "날짜 확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 2202,
+          "evidence_hash": "b2d467e8966afd28",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 47206
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 2202
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inha",
+      "name": "인하대학교 · 교내 공지",
+      "status": "disabled",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 0,
+      "deadline_known": 0,
+      "start_and_end_known": 0,
+      "deadline_time_known": 0,
+      "attempted_this_run": 0,
+      "deadline_confirmed_this_run": 0,
+      "manual_count": 0,
+      "automatic_deadline_known": 0,
+      "deadline_coverage": null,
+      "reasons": {},
+      "samples": []
+    },
+    {
+      "id": "dacon",
+      "name": "DACON",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 3,
+      "deadline_known": 3,
+      "start_and_end_known": 3,
+      "deadline_time_known": 3,
+      "attempted_this_run": 3,
+      "deadline_confirmed_this_run": 3,
+      "manual_count": 0,
+      "automatic_deadline_known": 3,
+      "deadline_coverage": 100.0,
+      "reasons": {
+        "confirmed": 3
+      },
+      "samples": [
+        {
+          "id": "6f8f9451b6636bd7476e",
+          "title": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
+          "url": "https://dacon.io/competitions/official/236749/overview/",
+          "reason": "confirmed",
+          "label": "날짜 확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 1025,
+          "evidence_hash": "36900330b3b6cb3f",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 954160
+            },
+            {
+              "stage": "schedule_http",
+              "outcome": "ok",
+              "text_length": 933078
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 1025
+            }
+          ]
+        },
+        {
+          "id": "7f6e9999a4808a78b583",
+          "title": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
+          "url": "https://dacon.io/competitions/official/236753/overview/",
+          "reason": "confirmed",
+          "label": "날짜 확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 1032,
+          "evidence_hash": "21a0e47f481806c0",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 1136237
+            },
+            {
+              "stage": "schedule_http",
+              "outcome": "ok",
+              "text_length": 1040914
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 1032
+            }
+          ]
+        },
+        {
+          "id": "81ae9c6a7f2a2412f43b",
+          "title": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
+          "url": "https://dacon.io/competitions/official/236754/overview/",
+          "reason": "confirmed",
+          "label": "날짜 확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 1215,
+          "evidence_hash": "de5a1dd24c67abe1",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 838102
+            },
+            {
+              "stage": "schedule_http",
+              "outcome": "ok",
+              "text_length": 832115
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 1215
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aifactory",
+      "name": "인공지능팩토리",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 2,
+      "deadline_known": 1,
+      "start_and_end_known": 1,
+      "deadline_time_known": 1,
+      "attempted_this_run": 2,
+      "deadline_confirmed_this_run": 0,
+      "manual_count": 0,
+      "automatic_deadline_known": 1,
+      "deadline_coverage": 50.0,
+      "reasons": {
+        "no_explicit_date": 1,
+        "stale_evidence": 1
+      },
+      "samples": [
+        {
+          "id": "68f060fa2d76de81ee51",
+          "title": "주제 3: 국립공원 내 시설물 변화 탐지",
+          "url": "https://aifactory.space/ko/competitions/9306",
+          "reason": "no_explicit_date",
+          "label": "명시적인 접수 날짜 미확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 135,
+          "evidence_hash": "09e3be77392a468a",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 244236
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "ok",
+              "text_length": 242962
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 135
+            }
+          ]
+        },
+        {
+          "id": "48d87172618e84c2f520",
+          "title": "주제 4: 해안 쓰레기 탐지 및 규모 추정",
+          "url": "https://aifactory.space/ko/competitions/9307",
+          "reason": "stale_evidence",
+          "label": "이전 확인 날짜 유지 · 이번 상세에서 재확인 못함",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 136,
+          "evidence_hash": "827d7fd2e22c6caa",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 240834
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "ok",
+              "text_length": 239544
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 136
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "campuspick",
+      "name": "캠퍼스픽 · AI/데이터",
+      "status": "ok",
+      "checked_at": "2026-09-23T01:51:51.131569+09:00",
+      "denominator": 6,
+      "deadline_known": 0,
+      "start_and_end_known": 0,
+      "deadline_time_known": 0,
+      "attempted_this_run": 6,
+      "deadline_confirmed_this_run": 0,
+      "manual_count": 0,
+      "automatic_deadline_known": 0,
+      "deadline_coverage": 0.0,
+      "reasons": {
+        "browser_denied": 4,
+        "no_explicit_date": 2
+      },
+      "samples": [
+        {
+          "id": "a9c7989bbc28cdf6846b",
+          "title": "[방송미디어통신위원회] 생성형 AI 위험성 찾기 이벤트 시즌3",
+          "url": "https://www.campuspick.com/contest/view?id=36243",
+          "reason": "browser_denied",
+          "label": "동적 화면 접근 제한",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 9723
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "error",
+              "code": "browser_denied"
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 0
+            }
+          ]
+        },
+        {
+          "id": "603410737f1171332f2b",
+          "title": "「2026 별별화성 Awards」화성특례시 AI CF 공모전",
+          "url": "https://www.campuspick.com/contest/view?id=36195",
+          "reason": "browser_denied",
+          "label": "동적 화면 접근 제한",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 7777
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "error",
+              "code": "browser_denied"
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 0
+            }
+          ]
+        },
+        {
+          "id": "3f7d8d2a4770babfdf7b",
+          "title": "청년들이 만드는 첨단 공공서비스 AI 영상 공모전",
+          "url": "https://www.campuspick.com/contest/view?id=36180",
+          "reason": "browser_denied",
+          "label": "동적 화면 접근 제한",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 9616
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "error",
+              "code": "browser_denied"
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 0
+            }
+          ]
+        },
+        {
+          "id": "a61ec4deaae42aa56334",
+          "title": "2026 KoMaP AI 경진대회",
+          "url": "https://www.campuspick.com/contest/view?id=36134",
+          "reason": "browser_denied",
+          "label": "동적 화면 접근 제한",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 7787
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "error",
+              "code": "browser_denied"
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 0
+            }
+          ]
+        },
+        {
+          "id": "a86abc88d80d504621a7",
+          "title": "[디오니] AI 숏 시리즈 콘테스트",
+          "url": "https://www.campuspick.com/contest/view?id=36130",
+          "reason": "no_explicit_date",
+          "label": "명시적인 접수 날짜 미확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 8014
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 0
+            }
+          ]
+        },
+        {
+          "id": "ef0727d16eacef3658e4",
+          "title": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+          "url": "https://www.campuspick.com/contest/view?id=36128",
+          "reason": "no_explicit_date",
+          "label": "명시적인 접수 날짜 미확인",
+          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 8236
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
