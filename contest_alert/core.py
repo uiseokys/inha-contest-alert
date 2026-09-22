@@ -18,11 +18,11 @@ PATTERNS = {
     'campuspick': r'/contest/view\?(?:[^#]*&)?id=\d+(?:&|$)',
     'aifactory': r'/(?:ko/)?competitions/\d+',
 }
-DETAIL_FIELDS = ('opportunity_kind','duplicate_of','detail_parser_version','detail_title','title_raw','listing_title','relevance_status','relevance_evidence','relevance_reason','relevance_version','deadline_time','registration_start_time','registration_time_ambiguous','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
+DETAIL_FIELDS = ('date_failure_code','detail_trace','detail_content_hash','detail_text_length','manual_correction','registration_timezone','opportunity_kind','duplicate_of','detail_parser_version','detail_title','title_raw','listing_title','relevance_status','relevance_evidence','relevance_reason','relevance_version','deadline_time','registration_start_time','registration_time_ambiguous','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
                  'event_start','event_end','event_ambiguous','schedule_text','organizer','eligibility',
                  'benefits','summary','website_url','application_url','detail_source_url',
                  'detail_checked_at','detail_attempted_at','detail_status')
-PERSIST = ('id','title','url','source_id','source_name','group','posted_at','platform_status') + DETAIL_FIELDS
+PERSIST = ('id','title','url','source_id','source_name','group','posted_at','platform_status') + DETAIL_FIELDS + ('_automatic_dates',)
 CHANGE_FIELDS = ('title','deadline_time','registration_start_time','deadline','registration_start','platform_status','registration_text',
                  'event_start','event_end','schedule_text','organizer','eligibility','benefits',
                  'summary','website_url','application_url','registration_ambiguous','event_ambiguous')
@@ -189,7 +189,11 @@ def merge_items(state: dict, records: list[dict], now: datetime) -> None:
             changed=any(item.get(k)!=old.get(k) for k in CHANGE_FIELDS)
             item['first_seen']=old['first_seen']
             item['last_changed']=stamp if changed else old['last_changed']
-            if changed:state['changes'].append({'id':rid,'kind':'updated','at':stamp})
+            if changed:
+                change={'id':rid,'kind':'updated','at':stamp}
+                if any(item.get(k)!=old.get(k) for k in ('deadline','deadline_time')):
+                    change.update(old_deadline=old.get('deadline'),new_deadline=item.get('deadline'),old_deadline_time=old.get('deadline_time'),new_deadline_time=item.get('deadline_time'),date_change_reason='reparsed' if old.get('date_parser_version')!=item.get('date_parser_version') else 'observed_update')
+                state['changes'].append(change)
         else:
             item['first_seen']=item['last_changed']=stamp
             kind='new' if record['source_id'] in initialized else 'initial'
@@ -205,12 +209,6 @@ def merge_items(state: dict, records: list[dict], now: datetime) -> None:
     state['claims']={d:c for d,c in state.get('claims',{}).items() if d>=(now.date()-timedelta(days=370)).isoformat()}
 
 
-def status_of(item: dict, today: date) -> str:
-    deadline=item.get('deadline'); start=item.get('registration_start')
-    if deadline and deadline<today.isoformat():return 'closed'
-    if start and start>today.isoformat():return 'upcoming'
-    if item.get('platform_status')=='closed':return 'closed'
-    if deadline:return 'active'  # label is '기한 남음', NOT guaranteed eligibility/open registration.
-    seen=item.get('last_seen','')[:10]
-    if item.get('platform_status')=='open' and seen and seen>=(today-timedelta(days=3)).isoformat():return 'active'
-    return 'unknown'
+def status_of(item: dict, today: date | datetime) -> str:
+    from .timing import status_at
+    return status_at(item,today)

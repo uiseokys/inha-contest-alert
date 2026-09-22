@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "denied native storage -> in-memory favorites still functional",
+    "stubbed latest workflow failure + run mismatch distinguished from cached metadata",
+    "API failure does not imply a successful deployment"
+  ],
+  "page_errors": []
+}

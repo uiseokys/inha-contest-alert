@@ -1,0 +1,154 @@
+TAP version 13
+# Subtest: personal preferences module exists
+ok 1 - personal preferences module exists
+  ---
+  duration_ms: 1.259438
+  type: 'test'
+  ...
+# Subtest: local default retains farthest deadline ordering
+ok 2 - local default retains farthest deadline ordering
+  ---
+  duration_ms: 0.268946
+  type: 'test'
+  ...
+# Subtest: imports merge favorite aliases into a stable event id
+ok 3 - imports merge favorite aliases into a stable event id
+  ---
+  duration_ms: 0.899525
+  type: 'test'
+  ...
+# Subtest: unknown favorite ids survive for archived events
+ok 4 - unknown favorite ids survive for archived events
+  ---
+  duration_ms: 0.142154
+  type: 'test'
+  ...
+# Subtest: unsafe strings rejected
+ok 5 - unsafe strings rejected
+  ---
+  duration_ms: 1.721634
+  type: 'test'
+  ...
+# Subtest: oversized import is rejected
+ok 6 - oversized import is rejected
+  ---
+  duration_ms: 0.142325
+  type: 'test'
+  ...
+# Subtest: too many favorites rejected
+ok 7 - too many favorites rejected
+  ---
+  duration_ms: 0.348655
+  type: 'test'
+  ...
+# Subtest: invalid JSON and wrong shape rejected
+ok 8 - invalid JSON and wrong shape rejected
+  ---
+  duration_ms: 0.181704
+  type: 'test'
+  ...
+# Subtest: import is whitelisted and pollution proof
+ok 9 - import is whitelisted and pollution proof
+  ---
+  duration_ms: 0.470359
+  type: 'test'
+  ...
+# Subtest: storage forbidden uses functional memory fallback
+ok 10 - storage forbidden uses functional memory fallback
+  ---
+  duration_ms: 0.754466
+  type: 'test'
+  ...
+# Subtest: corrupted storage returns safe defaults
+ok 11 - corrupted storage returns safe defaults
+  ---
+  duration_ms: 0.314034
+  type: 'test'
+  ...
+# Subtest: valid export roundtrip preserves filters without copying unknown keys
+ok 12 - valid export roundtrip preserves filters without copying unknown keys
+  ---
+  duration_ms: 0.285691
+  type: 'test'
+  ...
+# Subtest: filter validation keeps only supported values and bounded query
+ok 13 - filter validation keeps only supported values and bounded query
+  ---
+  duration_ms: 0.187102
+  type: 'test'
+  ...
+# Subtest: stale comparisons clear current new ids and counts
+ok 14 - stale comparisons clear current new ids and counts
+  ---
+  duration_ms: 20.00445
+  type: 'test'
+  ...
+# Subtest: comparison timestamp uses Korea date even if saved offset differs
+ok 15 - comparison timestamp uses Korea date even if saved offset differs
+  ---
+  duration_ms: 0.44438
+  type: 'test'
+  ...
+# Subtest: normalized foreign instant takes priority over Korean date
+ok 16 - normalized foreign instant takes priority over Korean date
+  ---
+  duration_ms: 1.238296
+  type: 'test'
+  ...
+# Subtest: ambiguous cached deadline sorts with unknown
+ok 17 - ambiguous cached deadline sorts with unknown
+  ---
+  duration_ms: 0.730951
+  type: 'test'
+  ...
+# Subtest: known time sorts before date-only on the same day
+ok 18 - known time sorts before date-only on the same day
+  ---
+  duration_ms: 1.946813
+  type: 'test'
+  ...
+# Subtest: successful write restores availability after corrupted read
+ok 19 - successful write restores availability after corrupted read
+  ---
+  duration_ms: 0.458671
+  type: 'test'
+  ...
+# Subtest: time runtime module is present
+ok 20 - time runtime module is present
+  ---
+  duration_ms: 0.769679
+  type: 'test'
+  ...
+# Subtest: precise deadline and different device timezone
+ok 21 - precise deadline and different device timezone
+  ---
+  duration_ms: 14.877255
+  type: 'test'
+  ...
+# Subtest: start time and date-only truthfulness
+ok 22 - start time and date-only truthfulness
+  ---
+  duration_ms: 0.943983
+  type: 'test'
+  ...
+# Subtest: old yesterday comparison becomes explicitly dated
+ok 23 - old yesterday comparison becomes explicitly dated
+  ---
+  duration_ms: 0.348515
+  type: 'test'
+  ...
+# Subtest: bad dates and ambiguous clocks do not fabricate deadline
+ok 24 - bad dates and ambiguous clocks do not fabricate deadline
+  ---
+  duration_ms: 0.633794
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 85.800729

@@ -200,6 +200,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
             for pending in queue:
                 report=state['sources'][pending['source_id']]
                 report['detail_deferred']=report.get('detail_deferred',0)+1
+                pending['date_failure_code']='budget_deferred'
         # Extra requests are bounded independently of the number of notices.
         # This keeps the existing 18-minute workflow and free-host usage modest.
         extra_left=config.get('max_extra_detail_requests',18)
@@ -208,7 +209,14 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
         for item in due:
             report=state['sources'][item['source_id']]
             if time.monotonic()>=stop_at:
-                report['detail_deferred']=report.get('detail_deferred',0)+1;continue
+                report['detail_deferred']=report.get('detail_deferred',0)+1;item['date_failure_code']='budget_deferred';continue
+            item['detail_trace']=[]
+            item['date_failure_code']=''
+            def trace(stage,outcome,code='',text_length=None):
+                entry={'stage':stage,'outcome':outcome}
+                if code:entry['code']=code
+                if text_length is not None:entry['text_length']=text_length
+                item['detail_trace'].append(entry)
             item['detail_attempted_at']=stamp
             item['date_parser_version']=PARSER_VERSION
             source=source_map[item['source_id']]
@@ -229,6 +237,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
                 return result
             try:
                 html=client.get_text(item['url'])
+                trace('detail_http','ok',text_length=len(html))
                 fields=detail_fields(html,item['url'],source.get('kind',''),preferred_title(item))
                 links=schedule_links(html,item['url'])
                 # Rendering is needed for absent dates, not merely absent ALL fields.
@@ -236,35 +245,48 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
                     browser_left-=1
                     try:
                         html=client.browser_html(item['url'])
+                        trace('detail_render','ok',text_length=len(html))
                         fields=blend(fields,detail_fields(html,item['url'],source.get('kind',''),preferred_title(item)))
                         links=schedule_links(html,item['url'])
-                    except FetchError:
+                    except FetchError as exc:
+                        trace('detail_render','error',exc.code);item['date_failure_code']=exc.code
                         report['detail_render_errors']=report.get('detail_render_errors',0)+1
                 for link in links[:1]:
                     if (not needs_dates(fields) and fields.get('deadline_time')) or extra_left<=0 or time.monotonic()>=stop_at:break
                     extra_left-=1
                     try:
                         more=client.get_text(link)
+                        trace('schedule_http','ok',text_length=len(more))
                         kind='dacon' if urlsplit(link).hostname in ('dacon.io','www.dacon.io') else source.get('kind','')
                         extra=detail_fields(more,link,kind,preferred_title(item))
                         if needs_dates(extra) and config.get('browser_fallback',False) and browser_left>0 and time.monotonic()<stop_at:
                             browser_left-=1
                             try:extra=blend(extra,detail_fields(client.browser_html(link),link,kind,preferred_title(item)))
-                            except FetchError:report['detail_render_errors']=report.get('detail_render_errors',0)+1
+                            except FetchError as exc:
+                                trace('schedule_render','error',exc.code);item['date_failure_code']=exc.code
+                                report['detail_render_errors']=report.get('detail_render_errors',0)+1
                         # Preserve the source article title; the linked platform
                         # is date evidence, not a replacement for its identity.
                         if fields.get('detail_title'):extra.pop('detail_title',None)
                         fields=blend(fields,extra)
-                    except FetchError:report['schedule_errors']=report.get('schedule_errors',0)+1
+                    except FetchError as exc:
+                        trace('schedule_http','error',exc.code);item['date_failure_code']='schedule_error'
+                        report['schedule_errors']=report.get('schedule_errors',0)+1
                 fields['date_status']=fields.get('date_status') or ('complete' if not needs_dates(fields) else 'partial' if fields.get('deadline') or fields.get('registration_start') else 'missing')
                 item.update(fields)
-                substantive={k for k,v in fields.items() if v and k not in {'detail_title','detail_source_url','date_status','date_note','_topic_text','detail_parser_version'}}
+                trace('date_parse','ok' if fields.get('deadline') else 'unconfirmed',text_length=fields.get('detail_text_length'))
+                if fields.get('registration_ambiguous'):item['date_failure_code']='date_conflict'
+                elif fields.get('deadline'):item['date_failure_code']='confirmed'
+                elif not item.get('date_failure_code'):item['date_failure_code']='no_explicit_date'
+                substantive={k for k,v in fields.items() if v and k not in {'detail_title','detail_source_url','date_status','date_note','_topic_text','detail_parser_version','detail_text_length','detail_content_hash'}}
                 if substantive:
                     item['detail_checked_at']=stamp;item['detail_status']='ok'
                 else:
                     item['detail_status']='unconfirmed'
                     report['detail_unconfirmed']=report.get('detail_unconfirmed',0)+1
-            except (FetchError,ValueError,TypeError,AttributeError):
+            except (FetchError,ValueError,TypeError,AttributeError) as exc:
+                item['date_failure_code']=exc.code if isinstance(exc,FetchError) else 'parser_error'
+                trace('detail_http' if isinstance(exc,FetchError) else 'date_parse','error',item['date_failure_code'])
                 item['detail_status']='error'
                 report['detail_errors']=report.get('detail_errors',0)+1
         for item in all_records:

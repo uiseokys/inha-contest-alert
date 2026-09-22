@@ -1,0 +1,13 @@
+/* Browser-local preferences only. No cookies, personal API token or cloud sync. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.CMPersonal=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+ 'use strict';
+ const LIMIT=1000,ID=/^[A-Za-z0-9:_-]{1,120}$/;
+ const choices={group:['all','inha','external'],kind:['all','contest','program','other'],field:['all','data_analysis','model_development','service_development','creative_ai','general_ai'],status:['review','all','active','upcoming','unknown','closed'],sort:['remaining','deadline','newest']};
+ const defaults=()=>({version:1,favorites:[],filters:{query:'',source:'all',group:'all',kind:'all',field:'all',status:'review',sort:'remaining',newOnly:false,onlyFavorites:false}});
+ function filters(input){const out=defaults().filters;if(!input||typeof input!=='object'||Array.isArray(input))return out;for(const key of Object.keys(choices))if(choices[key].includes(input[key]))out[key]=input[key];if(typeof input.query==='string')out.query=input.query.slice(0,300);if(typeof input.source==='string'&&input.source.length<=180)out.source=input.source;for(const key of ['newOnly','onlyFavorites'])out[key]=input[key]===true;return out;}
+ function parseImport(text){if(typeof text!=='string'||text.length>262144)throw Error('가져오기 파일 크기는 256KB 이하여야 합니다.');let data;try{data=JSON.parse(text);}catch{throw Error('올바른 관심 목록 JSON 파일이 아닙니다.');}if(!data||Array.isArray(data)||data.version!==1||!Array.isArray(data.favorites))throw Error('지원하는 관심 목록 형식(version 1)이 아닙니다.');if(data.favorites.length>LIMIT)throw Error('관심 목록은 1000개 이하여야 합니다.');if(data.favorites.some(id=>typeof id!=='string'||!ID.test(id)))throw Error('관심 공고 식별자에 허용하지 않는 값이 있습니다.');return {version:1,favorites:[...new Set(data.favorites)],filters:filters(data.filters)};}
+ function exportJSON(value){return JSON.stringify(parseImport(JSON.stringify(value)),null,2);}
+ function normalizeFavorites(ids,events){const map=new Map();for(const event of events){map.set(event.id,event.id);for(const old of event.favorite_ids||[])map.set(old,event.id);}return [...new Set(ids.map(id=>map.get(id)||id))];}
+ function store(storage,key){let memory=defaults(),loaded=false,available=true;return {get available(){return available;},read(){if(loaded)return structuredClone(memory);loaded=true;try{const data=storage.getItem(key);if(data)memory=parseImport(data);}catch{available=false;}return structuredClone(memory);},write(value){memory=parseImport(JSON.stringify(value));loaded=true;try{storage.setItem(key,JSON.stringify(memory));available=true;return true;}catch{available=false;return false;}}};}
+ return {defaults,filters,parseImport,exportJSON,normalizeFavorites,store};
+});

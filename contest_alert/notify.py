@@ -12,6 +12,7 @@ import requests
 from .core import status_of
 from .quality import visible_state
 from .daily import compare_day, comparison_lines
+from .events import group_events,event_comparison
 
 KST=ZoneInfo('Asia/Seoul')
 
@@ -27,6 +28,8 @@ def utf8_clip(text:str,limit:int)->str:
     return text.encode('utf-8')[:limit].decode('utf-8',errors='ignore')
 
 def digest(state:dict,now:datetime,page_url:str)->str:
+    events=group_events(state)
+    comparison=event_comparison(state,compare_day(state,now),events)
     state=visible_state(state)
     today=now.astimezone(KST).date();cursor=state.get('digest_cursor','')
     changes=[x for x in state['changes'] if x['at']>cursor and x['id'] in state['items']]
@@ -36,31 +39,31 @@ def digest(state:dict,now:datetime,page_url:str)->str:
     enabled=[s for s in state['sources'].values() if s['status']!='disabled']
     good=sum(s['status']=='ok' for s in enabled)
     failed=sum(s['status'] in ('error','partial') for s in enabled)
-    comparison = compare_day(state, now)
     lines=[f'{today.isoformat()} 공모전·경진대회', *comparison_lines(comparison),
            f'지난 알림 이후 미전달 신규 {len(new)}건 · 변경 {len(updated)}건',
            f'출처 수집 정상 {good}/{len(enabled)}곳']
     if failed:lines.append(f'주의: {failed}곳 수집 실패/부분 실패. 신규 0건이어도 전체에 없다는 뜻은 아닙니다.')
     if initial:lines.append(f'최초 수집 {len(initial)}건은 기존 목록에 추가했습니다.')
-    visible=sum(status_of(x,today)!='closed' for x in state['items'].values())
-    lines.append(f'목록 {visible}건 (마감 미확인 포함)')
-    picks=new[:4] or updated[:3]
-    for rid in picks:
-        item=state['items'][rid]
-        lines.append('• '+utf8_clip(item['title'],180))
-    due=sorted((x for x in state['items'].values() if x.get('deadline') and today.isoformat()<=x['deadline']<=(today+timedelta(days=7)).isoformat()),key=lambda x:x['deadline'])
+    visible=sum(status_of(x,now)!='closed' for x in events)
+    lines.append(f'대회·프로그램 {visible}개 (마감 미확인 포함)')
+    picks=[e for e in events if set(e['member_ids']).intersection(new)] or [e for e in events if set(e['member_ids']).intersection(updated)]
+    for item in picks[:4]:lines.append('• '+utf8_clip(item['title'],180))
+    for ext in comparison.get('deadline_extensions',[])[:2]:
+        lines.append('연장: '+ext['from']+(' '+ext['from_time'] if ext.get('from_time') else '')+' → '+ext['to']+(' '+ext['to_time'] if ext.get('to_time') else '')+' '+utf8_clip(ext['title'],90))
+    due=sorted((x for x in events if status_of(x,now)!='closed' and x.get('deadline') and today.isoformat()<=x['deadline']<=(today+timedelta(days=7)).isoformat()),key=lambda x:x['deadline'])
     if due:
         lines.append('7일 이내 마감일 확인:')
         for x in due[:2]:lines.append(f"• {x['deadline']} {utf8_clip(x['title'],140)}")
-    if not new and not updated and not initial:lines.append('이번 확인 범위에서 새로 발견한 공고 0건입니다.')
-    tail=f'\n전체 목록: {page_url}\n신규는 새로 확인한 공고 주소 기준이며 실제 게시일·대회 수와 다를 수 있습니다.\n신청 가능 여부와 마감 시각은 원문을 확인하세요.'
+    if good and not new and not updated and not initial:lines.append('이번 확인 범위에서 새로 발견한 공고 0건입니다.')
+    tail=f'\n전체 목록: {page_url}\n새 공고와 근거 기반으로 통합한 대회 수를 구분합니다. 실제 게시일과 다를 수 있습니다.\n신청 가능 여부와 마감 시각은 원문을 확인하세요.'
     return utf8_clip('\n'.join(lines),2600)+tail
 
 def reserve(state:dict,now:datetime,page_url:str,mode:str,run_id:str)->dict|None:
     day=now.astimezone(KST).date().isoformat()
     if day in state['claims']:return None
+    digest_time=max(now.astimezone(KST),noon_target(now)) if mode=='scheduled' else now
     draft={'day':day,'mode':mode,'run_id':run_id,'cutoff_at':state.get('updated_at') or now.isoformat(),
-           'payload':{'title':'공모전 모아보기 · 점심 브리핑','message':digest(state,now,page_url),
+           'payload':{'title':'공모전 모아보기 · 점심 브리핑','message':digest(state,digest_time,page_url),
                       'click':page_url,'tags':['calendar'],'priority':3}}
     state['claims'][day]={'status':'reserved','at':now.isoformat(),'run_id':run_id}
     return draft

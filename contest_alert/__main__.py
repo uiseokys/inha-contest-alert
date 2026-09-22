@@ -1,6 +1,6 @@
 """CLI used by GitHub Actions. All writes are inside the chosen project root."""
 from __future__ import annotations
-import argparse,json,os,sys
+import argparse,json,os,sys,copy
 from pathlib import Path
 from datetime import datetime
 from .core import empty_state,canonical
@@ -33,16 +33,52 @@ def urls()->tuple[str,str]:
 
 def main()->int:
     p=argparse.ArgumentParser(description='공모전 목록과 정오 ntfy 브리핑')
-    p.add_argument('command',choices=['collect','render','prepare','send'])
+    p.add_argument('command',choices=['collect','render','prepare','send','audit'])
     p.add_argument('--root',type=Path,default=Path.cwd())
     p.add_argument('--mode',choices=['scheduled','manual'],default='manual')
     args=p.parse_args();root=args.root.resolve();now=datetime.now(KST)
     config=read_json(root/'config.json');state_path=root/'data/state.json'
     state=read_json(state_path,empty_state());repo_url,page_url=urls()
     runtime=root/'.runtime';runtime.mkdir(exist_ok=True)
+    from .corrections import apply_corrections,restore_automatic_dates,validate_config
+    overrides=read_json(root/'overrides.json',{'version':1,'entries':{}})
+    validate_config(overrides,now)
+    if args.command=='audit':
+        from .diagnostics import diagnostic_report,report_markdown
+        probe=copy.deepcopy(state);restore_automatic_dates(probe)
+        for item in probe.get('items',{}).values():item['date_parser_version']=0
+        cfg=copy.deepcopy(config);cfg.update(max_pages_per_source=1,max_detail_requests=16)
+        probe=collect_all(cfg,probe,now)
+        report=diagnostic_report(probe,now);report['mode']='read_only_audit'
+        write_json(runtime/'quality.json',report)
+        (runtime/'quality.md').write_text(report_markdown(report),encoding='utf-8')
+        print(report_markdown(report))
+        return 0
+    if args.command!='collect':apply_corrections(state,overrides,now)
     if args.command=='collect':
-        state=collect_all(config,state,now);write_json(state_path,state)
-        build(root,state,now,repo_url,page_url)
+        from .operations import finish_collection
+        prior=copy.deepcopy(state)
+        restore_automatic_dates(state)
+        try:
+            state=collect_all(config,state,now)
+            finish_collection(state,now,datetime.now(KST))
+            apply_corrections(state,overrides,now)
+        except Exception:
+            from .operations import execution_identity
+            prior.setdefault('operations',{})['collection']={**execution_identity(),'status':'failed','attempted_at':now.isoformat(),'finished_at':datetime.now(KST).isoformat()}
+            write_json(state_path,prior);build(root,prior,datetime.now(KST),repo_url,page_url)
+            raise
+        from .events import group_events
+        group_events(state)
+        write_json(state_path,state)
+        build(root,state,datetime.now(KST),repo_url,page_url)
+        from .diagnostics import diagnostic_report,report_markdown
+        report=diagnostic_report(state,now)
+        write_json(runtime/'quality.json',report)
+        (runtime/'quality.md').write_text(report_markdown(report),encoding='utf-8')
+        summary=os.getenv('GITHUB_STEP_SUMMARY')
+        if summary:
+            with open(summary,'a',encoding='utf-8') as f:f.write(report_markdown(report))
         for src in state['sources'].values():print(f"{src['name']}: {src['status']} ({src['retained']}건)")
         return 0
     if args.command=='render':build(root,state,now,repo_url,page_url);return 0
@@ -73,7 +109,9 @@ def main()->int:
         except (RuntimeError,ValueError) as e:
             claim.update(status='failed',failed_at=now.isoformat())
             print(str(e),file=sys.stderr);return 1
-        finally:write_json(state_path,state)
+        finally:
+            write_json(state_path,state)
+            build(root,state,datetime.now(KST),repo_url,page_url)
     return 0
 
 if __name__=='__main__':

@@ -1,6 +1,6 @@
 """Evidence-based public notice extraction; no guessed clock year or private API."""
 from __future__ import annotations
-import json,re
+import json,re,hashlib
 from datetime import date
 from urllib.parse import urljoin,urlsplit,urlunsplit
 from bs4 import BeautifulSoup
@@ -8,7 +8,7 @@ from .core import DATE,dates,canonical,clean_title,generic_title
 
 from .extraction import normalize_text,reorder_timeline,structured_registration,time_value
 
-PARSER_VERSION=6
+PARSER_VERSION=7
 LABELS={
  'registration':r'참가\s*접수(?=\s*(?:[:：]|\n|20\d{2}|$))|(?:(?:접수|신청|모집|응모)\s*)?마감\s*일\s*시|(?:접수|신청|모집)\s*(?:시작|종료)\s*일\s*시|(?:(?:참가|참여|작품|참가자)\s*)?(?:접수|신청|모집|응모|공모|지원)\s*(?:기간|일정|기한|시작(?:일)?|개시(?:일)?|종료(?:일)?|마감(?:일)?)|(?:참가|참여)\s*기간|(?:접수|응모|공모|신청)(?=\s*[:：])|(?:registration|application|submission)\s*(?:period|deadline|opens?|closes?|start(?:s| date)?|end(?:s| date)?)',
  'event':r'(?:대회|행사|본선|해커톤|활동|개최)\s*(?:기간|일시|일정|일자)|event\s*(?:dates?|period)',
@@ -17,7 +17,7 @@ LABELS={
  'benefits':r'상금\s*(?:및|/|·)\s*혜택|시상\s*(?:내역|내용|규모)|총\s*상금|상금|혜택',
  'summary':r'참여\s*주제|프로그램\s*(?:주제|내용)|공모\s*주제|대회\s*주제|공모\s*내용|주제|주요\s*내용',
  'schedule':r'상세\s*일정|진행\s*일정|주요\s*일정|추진\s*일정|세부\s*일정',
- 'stop':r'참가자\s*수|조회\s*수|소개(?=\s*(?:\n|$))|(?:팀\s*병합|팀명\s*변경)\s*기간|평가\s*방법|평가\s*기준|동의사항|참가\s*방법|대회명|신청\s*안내|담당자|선발\s*결과|결과\s*발표|학습\s*데이터셋\s*공개|코드\s*제출|순위\s*발표|접수처|(?:공식\s*)?홈페이지|참가\s*신청(?=\s*[:：])|공식\s*사이트|신청\s*방법|접수\s*방법|문의(?:처)?|유의\s*사항|첨부\s*파일|발표\s*일시|심사\s*(?:기간|일정)|팀\s*병합\s*마감|(?:소스\s*코드|리더보드|결과물|보고서|작품|2차\s*평가\s*자료)\s*제출(?:\s*마감)?|최종\s*(?:순위|결과)\s*발표|시상식|대회\s*(?:종료|시작)|운영|설명|대회\s*설명',
+ 'stop':r'(?:장학금|장학급|지원금|환불|환급|이의\s*신청|이의\s*제기|인증서|수료증|결과\s*보고|정산)\s*(?:(?:신청|제출|지급)\s*(?:기간|기한|일정|마감일?)?|규정)|(?:당초|변경\s*전|기존)\s*(?:접수|신청|모집)\s*(?:기간|일정|기한)|참가자\s*수|조회\s*수|소개(?=\s*(?:\n|$))|(?:팀\s*병합|팀명\s*변경)\s*기간|평가\s*방법|평가\s*기준|동의사항|참가\s*방법|대회명|신청\s*안내|담당자|선발\s*결과|결과\s*발표|학습\s*데이터셋\s*공개|코드\s*제출|순위\s*발표|접수처|(?:공식\s*)?홈페이지|참가\s*신청(?=\s*[:：])|공식\s*사이트|신청\s*방법|접수\s*방법|문의(?:처)?|유의\s*사항|첨부\s*파일|발표\s*일시|심사\s*(?:기간|일정)|팀\s*병합\s*마감|(?:소스\s*코드|리더보드|결과물|보고서|작품|2차\s*평가\s*자료)\s*제출(?:\s*마감)?|최종\s*(?:순위|결과)\s*발표|시상식|대회\s*(?:종료|시작)|운영|설명|대회\s*설명',
 }
 LABEL_RE=re.compile(r'(?<![가-힣A-Za-z0-9])(?:'+'|'.join('(?P<'+k+'>'+v+')' for k,v in LABELS.items())+r')(?=\s|[:：]|$)[ \t]*[:：]?[ \t]*',re.I)
 SHORT=re.compile(r'(?<![\d./-])(\d{1,2})\s*[./월-]\s*(\d{1,2})\s*(?:일)?(?!\d)')
@@ -37,6 +37,7 @@ def entries(text:str)->list[tuple[str,str,str]]:
         label=m.group(m.lastgroup)
         before=text[text.rfind('\n',0,m.start())+1:m.start()].strip(' \t•·○■□●*-0123456789.)')
         after=text[m.end():]
+        if m.lastgroup=='registration' and re.search(r'장학금|장학급|환불|환급|정산|변경\s*전|당초',before):continue
         if m.lastgroup in ('organizer','benefits','summary','event','eligibility'):
             # A field is a heading or a colon-labelled value, not prose such as
             # '주최 측', '상금 지급', or '대회 기간 중에는'.
@@ -56,6 +57,7 @@ def entries(text:str)->list[tuple[str,str,str]]:
         if m.lastgroup in ('organizer','benefits','eligibility','summary'):
             raw=re.split(r'\n(?:평가|동의|규칙|참가 방법|제출|문의|주의|유의|개요|일정|진행 방식|첨부)(?:[^\n]{0,35})(?:\n|$)',raw,maxsplit=1)[0]
         value=compact(raw,400)
+        if m.lastgroup=='registration' and re.fullmatch(r'(?:및\s*)?일정(?:\s*\(안\))?[\s∙·•]*',value):continue
         if not re.search(r'[가-힣A-Za-z0-9]',value):continue
         if m.lastgroup=='benefits' and re.fullmatch(r'총\s*상금',m.group('benefits')) and value:value='총상금 '+value
         if value:out.append((m.lastgroup,m.group(m.lastgroup),value))
@@ -353,6 +355,9 @@ def parse_details(html:str,page_url:str='',source_kind:str='',context_title:str=
             out['date_note']=(out.get('date_note','')+' 원문의 두 자리 연도 표기를 20YY년으로 정규화했습니다.').strip()
     if structured and out.get('deadline'):
         out['date_note']=(out.get('date_note','')+' 해당 공고의 공개 구조화 접수 필드도 확인했습니다. 시간대가 명시된 값은 한국시간으로 변환했습니다.').strip()
+    if content is not None and (out or title):
+        out['detail_text_length']=len(text)
+        out['detail_content_hash']=hashlib.sha256(text.encode('utf-8')).hexdigest()[:16]
     if title:out['detail_title']=title
     if title or re.search(r'AI|데이터|인공지능|통계|머신러닝|딥러닝',text,re.I):out['_topic_text']=text[:12000]
     if out.get('deadline') or out.get('registration_start'):

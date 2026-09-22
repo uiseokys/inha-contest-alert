@@ -1,0 +1,22 @@
+clean-python: PASS
+clean-node: PASS
+clean-render: PASS
+Clean install has no operational records, demo contests, active manual dates or preferences: PASS
+seed-v6: PASS
+Applying patch preserves state/config/README/active overrides BYTE FOR BYTE: PASS
+Updated daily workflow is intentionally replaced; schedule and NTFY_TOPIC interface retained; separate audit workflow added: PASS
+upgrade-python: PASS
+upgrade-node: PASS
+upgrade-render: PASS
+Rendering groups two fictional notices into one event; retains raw IDs; does not expose private item/claim test fields: PASS
+upgrade-migration: PASS
+clean-compile: PASS
+clean-app-syntax: PASS
+clean-runtime-syntax: PASS
+clean-personal-syntax: PASS
+upgrade-compile: PASS
+upgrade-app-syntax: PASS
+upgrade-runtime-syntax: PASS
+upgrade-personal-syntax: PASS
+Both ZIPs: CRC valid; no font files/bytecode; no production state copied into fresh install: PASS
+Scope: local archive validation only. No user repository push, external collection request, ntfy submission or remote deployment.

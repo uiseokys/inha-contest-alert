@@ -139,6 +139,12 @@ def comparison_lines(result: dict) -> list[str]:
         lines = [f"어제 수집 기록 없음 · {result['base_date']} 대비 신규 {result['new_count']}건"]
     else:
         lines = [f"어제 대비 신규 {result['new_count']}건 · 기존 공고 변경 {result['updated_count']}건"]
+    if result.get('new_event_count') is not None:
+        prefix='어제 대비' if status=='comparable' else result['base_date']+' 대비'
+        lines.append(f"{prefix} 새 대회·프로그램 {result['new_event_count']}개 · 새 공고 {result['new_count']}건")
+        if result.get('repost_count'):lines.append(f"기존 기회의 재게시 {result['repost_count']}건은 새 대회 수에서 제외")
+        if result.get('deadline_extensions'):lines.append(f"마감 연장 {len(result['deadline_extensions'])}개 (저장 날짜 비교 · 원문 확인)")
+        if result.get('date_correction_count'):lines.append(f"추출 방식 갱신에 따른 날짜 정정 {result['date_correction_count']}건 별도")
     base = _time(result['base_at'])
     end = _time(result['as_of'])
     if base and end:
