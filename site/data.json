@@ -6,25 +6,25 @@
     "build": {
       "version": "7.0.0",
       "fingerprint": "f1b571df8d37",
-      "commit": "cfcabbde7149121347540f0aaec9654b50576337",
-      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35757451818",
-      "run_id": "35757451818"
+      "commit": "f1ea4a7ec1765d898bfb46a38decccd3e11d2053",
+      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35834337321",
+      "run_id": "35834337321"
     },
-    "generated_at": "2026-09-23T01:58:27.871123+09:00",
+    "generated_at": "2026-09-23T16:57:23.106215+09:00",
     "collection": {
       "version": "7.0.0",
       "fingerprint": "f1b571df8d37",
-      "commit": "cfcabbde7149121347540f0aaec9654b50576337",
-      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35757451818",
-      "run_id": "35757451818",
+      "commit": "f1ea4a7ec1765d898bfb46a38decccd3e11d2053",
+      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/35834337321",
+      "run_id": "35834337321",
       "status": "complete",
-      "attempted_at": "2026-09-23T01:57:55.778604+09:00",
-      "finished_at": "2026-09-23T01:58:27.859906+09:00",
+      "attempted_at": "2026-09-23T16:56:47.873320+09:00",
+      "finished_at": "2026-09-23T16:57:23.091939+09:00",
       "enabled_sources": 8,
       "ok_sources": 8
     },
-    "last_usable_at": "2026-09-23T01:58:27.859906+09:00",
-    "last_complete_at": "2026-09-23T01:58:27.859906+09:00",
+    "last_usable_at": "2026-09-23T16:57:23.091939+09:00",
+    "last_complete_at": "2026-09-23T16:57:23.091939+09:00",
     "notification": {
       "status": "reserved",
       "day": "2026-09-23",
@@ -34,8 +34,8 @@
   },
   "quality": {
     "version": 1,
-    "generated_at": "2026-09-23T01:58:27.871123+09:00",
-    "observation_at": "2026-09-23T01:57:55.778604+09:00",
+    "generated_at": "2026-09-23T16:57:23.106215+09:00",
+    "observation_at": "2026-09-23T16:56:47.873320+09:00",
     "basis": "저장된 AI·데이터 관련 공고 주소 기준(마감 포함). 관리자 보정 포함 여부를 구분하며, 목록 접근 성공과 날짜 추출 성공은 별개입니다.",
     "manual_count": 0,
     "automatic_deadline_known": 8,
@@ -48,7 +48,7 @@
         "id": "ds_contest",
         "name": "데이터사이언스학과 · 대회",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 0,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -65,7 +65,7 @@
         "id": "ds_notice",
         "name": "데이터사이언스학과 · 공지",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 1,
         "deadline_known": 1,
         "start_and_end_known": 1,
@@ -108,7 +108,7 @@
         "id": "ai_notice",
         "name": "인공지능공학과 · 공지",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 0,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -125,7 +125,7 @@
         "id": "aix",
         "name": "인공지능융합연구센터",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 4,
         "deadline_known": 1,
         "start_and_end_known": 1,
@@ -256,7 +256,7 @@
         "id": "sw",
         "name": "SW중심대학사업단",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 2,
         "deadline_known": 2,
         "start_and_end_known": 1,
@@ -328,7 +328,7 @@
         "id": "inha",
         "name": "인하대학교 · 교내 공지",
         "status": "disabled",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 0,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -345,7 +345,7 @@
         "id": "dacon",
         "name": "DACON",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 3,
         "deadline_known": 3,
         "start_and_end_known": 3,
@@ -449,7 +449,7 @@
         "id": "aifactory",
         "name": "인공지능팩토리",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 2,
         "deadline_known": 1,
         "start_and_end_known": 1,
@@ -526,7 +526,7 @@
         "id": "campuspick",
         "name": "캠퍼스픽 · AI/데이터",
         "status": "ok",
-        "checked_at": "2026-09-23T01:57:55.778604+09:00",
+        "checked_at": "2026-09-23T16:56:47.873320+09:00",
         "denominator": 6,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -706,7 +706,7 @@
   "daily_comparison": {
     "status": "comparable",
     "date": "2026-09-23",
-    "as_of": "2026-09-23T01:57:55.778604+09:00",
+    "as_of": "2026-09-23T16:56:47.873320+09:00",
     "base_date": "2026-09-22",
     "base_at": "2026-09-22T23:54:54.413884+09:00",
     "new_count": 0,
@@ -741,7 +741,7 @@
     "deadline_extensions": [],
     "date_correction_count": 1
   },
-  "updated_at": "2026-09-23T01:57:55.778604+09:00",
+  "updated_at": "2026-09-23T16:56:47.873320+09:00",
   "demo": false,
   "items": [
     {
@@ -794,7 +794,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "active",
@@ -866,7 +866,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": "2026-10-06T14:00:00+09:00",
       "registration_start_at": "2026-07-31T10:00:00+09:00",
       "status": "active",
@@ -939,7 +939,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": "2026-09-29T10:00:00+09:00",
       "registration_start_at": "2026-08-18T10:00:00+09:00",
       "status": "active",
@@ -1012,7 +1012,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": "2026-09-29T10:00:00+09:00",
       "registration_start_at": "2026-08-18T10:00:00+09:00",
       "status": "active",
@@ -1085,7 +1085,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": "2026-09-29T10:00:00+09:00",
       "registration_start_at": "2026-08-18T10:00:00+09:00",
       "status": "active",
@@ -1140,7 +1140,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1189,7 +1189,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1239,7 +1239,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1294,7 +1294,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1351,7 +1351,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1402,7 +1402,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1457,7 +1457,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1474,15 +1474,6 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "opportunity_kind": "contest",
-      "title_raw": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
-      "listing_title": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
-      "relevance_status": "included",
-      "relevance_evidence": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": null,
-      "registration_start": null,
       "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
@@ -1498,10 +1489,19 @@
       ],
       "detail_content_hash": "e3b0c44298fc1c14",
       "detail_text_length": 0,
+      "opportunity_kind": "contest",
       "detail_parser_version": 7,
       "detail_title": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "title_raw": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "listing_title": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "relevance_status": "included",
+      "relevance_evidence": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "date_parser_version": 7,
       "date_status": "missing",
+      "deadline": null,
+      "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36128",
       "detail_attempted_at": "2026-09-23T01:51:51.131569+09:00",
       "detail_status": "unconfirmed",
@@ -1567,7 +1567,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "active",
@@ -1622,7 +1622,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1682,7 +1682,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "closed",
@@ -1744,7 +1744,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "closed",
@@ -1816,7 +1816,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "deadline_at": "2026-08-17T23:59:00+09:00",
       "registration_start_at": "2026-07-16T10:00:00+09:00",
       "status": "closed",
@@ -1876,7 +1876,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "a9338c28d67faa2bfa50",
       "member_ids": [
         "a9338c28d67faa2bfa50"
@@ -1987,7 +1987,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "48d87172618e84c2f520",
       "member_ids": [
         "48d87172618e84c2f520"
@@ -2096,7 +2096,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "81ae9c6a7f2a2412f43b",
       "member_ids": [
         "81ae9c6a7f2a2412f43b"
@@ -2204,7 +2204,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "6f8f9451b6636bd7476e",
       "member_ids": [
         "6f8f9451b6636bd7476e"
@@ -2312,7 +2312,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "7f6e9999a4808a78b583",
       "member_ids": [
         "7f6e9999a4808a78b583"
@@ -2402,7 +2402,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "a61ec4deaae42aa56334",
       "member_ids": [
         "a61ec4deaae42aa56334"
@@ -2491,7 +2491,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "8bdabc7eaa5fdc81735c",
       "member_ids": [
         "8bdabc7eaa5fdc81735c"
@@ -2581,7 +2581,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "a86abc88d80d504621a7",
       "member_ids": [
         "a86abc88d80d504621a7"
@@ -2676,7 +2676,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "a9c7989bbc28cdf6846b",
       "member_ids": [
         "a9c7989bbc28cdf6846b"
@@ -2773,7 +2773,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "c7155fa7b56de5f46645",
       "member_ids": [
         "c7155fa7b56de5f46645"
@@ -2862,7 +2862,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "93b40e33a5034b9bef90",
       "member_ids": [
         "93b40e33a5034b9bef90"
@@ -2957,7 +2957,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "603410737f1171332f2b",
       "member_ids": [
         "603410737f1171332f2b"
@@ -3014,15 +3014,6 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "opportunity_kind": "contest",
-      "title_raw": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
-      "listing_title": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
-      "relevance_status": "included",
-      "relevance_evidence": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": null,
-      "registration_start": null,
       "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
@@ -3038,10 +3029,19 @@
       ],
       "detail_content_hash": "e3b0c44298fc1c14",
       "detail_text_length": 0,
+      "opportunity_kind": "contest",
       "detail_parser_version": 7,
       "detail_title": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "title_raw": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "listing_title": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "relevance_status": "included",
+      "relevance_evidence": "제4회 경남AI·SW경진대회-제조 피지컬 AI Agent 일부 부문 안내",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "date_parser_version": 7,
       "date_status": "missing",
+      "deadline": null,
+      "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36128",
       "detail_attempted_at": "2026-09-23T01:51:51.131569+09:00",
       "detail_status": "unconfirmed",
@@ -3147,7 +3147,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "68f060fa2d76de81ee51",
       "member_ids": [
         "68f060fa2d76de81ee51"
@@ -3239,7 +3239,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "3f7d8d2a4770babfdf7b",
       "member_ids": [
         "3f7d8d2a4770babfdf7b"
@@ -3340,7 +3340,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "9bf71550e1df76f86c69",
       "member_ids": [
         "9bf71550e1df76f86c69"
@@ -3441,7 +3441,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "a8d1c8bc81a78c82adad",
       "member_ids": [
         "a8d1c8bc81a78c82adad"
@@ -3553,7 +3553,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00",
       "notice_id": "9b3f043cd2a127294336",
       "member_ids": [
         "9b3f043cd2a127294336"
@@ -3646,7 +3646,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00"
+      "last_seen": "2026-09-23T16:56:47.873320+09:00"
     },
     {
       "id": "e3a61f53d7db6e527e53",
@@ -3694,7 +3694,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00"
+      "last_seen": "2026-09-23T16:56:47.873320+09:00"
     },
     {
       "id": "57210b8aec2b457edd1f",
@@ -3742,7 +3742,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00"
+      "last_seen": "2026-09-23T16:56:47.873320+09:00"
     },
     {
       "id": "632cafcdcf7057846030",
@@ -3790,7 +3790,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00"
+      "last_seen": "2026-09-23T16:56:47.873320+09:00"
     },
     {
       "id": "effd6b07b9f76014f2cb",
@@ -3801,14 +3801,6 @@
       "group": "inha",
       "posted_at": "2026-08-28",
       "platform_status": null,
-      "title_raw": "[교수학습개발센터] 학사경고 학생 대상 런!런! 챌린지 프로그램 참여 독려",
-      "listing_title": "[교수학습개발센터] 학사경고 학생 대상 런!런! 챌린지 프로그램 참여 독려",
-      "relevance_status": "pending",
-      "relevance_evidence": "",
-      "relevance_reason": "AI·데이터 관련성 확인 대기",
-      "relevance_version": 6,
-      "deadline": null,
-      "registration_start": null,
       "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
@@ -3826,8 +3818,16 @@
       "detail_text_length": 0,
       "detail_parser_version": 7,
       "detail_title": "[교수학습개발센터] 학사경고 학생 대상 런!런! 챌린지 프로그램 참여 독려",
+      "title_raw": "[교수학습개발센터] 학사경고 학생 대상 런!런! 챌린지 프로그램 참여 독려",
+      "listing_title": "[교수학습개발센터] 학사경고 학생 대상 런!런! 챌린지 프로그램 참여 독려",
+      "relevance_status": "pending",
+      "relevance_evidence": "",
+      "relevance_reason": "AI·데이터 관련성 확인 대기",
+      "relevance_version": 6,
       "date_parser_version": 7,
       "date_status": "missing",
+      "deadline": null,
+      "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/189585/artclView.do",
       "detail_attempted_at": "2026-09-23T01:51:51.131569+09:00",
       "detail_status": "unconfirmed",
@@ -3881,7 +3881,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00"
+      "last_seen": "2026-09-23T16:56:47.873320+09:00"
     },
     {
       "id": "36e73267afa3a96bb136",
@@ -3923,7 +3923,55 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T23:54:54.413884+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-09-23T01:57:55.778604+09:00"
+      "last_seen": "2026-09-23T16:56:47.873320+09:00"
+    },
+    {
+      "id": "b1ba3a9d6aec8a2e41d4",
+      "title": "[인재개발팀] 국가공무원 채용시험(PSAT) 대비 특강",
+      "url": "https://datascience.inha.ac.kr/bbs/datascience/746/192150/artclView.do",
+      "source_id": "ds_notice",
+      "source_name": "데이터사이언스학과 · 공지",
+      "group": "inha",
+      "posted_at": "2026-09-23",
+      "platform_status": null,
+      "date_failure_code": "no_explicit_date",
+      "detail_trace": [
+        {
+          "stage": "detail_http",
+          "outcome": "ok",
+          "text_length": 23426
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "ok",
+          "text_length": 23225
+        },
+        {
+          "stage": "date_parse",
+          "outcome": "unconfirmed",
+          "text_length": 286
+        }
+      ],
+      "detail_content_hash": "31fc67c01ac3da92",
+      "detail_text_length": 286,
+      "detail_parser_version": 7,
+      "detail_title": "[인재개발팀] 국가공무원 채용시험(PSAT) 대비 특강",
+      "title_raw": "[인재개발팀] 국가공무원 채용시험(PSAT) 대비 특강",
+      "listing_title": "[인재개발팀] 국가공무원 채용시험(PSAT) 대비 특강",
+      "relevance_status": "pending",
+      "relevance_evidence": "",
+      "relevance_reason": "AI·데이터 관련성 확인 대기",
+      "relevance_version": 6,
+      "date_parser_version": 7,
+      "date_status": "missing",
+      "deadline": null,
+      "registration_start": null,
+      "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/192150/artclView.do",
+      "detail_attempted_at": "2026-09-23T16:56:47.873320+09:00",
+      "detail_status": "unconfirmed",
+      "first_seen": "2026-09-23T16:56:47.873320+09:00",
+      "last_changed": "2026-09-23T16:56:47.873320+09:00",
+      "last_seen": "2026-09-23T16:56:47.873320+09:00"
     }
   ],
   "field_labels": {
@@ -3940,7 +3988,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 15,
       "retained": 0,
       "pages": 2,
@@ -3957,13 +4005,14 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 22,
       "retained": 1,
       "pages": 2,
+      "detail_unconfirmed": 1,
       "duplicates_hidden": 0,
       "excluded": 3,
-      "topic_pending": 5,
+      "topic_pending": 6,
       "dates_complete": 1,
       "dates_partial": 0,
       "dates_missing": 0
@@ -3974,7 +4023,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 13,
       "retained": 0,
       "pages": 2,
@@ -3991,7 +4040,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 40,
       "retained": 4,
       "pages": 2,
@@ -4008,7 +4057,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 29,
       "retained": 2,
       "pages": 2,
@@ -4025,7 +4074,7 @@
       "group": "inha",
       "status": "disabled",
       "message": "인하대 대표 홈페이지: 자동 수집 대상에서 제외했습니다. 학과·센터 게시판은 계속 수집합니다.",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 0,
       "retained": 0,
       "pages": 0,
@@ -4042,7 +4091,7 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 14,
       "retained": 3,
       "pages": 1,
@@ -4059,7 +4108,7 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 112,
       "retained": 2,
       "pages": 1,
@@ -4076,7 +4125,7 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-09-23T01:57:55.778604+09:00",
+      "checked_at": "2026-09-23T16:56:47.873320+09:00",
       "recognized": 24,
       "retained": 6,
       "pages": 1,
