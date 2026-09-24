@@ -1,20 +1,20 @@
 {
   "version": 1,
-  "generated_at": "2026-09-23T16:57:23.106215+09:00",
-  "observation_at": "2026-09-23T16:56:47.873320+09:00",
+  "generated_at": "2026-09-24T16:50:07.819466+09:00",
+  "observation_at": "2026-09-24T16:47:37.579039+09:00",
   "basis": "저장된 AI·데이터 관련 공고 주소 기준(마감 포함). 관리자 보정 포함 여부를 구분하며, 목록 접근 성공과 날짜 추출 성공은 별개입니다.",
   "manual_count": 0,
-  "automatic_deadline_known": 8,
-  "total": 18,
-  "deadline_known": 8,
-  "deadline_time_known": 5,
-  "coverage": 44.4,
+  "automatic_deadline_known": 9,
+  "total": 19,
+  "deadline_known": 9,
+  "deadline_time_known": 6,
+  "coverage": 47.4,
   "sources": [
     {
       "id": "ds_contest",
       "name": "데이터사이언스학과 · 대회",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 0,
       "deadline_known": 0,
       "start_and_end_known": 0,
@@ -31,7 +31,7 @@
       "id": "ds_notice",
       "name": "데이터사이언스학과 · 공지",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 1,
       "deadline_known": 1,
       "start_and_end_known": 1,
@@ -74,7 +74,7 @@
       "id": "ai_notice",
       "name": "인공지능공학과 · 공지",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 0,
       "deadline_known": 0,
       "start_and_end_known": 0,
@@ -91,12 +91,12 @@
       "id": "aix",
       "name": "인공지능융합연구센터",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 4,
       "deadline_known": 1,
       "start_and_end_known": 1,
       "deadline_time_known": 1,
-      "attempted_this_run": 0,
+      "attempted_this_run": 3,
       "deadline_confirmed_this_run": 0,
       "manual_count": 0,
       "automatic_deadline_known": 1,
@@ -112,7 +112,7 @@
           "url": "https://aix.inha.ac.kr/news/notice/?vid=109",
           "reason": "no_explicit_date",
           "label": "명시적인 접수 날짜 미확인",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": null,
           "evidence_hash": null,
@@ -120,12 +120,12 @@
             {
               "stage": "detail_http",
               "outcome": "ok",
-              "text_length": 112599
+              "text_length": 113642
             },
             {
               "stage": "detail_render",
               "outcome": "ok",
-              "text_length": 113919
+              "text_length": 114962
             },
             {
               "stage": "date_parse",
@@ -139,7 +139,7 @@
           "url": "https://aix.inha.ac.kr/news/notice/?vid=108",
           "reason": "no_explicit_date",
           "label": "명시적인 접수 날짜 미확인",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": null,
           "evidence_hash": null,
@@ -166,7 +166,7 @@
           "url": "https://aix.inha.ac.kr/news/notice/?vid=106",
           "reason": "no_explicit_date",
           "label": "명시적인 접수 날짜 미확인",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 254,
           "evidence_hash": "bc44d06a08e836c8",
@@ -222,13 +222,13 @@
       "id": "sw",
       "name": "SW중심대학사업단",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 2,
       "deadline_known": 2,
       "start_and_end_known": 1,
       "deadline_time_known": 0,
-      "attempted_this_run": 0,
-      "deadline_confirmed_this_run": 0,
+      "attempted_this_run": 1,
+      "deadline_confirmed_this_run": 1,
       "manual_count": 0,
       "automatic_deadline_known": 2,
       "deadline_coverage": 100.0,
@@ -243,7 +243,7 @@
           "url": "https://swuniv.inha.ac.kr/bbs/swuniv/3113/187543/artclView.do",
           "reason": "partial_date",
           "label": "시작 또는 마감 일부만 확인",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 0,
           "evidence_hash": "e3b0c44298fc1c14",
@@ -294,7 +294,7 @@
       "id": "inha",
       "name": "인하대학교 · 교내 공지",
       "status": "disabled",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 0,
       "deadline_known": 0,
       "start_and_end_known": 0,
@@ -311,7 +311,7 @@
       "id": "dacon",
       "name": "DACON",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 3,
       "deadline_known": 3,
       "start_and_end_known": 3,
@@ -415,49 +415,21 @@
       "id": "aifactory",
       "name": "인공지능팩토리",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
       "denominator": 2,
-      "deadline_known": 1,
-      "start_and_end_known": 1,
-      "deadline_time_known": 1,
-      "attempted_this_run": 0,
-      "deadline_confirmed_this_run": 0,
+      "deadline_known": 2,
+      "start_and_end_known": 2,
+      "deadline_time_known": 2,
+      "attempted_this_run": 1,
+      "deadline_confirmed_this_run": 1,
       "manual_count": 0,
-      "automatic_deadline_known": 1,
-      "deadline_coverage": 50.0,
+      "automatic_deadline_known": 2,
+      "deadline_coverage": 100.0,
       "reasons": {
-        "no_explicit_date": 1,
+        "confirmed": 1,
         "stale_evidence": 1
       },
       "samples": [
-        {
-          "id": "68f060fa2d76de81ee51",
-          "title": "주제 3: 국립공원 내 시설물 변화 탐지",
-          "url": "https://aifactory.space/ko/competitions/9306",
-          "reason": "no_explicit_date",
-          "label": "명시적인 접수 날짜 미확인",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
-          "parser_version": 7,
-          "text_length": 135,
-          "evidence_hash": "09e3be77392a468a",
-          "trace": [
-            {
-              "stage": "detail_http",
-              "outcome": "ok",
-              "text_length": 244236
-            },
-            {
-              "stage": "detail_render",
-              "outcome": "ok",
-              "text_length": 242962
-            },
-            {
-              "stage": "date_parse",
-              "outcome": "unconfirmed",
-              "text_length": 135
-            }
-          ]
-        },
         {
           "id": "48d87172618e84c2f520",
           "title": "주제 4: 해안 쓰레기 탐지 및 규모 추정",
@@ -485,6 +457,34 @@
               "text_length": 136
             }
           ]
+        },
+        {
+          "id": "68f060fa2d76de81ee51",
+          "title": "주제 3: 국립공원 내 시설물 변화 탐지",
+          "url": "https://aifactory.space/ko/competitions/9306",
+          "reason": "confirmed",
+          "label": "날짜 확인",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
+          "parser_version": 7,
+          "text_length": 6395,
+          "evidence_hash": "3c0824b4998646fe",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 245002
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "ok",
+              "text_length": 242241
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "ok",
+              "text_length": 6395
+            }
+          ]
         }
       ]
     },
@@ -492,19 +492,19 @@
       "id": "campuspick",
       "name": "캠퍼스픽 · AI/데이터",
       "status": "ok",
-      "checked_at": "2026-09-23T16:56:47.873320+09:00",
-      "denominator": 6,
+      "checked_at": "2026-09-24T16:47:37.579039+09:00",
+      "denominator": 7,
       "deadline_known": 0,
       "start_and_end_known": 0,
       "deadline_time_known": 0,
-      "attempted_this_run": 0,
+      "attempted_this_run": 7,
       "deadline_confirmed_this_run": 0,
       "manual_count": 0,
       "automatic_deadline_known": 0,
       "deadline_coverage": 0.0,
       "reasons": {
         "browser_denied": 4,
-        "no_explicit_date": 2
+        "no_explicit_date": 3
       },
       "samples": [
         {
@@ -513,7 +513,7 @@
           "url": "https://www.campuspick.com/contest/view?id=36243",
           "reason": "browser_denied",
           "label": "동적 화면 접근 제한",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 0,
           "evidence_hash": "e3b0c44298fc1c14",
@@ -521,7 +521,7 @@
             {
               "stage": "detail_http",
               "outcome": "ok",
-              "text_length": 9723
+              "text_length": 9724
             },
             {
               "stage": "detail_render",
@@ -541,7 +541,7 @@
           "url": "https://www.campuspick.com/contest/view?id=36195",
           "reason": "browser_denied",
           "label": "동적 화면 접근 제한",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 0,
           "evidence_hash": "e3b0c44298fc1c14",
@@ -569,7 +569,7 @@
           "url": "https://www.campuspick.com/contest/view?id=36180",
           "reason": "browser_denied",
           "label": "동적 화면 접근 제한",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 0,
           "evidence_hash": "e3b0c44298fc1c14",
@@ -577,7 +577,7 @@
             {
               "stage": "detail_http",
               "outcome": "ok",
-              "text_length": 9616
+              "text_length": 9617
             },
             {
               "stage": "detail_render",
@@ -595,9 +595,9 @@
           "id": "a61ec4deaae42aa56334",
           "title": "2026 KoMaP AI 경진대회",
           "url": "https://www.campuspick.com/contest/view?id=36134",
-          "reason": "browser_denied",
-          "label": "동적 화면 접근 제한",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "reason": "no_explicit_date",
+          "label": "명시적인 접수 날짜 미확인",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 0,
           "evidence_hash": "e3b0c44298fc1c14",
@@ -606,11 +606,6 @@
               "stage": "detail_http",
               "outcome": "ok",
               "text_length": 7787
-            },
-            {
-              "stage": "detail_render",
-              "outcome": "error",
-              "code": "browser_denied"
             },
             {
               "stage": "date_parse",
@@ -625,7 +620,7 @@
           "url": "https://www.campuspick.com/contest/view?id=36130",
           "reason": "no_explicit_date",
           "label": "명시적인 접수 날짜 미확인",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 0,
           "evidence_hash": "e3b0c44298fc1c14",
@@ -648,7 +643,7 @@
           "url": "https://www.campuspick.com/contest/view?id=36128",
           "reason": "no_explicit_date",
           "label": "명시적인 접수 날짜 미확인",
-          "last_attempted_at": "2026-09-23T01:51:51.131569+09:00",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
           "parser_version": 7,
           "text_length": 0,
           "evidence_hash": "e3b0c44298fc1c14",
@@ -657,6 +652,34 @@
               "stage": "detail_http",
               "outcome": "ok",
               "text_length": 8236
+            },
+            {
+              "stage": "date_parse",
+              "outcome": "unconfirmed",
+              "text_length": 0
+            }
+          ]
+        },
+        {
+          "id": "800598f265163b201dd9",
+          "title": "AI-EDU Next Class 전국예비교원 AI 융합 수업설계 해커톤",
+          "url": "https://www.campuspick.com/contest/view?id=36285",
+          "reason": "browser_denied",
+          "label": "동적 화면 접근 제한",
+          "last_attempted_at": "2026-09-24T16:47:37.579039+09:00",
+          "parser_version": 7,
+          "text_length": 0,
+          "evidence_hash": "e3b0c44298fc1c14",
+          "trace": [
+            {
+              "stage": "detail_http",
+              "outcome": "ok",
+              "text_length": 8558
+            },
+            {
+              "stage": "detail_render",
+              "outcome": "error",
+              "code": "browser_denied"
             },
             {
               "stage": "date_parse",
