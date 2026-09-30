@@ -4,11 +4,11 @@
   "build": {
     "version": "7.0.0",
     "fingerprint": "f1b571df8d37",
-    "commit": "2cd70ce0780d960f48f8f994ca127dc762028e59",
+    "commit": "f039a58c8c61b1008758ea1a1c5b8ebe1e983b03",
     "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/36692954071",
     "run_id": "36692954071"
   },
-  "generated_at": "2026-09-30T18:00:29.276069+09:00",
+  "generated_at": "2026-09-30T18:00:31.639237+09:00",
   "collection": {
     "version": "7.0.0",
     "fingerprint": "f1b571df8d37",
@@ -25,9 +25,9 @@
   "last_complete_at": "2026-09-30T18:00:29.263942+09:00",
   "notification": {
     "status": "accepted",
-    "day": "2026-09-29",
-    "at": "2026-09-29T18:01:06.728774+09:00",
-    "accepted_at": "2026-09-29T18:01:08.593003+09:00"
+    "day": "2026-09-30",
+    "at": "2026-09-30T18:00:29.473961+09:00",
+    "accepted_at": "2026-09-30T18:00:31.463653+09:00"
   },
   "notification_note": "ntfy 수락은 휴대폰 표시 성공이 아닙니다."
 }
