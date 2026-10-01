@@ -1,25 +1,21 @@
 name: Daily contest dashboard
-
 on:
   schedule:
-    # 02:40 UTC = 11:40 Asia/Seoul. ntfy delivers the prepared digest at 12:00 KST.
+    # Keep the original noon trigger, plus lightweight setting-aware ticks.
     - cron: '40 2 * * *'
+    - cron: '3,23,43 * * * *'
   workflow_dispatch:
     inputs:
       send_today:
-        description: '오늘 알림도 보내기 (시험용 즉시 발송, 이미 오늘 시도했으면 생략)'
+        description: '오늘 알림도 보내기 (즉시 시험 발송, 당일 이미 시도했으면 생략)'
         required: false
         type: boolean
         default: false
-
-# A manual refresh and a scheduled run must not overwrite each other's state.
 concurrency:
   group: contest-daily-state
   cancel-in-progress: false
-
 permissions:
   contents: read
-
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -31,89 +27,80 @@ jobs:
     env:
       PAGE_URL: ${{ vars.PAGE_URL }}
       ENABLE_PAGES: ${{ vars.ENABLE_PAGES }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
     steps:
-      - name: Read latest persistent state
+      - name: Read latest code and state
         uses: actions/checkout@v6
         with:
           ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
+      - name: Verify complete release before importing anything
+        run: python tools/preflight.py
+      - name: Check selected notification time
+        id: gate
+        run: python tools/schedule_gate.py
       - name: Set up Python
+        if: steps.gate.outputs.run == 'true'
         uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Install dependencies
+        if: steps.gate.outputs.run == 'true'
         run: |
           python -m pip install -r requirements.txt
           python -m playwright install --with-deps chromium
-      - name: Offline tests
-        run: python -m unittest discover -s tests -v
-      - name: Collect public notices and build the dashboard
-        id: collect
-        continue-on-error: true
-        run: python -m contest_alert collect
-      - name: Persist failed collection metadata with the previous valid snapshot
-        if: always() && steps.collect.outcome == 'failure'
-        env:
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+      - name: Offline tests and release imports
+        id: tests
+        if: steps.gate.outputs.run == 'true'
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/state.json README.md site/
-          if ! git diff --cached --quiet; then
-            git commit -m 'Record failed collection without sending notifications'
-            git pull --rebase origin "$DEFAULT_BRANCH"
-            git push origin HEAD:"$DEFAULT_BRANCH"
-          fi
-      - name: Reserve today's single notification attempt
+          python tools/preflight.py --imports
+          python -m unittest discover -s tests -v
+          python tools/smoke.py
+      - name: Collect notices and build dashboard
+        id: collect
+        if: steps.gate.outputs.run == 'true'
+        continue-on-error: true
+        env:
+          COLLECT_MODE: ${{ github.event_name == 'schedule' && 'scheduled' || 'manual' }}
+        run: python -m contest_alert collect --mode "$COLLECT_MODE"
+      - name: Persist failed collection metadata without replacing old records
+        id: persist_failure
+        if: always() && steps.collect.outcome == 'failure'
+        run: python tools/persist.py
+      - name: Reserve one daily notification
         id: reserve
         continue-on-error: true
         if: steps.collect.outcome == 'success' && (github.event_name == 'schedule' || inputs.send_today == true)
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           NOTIFY_MODE: ${{ github.event_name == 'schedule' && 'scheduled' || 'manual' }}
+          CM_TARGET_DAY: ${{ steps.gate.outputs.day }}
         run: python -m contest_alert prepare --mode "$NOTIFY_MODE"
-      - name: Save snapshot and reservation BEFORE sending
+      - name: Persist reservation before posting
+        id: persist
         if: steps.collect.outcome == 'success'
-        env:
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/state.json README.md site/
-          if ! git diff --cached --quiet; then
-            git commit -m 'Update contest snapshot and daily state'
-            git pull --rebase origin "$DEFAULT_BRANCH"
-            git push origin HEAD:"$DEFAULT_BRANCH"
-          fi
-      - name: Submit one message to ntfy (or schedule it for noon)
+        run: python tools/persist.py
+      - name: Submit or schedule one ntfy digest
         id: notify
-        if: steps.reserve.outputs.send == 'true'
+        if: steps.persist.outcome == 'success' && steps.reserve.outputs.send == 'true'
         continue-on-error: true
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python -m contest_alert send
-      - name: Persist ntfy acceptance or failure, without any topic or response body
+      - name: Save notification outcome
         if: always() && steps.reserve.outputs.send == 'true' && steps.notify.outcome != 'skipped'
-        env:
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          git add data/state.json README.md site/
-          if ! git diff --cached --quiet; then
-            git commit -m 'Record daily notification attempt result'
-            git pull --rebase origin "$DEFAULT_BRANCH"
-            git push origin HEAD:"$DEFAULT_BRANCH"
-          fi
-      - name: Upload only the public website
+        run: python tools/persist.py
+      - name: Upload public website
         id: upload
-        if: vars.ENABLE_PAGES != 'false'
+        if: always() && steps.tests.outcome == 'success' && steps.gate.outputs.run == 'true' && vars.ENABLE_PAGES != 'false' && (steps.persist.outcome == 'success' || steps.persist_failure.outcome == 'success')
         uses: actions/upload-pages-artifact@v4
         with:
           path: site
           retention-days: 1
-      - name: Make collection or ntfy failure visible in Actions
+      - name: Surface collection or notification errors
         if: always() && (steps.collect.outcome == 'failure' || steps.notify.outcome == 'failure' || steps.reserve.outcome == 'failure')
         run: |
-          echo 'Collection or ntfy step failed. Check source reports and workflow logs. No automatic notification retry was sent.'
+          echo 'Collection or notification failed. Previous state was retained; inspect the summary.'
           exit 1
 
   deploy:
@@ -128,8 +115,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4

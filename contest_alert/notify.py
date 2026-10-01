@@ -27,7 +27,7 @@ def validate_topic(topic:str)->str:
 def utf8_clip(text:str,limit:int)->str:
     return text.encode('utf-8')[:limit].decode('utf-8',errors='ignore')
 
-def digest(state:dict,now:datetime,page_url:str)->str:
+def digest(state:dict,now:datetime,page_url:str,settings:dict|None=None)->str:
     events=group_events(state)
     comparison=event_comparison(state,compare_day(state,now),events)
     state=visible_state(state)
@@ -39,7 +39,8 @@ def digest(state:dict,now:datetime,page_url:str)->str:
     enabled=[s for s in state['sources'].values() if s['status']!='disabled']
     good=sum(s['status']=='ok' for s in enabled)
     failed=sum(s['status'] in ('error','partial') for s in enabled)
-    lines=[f'{today.isoformat()} 공모전·경진대회', *comparison_lines(comparison),
+    from .briefing import priority_lines
+    lines=[f'{today.isoformat()} 공모전·경진대회', *priority_lines(events,state,now,settings or {},comparison), *comparison_lines(comparison),
            f'지난 알림 이후 미전달 신규 {len(new)}건 · 변경 {len(updated)}건',
            f'출처 수집 정상 {good}/{len(enabled)}곳']
     if failed:lines.append(f'주의: {failed}곳 수집 실패/부분 실패. 신규 0건이어도 전체에 없다는 뜻은 아닙니다.')
@@ -58,27 +59,31 @@ def digest(state:dict,now:datetime,page_url:str)->str:
     tail=f'\n전체 목록: {page_url}\n새 공고와 근거 기반으로 통합한 대회 수를 구분합니다. 실제 게시일과 다를 수 있습니다.\n신청 가능 여부와 마감 시각은 원문을 확인하세요.'
     return utf8_clip('\n'.join(lines),2600)+tail
 
-def reserve(state:dict,now:datetime,page_url:str,mode:str,run_id:str)->dict|None:
+def reserve(state:dict,now:datetime,page_url:str,mode:str,run_id:str,settings:dict|None=None)->dict|None:
+    from .settings import validate,target
+    settings=validate(settings or {})
+    if not settings['notification']['enabled']:return None
     day=now.astimezone(KST).date().isoformat()
     if day in state['claims']:return None
-    digest_time=max(now.astimezone(KST),noon_target(now)) if mode=='scheduled' else now
-    draft={'day':day,'mode':mode,'run_id':run_id,'cutoff_at':state.get('updated_at') or now.isoformat(),
-           'payload':{'title':'공모전 모아보기 · 점심 브리핑','message':digest(state,digest_time,page_url),
+    scheduled=target(settings,now)
+    digest_time=max(now.astimezone(KST),scheduled) if mode=='scheduled' else now
+    draft={'day':day,'mode':mode,'run_id':run_id,'target_at':scheduled.isoformat(),'cutoff_at':state.get('updated_at') or now.isoformat(),
+           'payload':{'title':'공모전 모아보기 · '+settings['notification']['time']+' 브리핑','message':digest(state,digest_time,page_url,settings),
                       'click':page_url,'tags':['calendar'],'priority':3}}
-    state['claims'][day]={'status':'reserved','at':now.isoformat(),'run_id':run_id}
+    state['claims'][day]={'status':'reserved','at':now.isoformat(),'run_id':run_id,'target_at':scheduled.isoformat()}
     return draft
 
 def publish(draft:dict,topic:str,now:datetime,sender=None)->str:
     topic=validate_topic(topic)
     payload=copy.deepcopy(draft['payload']);payload['topic']=topic
     if draft['mode']=='scheduled':
-        target=datetime.fromisoformat(draft['day']+'T12:00:00+09:00')
+        target=datetime.fromisoformat(draft.get('target_at') or draft['day']+'T12:00:00+09:00')
         seconds=(target-now.astimezone(KST)).total_seconds()
         if seconds>=15:payload['delay']=str(int(target.timestamp()))
         elif seconds>0:
             # ntfy minimum delay is 10s; avoid delivering a few seconds before noon.
             payload['delay']='15s'
-        else:payload['message']='[정오 작업 지연: 완료 후 발송]\n'+payload['message']
+        else:payload['message']=('[정오 작업 지연: 완료 후 발송]' if target.hour==12 and target.minute==0 else '[예약 시각 경과: 완료 후 발송]')+'\n'+payload['message']
     encoded=json.dumps(payload,ensure_ascii=False).encode('utf-8')
     if len(encoded)>4096:raise ValueError('메시지가 ntfy 4096바이트 한도를 초과해 전송을 중단했습니다.')
     try:

@@ -4,7 +4,7 @@ import os,re,hashlib,subprocess
 from pathlib import Path
 from datetime import datetime
 from .timing import as_local
-VERSION='7.0.0'
+VERSION='8.0.0'
 
 def code_fingerprint(root:Path|None=None) -> str:
     root=root or Path(__file__).resolve().parents[1]

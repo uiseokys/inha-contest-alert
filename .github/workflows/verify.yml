@@ -1,0 +1,26 @@
+name: Verify complete release
+on:
+  push:
+    paths: ['contest_alert/**', 'web/**', 'tools/**', 'tests/**', '.github/workflows/**', 'requirements.txt', 'release-manifest.json']
+  pull_request:
+    paths: ['contest_alert/**', 'web/**', 'tools/**', 'tests/**', '.github/workflows/**', 'requirements.txt', 'release-manifest.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - run: python tools/preflight.py
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Full release verification, no state writes or ntfy
+        run: |
+          python tools/preflight.py --imports
+          python -m unittest discover -s tests -v
+          node --test tests/*.test.cjs
+          python tools/smoke.py

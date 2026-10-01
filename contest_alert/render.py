@@ -40,6 +40,8 @@ def public_data(state:dict,now:datetime,demo:bool=False)->dict:
         item['daily_new']=item['id'] in daily_new
         items.append(item)
     for event in groups:
+        from .participation import conditions
+        event.setdefault('conditions',conditions('참가 대상: '+str(event.get('eligibility') or '')))
         event['technical_fields']=technical_fields(event)
         for field in ('deadline','registration_start'):
             instant=exact_instant(event,field);event[field+'_at']=instant.isoformat() if instant else None
@@ -49,7 +51,7 @@ def public_data(state:dict,now:datetime,demo:bool=False)->dict:
         event.pop('_automatic_dates',None)
     groups.sort(key=lambda x:deadline_sort_key(x,now))
     items.sort(key=lambda x:deadline_sort_key(x,now))
-    return {'version':7,'runtime':runtime_metadata(state,now),'quality':diagnostic_report(state,now),'daily_comparison':comparison,'updated_at':state.get('updated_at'),'demo':demo,'items':items,'events':groups,'review_items':review_items,'field_labels':FIELD_LABELS,'sources':list(state['sources'].values())}
+    return {'version':8,'quality_alerts':state.get('quality_alerts',[]),'runtime':runtime_metadata(state,now),'quality':diagnostic_report(state,now),'daily_comparison':comparison,'updated_at':state.get('updated_at'),'demo':demo,'items':items,'events':groups,'review_items':review_items,'field_labels':FIELD_LABELS,'sources':list(state['sources'].values())}
 
 def deadline_sort_key(item, today):
     """Date-first farthest remaining order, known clock tie-break, unknown last."""
@@ -89,9 +91,11 @@ def csv_cell(value)->str:
 
 def build(root:Path,state:dict,now:datetime,repo_url:str='',page_url:str='',demo:bool=False)->None:
     public=public_data(state,now,demo);public.update(repo_url=canonical(repo_url),page_url=canonical(page_url))
+    from .settings import load,public as public_settings
+    public['server_settings']=public_settings(load(root))
     site=root/'site';site.mkdir(exist_ok=True)
     template=(root/'web/index.template.html').read_text(encoding='utf-8')
-    page=template.replace('/*__STYLE__*/',(root/'web/style.css').read_text(encoding='utf-8')).replace('/*__RUNTIME__*/',(root/'web/runtime.js').read_text(encoding='utf-8')).replace('/*__PERSONAL__*/',(root/'web/personal.js').read_text(encoding='utf-8')).replace('/*__APP__*/',(root/'web/app.js').read_text(encoding='utf-8')).replace('/*__DATA__*/',embedded_json(public))
+    page=template.replace('/*__STYLE__*/',(root/'web/style.css').read_text(encoding='utf-8')).replace('/*__RUNTIME__*/',(root/'web/runtime.js').read_text(encoding='utf-8')).replace('/*__PERSONAL__*/',(root/'web/personal.js').read_text(encoding='utf-8')).replace('/*__PLANNER__*/',(root/'web/planner.js').read_text(encoding='utf-8')).replace('/*__FEATURES__*/',(root/'web/features.js').read_text(encoding='utf-8')).replace('/*__APP__*/',(root/'web/app.js').read_text(encoding='utf-8')).replace('/*__DATA__*/',embedded_json(public))
     (site/'index.html').write_text(page,encoding='utf-8')
     (site/'health.json').write_text(json.dumps(public['runtime'],ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (site/'data.json').write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

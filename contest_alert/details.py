@@ -8,7 +8,7 @@ from .core import DATE,dates,canonical,clean_title,generic_title
 
 from .extraction import normalize_text,reorder_timeline,structured_registration,time_value
 
-PARSER_VERSION=7
+PARSER_VERSION=8
 LABELS={
  'registration':r'참가\s*접수(?=\s*(?:[:：]|\n|20\d{2}|$))|(?:(?:접수|신청|모집|응모)\s*)?마감\s*일\s*시|(?:접수|신청|모집)\s*(?:시작|종료)\s*일\s*시|(?:(?:참가|참여|작품|참가자)\s*)?(?:접수|신청|모집|응모|공모|지원)\s*(?:기간|일정|기한|시작(?:일)?|개시(?:일)?|종료(?:일)?|마감(?:일)?)|(?:참가|참여)\s*기간|(?:접수|응모|공모|신청)(?=\s*[:：])|(?:registration|application|submission)\s*(?:period|deadline|opens?|closes?|start(?:s| date)?|end(?:s| date)?)',
  'event':r'(?:대회|행사|본선|해커톤|활동|개최)\s*(?:기간|일시|일정|일자)|event\s*(?:dates?|period)',
@@ -366,4 +366,9 @@ def parse_details(html:str,page_url:str='',source_kind:str='',context_title:str=
         out['date_note']=(out.get('date_note','')+' 접수 시각 표기가 서로 달라 시간을 확정하지 않았습니다.').strip()
     if out and content is not None:out['detail_parser_version']=PARSER_VERSION
     if out and page_url:out['detail_source_url']=canonical(page_url)
+    from .participation import conditions,milestones
+    criteria=conditions(text)
+    if any(v.get('evidence') for v in criteria.values()):out['conditions']=criteria
+    dates_extra=milestones(text,title or context_title,resource_url(page_url))
+    if dates_extra:out['milestones']=dates_extra
     return out

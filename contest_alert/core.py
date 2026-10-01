@@ -18,7 +18,7 @@ PATTERNS = {
     'campuspick': r'/contest/view\?(?:[^#]*&)?id=\d+(?:&|$)',
     'aifactory': r'/(?:ko/)?competitions/\d+',
 }
-DETAIL_FIELDS = ('date_failure_code','detail_trace','detail_content_hash','detail_text_length','manual_correction','registration_timezone','opportunity_kind','duplicate_of','detail_parser_version','detail_title','title_raw','listing_title','relevance_status','relevance_evidence','relevance_reason','relevance_version','deadline_time','registration_start_time','registration_time_ambiguous','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
+DETAIL_FIELDS = ('conditions','milestones','attachment_status','attachment_source_url','date_failure_code','detail_trace','detail_content_hash','detail_text_length','manual_correction','registration_timezone','opportunity_kind','duplicate_of','detail_parser_version','detail_title','title_raw','listing_title','relevance_status','relevance_evidence','relevance_reason','relevance_version','deadline_time','registration_start_time','registration_time_ambiguous','date_source_url','date_evidence','date_note','date_parser_version','date_status','deadline','registration_start','registration_text','registration_ambiguous',
                  'event_start','event_end','event_ambiguous','schedule_text','organizer','eligibility',
                  'benefits','summary','website_url','application_url','detail_source_url',
                  'detail_checked_at','detail_attempted_at','detail_status')

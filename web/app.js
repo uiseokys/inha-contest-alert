@@ -108,7 +108,7 @@ function detailPanel(item){
   fact(grid,'상금 / 혜택',item.benefits);fact(grid,'대회 주제',item.summary);
   if(item.schedule_text)fact(grid,'세부 일정 안내',item.schedule_text,true);
   if(item.date_evidence)fact(grid,'날짜 근거 (원문)',item.date_evidence,true);
-  panel.append(grid);
+  panel.append(grid,conditionsPanel(item),plannerPanel(item));
   if(item.date_note)panel.append(el('p','detail-note',item.date_note));
   if(safeURL(item.date_source_url))panel.append(outLink(item.date_source_url,'날짜 근거 페이지 ↗','date-evidence-link detail-link'));
   if(!item.deadline)panel.append(el('p','detail-note',item.detail_status==='error'?'상세 페이지 접근에 실패해 마감일을 확인하지 못했습니다.':'텍스트·공개 일정에서 접수 마감일을 아직 확정하지 못했습니다. 포스터에만 적힌 날짜는 원문을 확인하세요.'));
@@ -137,6 +137,7 @@ function card(item){
   h.querySelector('a').title=item.title;
   if(isDailyNew(item))source.append(el('span','new-badge','신규'));
   source.append(favoriteButton(item));
+  const progress=el('span','progress-chip',CMPlanner.STAGES[planningFor(item).stage]);progress.id='progress-'+item.id;source.append(progress);
   const reg=el('div','registration-line');
   for(const [label,value] of [['접수 시작',item.registration_start],['접수 마감',item.deadline?(item.deadline+(item.deadline_time?' '+item.deadline_time:'')):null]]){const part=el('div','date-pair');part.append(el('span','date-label',label),el('span','date-value'+(value?'':' is-unknown'),value||'확인 필요'));reg.append(part);}
   const fields=el('div','field-tags');for(const tag of item.technical_fields||[])fields.append(el('span','field-tag',fieldLabels[tag]||tag));
@@ -151,7 +152,7 @@ function card(item){
 }
 function update(){
   const query=$('searchInput').value.trim().toLowerCase(),source=$('sourceFilter').value,state=$('statusFilter').value,kind=$('kindFilter').value,field=$('fieldFilter').value;
-  filtered=DATA.items.filter(i=>{const current=status(i);return (selectedGroup==='all'||(i.groups||[i.group]).includes(selectedGroup))&&(kind==='all'||(i.opportunity_kind||'other')===kind)&&(field==='all'||(i.technical_fields||['general_ai']).includes(field))&&(source==='all'||(i.source_names||[i.source_name]).includes(source))&&(state==='all'||(state==='review'?current!=='closed':current===state))&&(!$('newOnly').checked||isDailyNew(i))&&(!$('favoriteOnly').checked||isFavorite(i))&&(!query||[i.title,i.source_name,i.organizer,i.eligibility,i.summary,i.benefits].filter(Boolean).join(' ').toLowerCase().includes(query));});
+  filtered=DATA.items.filter(i=>{const current=status(i);return CMPlanner.matches(i.conditions,plannerState.filters)&&(selectedGroup==='all'||(i.groups||[i.group]).includes(selectedGroup))&&(kind==='all'||(i.opportunity_kind||'other')===kind)&&(field==='all'||(i.technical_fields||['general_ai']).includes(field))&&(source==='all'||(i.source_names||[i.source_name]).includes(source))&&(state==='all'||(state==='review'?current!=='closed':current===state))&&(!$('newOnly').checked||isDailyNew(i))&&(!$('favoriteOnly').checked||isFavorite(i))&&(!query||[i.title,i.source_name,i.organizer,i.eligibility,i.summary,i.benefits].filter(Boolean).join(' ').toLowerCase().includes(query));});
   filtered.sort((a,b)=>CMRuntime.compareItems(a,b,$('sortFilter').value,currentTime()));
   $('items').replaceChildren(...filtered.map(card));$('resultCount').textContent=filtered.length+'개 대회·프로그램';$('empty').hidden=filtered.length!==0;$('csvButton').disabled=filtered.length===0;$('loading').hidden=true;savePreferences();
 }
@@ -160,6 +161,9 @@ for(const id of ['searchInput','sourceFilter','statusFilter','sortFilter','newOn
 for(const button of document.querySelectorAll('[data-group]'))button.addEventListener('click',()=>{selectedGroup=button.dataset.group;document.querySelectorAll('[data-group]').forEach(b=>{const yes=b===button;b.classList.toggle('selected',yes);b.setAttribute('aria-pressed',String(yes));});update();});
 $('csvButton').addEventListener('click',()=>{const quote=value=>{let s=String(value??'');if(/^[\s]*[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';};const rows=[['공고명','출처','접수시작일','접수마감일','접수기간 원문','대회시작일','대회종료일','일정안내','주최기관','참가대상','혜택','주제','안내사이트','신청링크','상태','공고원문','상세확인일','접수시작시각','접수마감시각'],...filtered.map(i=>[i.title,i.source_name,i.registration_start,i.deadline,i.registration_text,i.event_start,i.event_end,i.schedule_text,i.organizer,i.eligibility,i.benefits,i.summary,safeURL(i.website_url),safeURL(i.application_url),statusLabel(i),safeURL(i.url),i.detail_checked_at,i.registration_start_time,i.deadline_time])];const blob=new Blob(['\ufeff'+rows.map(r=>r.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='contests-'+today+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 function resetFilters(){
+  plannerState.filters=CMPlanner.defaults().filters;
+  for(const key in CMPlanner.FILTERS)if($('eligibility-'+key))$('eligibility-'+key).value='all';
+  if($('includeUnknown'))$('includeUnknown').checked=true;savePlanner();
   selectedGroup='all';$('fieldFilter').value='all';$('favoriteOnly').checked=false;$('kindFilter').value='all';$('searchInput').value='';$('sourceFilter').value='all';$('statusFilter').value='review';$('sortFilter').value='remaining';$('newOnly').checked=false;
   document.querySelectorAll('[data-group]').forEach(b=>{const active=b.dataset.group==='all';b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
   update();
@@ -167,7 +171,7 @@ function resetFilters(){
 $('resetFilters').addEventListener('click',()=>{resetFilters();$('searchInput').focus();});
 $('showNew').addEventListener('click',()=>{resetFilters();$('statusFilter').value='all';$('newOnly').checked=true;update();$('opportunities').scrollIntoView({block:'start'});$('newOnly').focus({preventScroll:true});});
 document.querySelectorAll('.nav-item').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(x=>{x.classList.toggle('current',x===a);if(x===a)x.setAttribute('aria-current','location');else x.removeAttribute('aria-current');});}));
-applyPreferences();personalReady=true;update();renderUrgentFavorites();
+setupV8();applyPreferences();personalReady=true;update();renderUrgentFavorites();
 
 function displayTime(value){if(!value)return '기록 없음';const parsed=new Date(value);return Number.isNaN(+parsed)?'기록 확인 필요':new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short',hour12:false}).format(parsed);}
 function runtimePanel(){

@@ -1,0 +1,21 @@
+const test=require('node:test'), assert=require('node:assert/strict'), fs=require('node:fs');
+const path=require('node:path').join(__dirname,'../web/planner.js');
+function api(){assert.ok(fs.existsSync(path),'planner.js must exist');return require(path);}
+test('unknown visible',()=>assert.equal(api().matches({}, {audience:'undergraduate',unknown:true}),true));
+test('unknown explicit filter',()=>assert.equal(api().matches({}, {audience:'undergraduate',unknown:false}),false));
+test('known audience',()=>assert.equal(api().matches({audience:{value:['undergraduate']}},{audience:'undergraduate',unknown:false}),true));
+test('known nonmatch',()=>assert.equal(api().matches({cost:{value:'paid'}},{cost:'free',unknown:true}),false));
+test('profile preserves unknown',()=>assert.equal(api().defaults().filters.unknown,true));
+test('progress round trip',()=>{const p=api().defaults();p.records.a={stage:'registered',note:'내 개인 메모',tasks:[{id:'one',label:'제안서 제출',date:'2026-11-01',time:'18:00'}]};assert.equal(api().parse(JSON.stringify(p)).records.a.stage,'registered');});
+test('bad task date',()=>{const p=api().defaults();p.records.a={stage:'review',tasks:[{id:'x',label:'x',date:'2026-02-30'}]};assert.throws(()=>api().parse(JSON.stringify(p)));});
+test('prototype rejected',()=>assert.throws(()=>api().parse('{"version":1,"records":{"__proto__":{}},"filters":{}}')));
+test('sync excludes notes',()=>{const p=api().request('settings',{watchlist:['a']});assert.equal(p.includes('note'),false);assert.ok(p.includes('CONTEST_REQUEST_V8'));});
+test('ics time UTC',()=>{const s=api().calendar({id:'a',title:'AI 대회',deadline:'2026-11-01',deadline_time:'18:00',url:'https://example.org/a'},null,new Date('2026-10-01T00:00:00Z'));assert.ok(s.includes('DTSTART:20261101T090000Z'));});
+test('ics date only',()=>{const s=api().calendar({id:'a',title:'AI 대회',deadline:'2026-11-01'},null,new Date());assert.ok(s.includes('DTSTART;VALUE=DATE:20261101'));assert.ok(!s.includes('235900'));});
+test('ics injection',()=>{const s=api().calendar({id:'a',title:'x\nBEGIN:VEVENT',deadline:'2026-11-01'},null,new Date());assert.equal((s.match(/\r\nBEGIN:VEVENT/g)||[]).length,1);});
+test('no dates',()=>assert.equal(api().calendar({id:'a',title:'x'},null,new Date()),''));
+test('utf8 folding',()=>{const s=api().calendar({id:'a',title:'매우 긴 한글 제목 '.repeat(30),deadline:'2026-11-01'},null,new Date());for(const l of s.split('\r\n'))assert.ok(Buffer.byteLength(l)<=75);assert.ok(!s.includes('\ufffd'));});
+test('separate tasks',()=>{const s=api().calendar({id:'a',title:'AI 대회',deadline:'2026-11-01'},{tasks:[{id:'t',label:'제출',date:'2026-11-15'}]},new Date());assert.equal((s.match(/BEGIN:VEVENT/g)||[]).length,2);});
+test('old aliases',()=>assert.equal(api().record({records:{old:{stage:'submitted'}}},{id:'new',favorite_ids:['old']}).stage,'submitted'));
+test('bad stages',()=>assert.throws(()=>api().parse('{"version":1,"records":{"a":{"stage":"<script>"}}}')));
+test('GitHub URL only',()=>assert.throws(()=>api().issueURL('javascript:alert(1)','settings',{})));

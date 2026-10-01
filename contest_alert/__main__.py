@@ -32,11 +32,13 @@ def urls()->tuple[str,str]:
     return canonical(repo_url),canonical(page)
 
 def main()->int:
-    p=argparse.ArgumentParser(description='공모전 목록과 정오 ntfy 브리핑')
+    p=argparse.ArgumentParser(description='공모전 목록과 지정 시각 ntfy 브리핑')
     p.add_argument('command',choices=['collect','render','prepare','send','audit'])
     p.add_argument('--root',type=Path,default=Path.cwd())
     p.add_argument('--mode',choices=['scheduled','manual'],default='manual')
     args=p.parse_args();root=args.root.resolve();now=datetime.now(KST)
+    from .settings import load as load_settings
+    server_settings=load_settings(root)
     config=read_json(root/'config.json');state_path=root/'data/state.json'
     state=read_json(state_path,empty_state());repo_url,page_url=urls()
     runtime=root/'.runtime';runtime.mkdir(exist_ok=True)
@@ -54,15 +56,26 @@ def main()->int:
         (runtime/'quality.md').write_text(report_markdown(report),encoding='utf-8')
         print(report_markdown(report))
         return 0
-    if args.command!='collect':apply_corrections(state,overrides,now)
+    from .intake import apply_intake
+    if args.command!='collect':
+        apply_intake(root,state,now)
+        apply_corrections(state,overrides,now)
     if args.command=='collect':
         from .operations import finish_collection
+        if args.mode=='scheduled':
+            state.setdefault('scheduler_attempts',{})[now.date().isoformat()]=now.isoformat()
+            for day in sorted(state['scheduler_attempts'])[:-35]:state['scheduler_attempts'].pop(day)
         prior=copy.deepcopy(state)
         restore_automatic_dates(state)
         try:
             state=collect_all(config,state,now)
             finish_collection(state,now,datetime.now(KST))
+            apply_intake(root,state,now)
             apply_corrections(state,overrides,now)
+            from .daily import capture_snapshot
+            from .alerts import record as record_quality
+            capture_snapshot(state,now)
+            record_quality(state,now)
         except Exception:
             from .operations import execution_identity
             prior.setdefault('operations',{})['collection']={**execution_identity(),'status':'failed','attempted_at':now.isoformat(),'finished_at':datetime.now(KST).isoformat()}
@@ -83,9 +96,11 @@ def main()->int:
         return 0
     if args.command=='render':build(root,state,now,repo_url,page_url);return 0
     if args.command=='prepare':
-        validate_topic(os.getenv('NTFY_TOPIC',''))
+        expected_day=os.getenv('CM_TARGET_DAY','')
+        if expected_day and expected_day!=now.date().isoformat():raise ValueError('수집 중 한국 날짜가 바뀌어 오래된 알림 예약을 중단했습니다.')
+        if server_settings['notification']['enabled']:validate_topic(os.getenv('NTFY_TOPIC',''))
         if not page_url:raise ValueError('알림에서 열 PAGE_URL 또는 GITHUB_REPOSITORY 설정이 필요합니다.')
-        draft=reserve(state,now,page_url,args.mode,os.getenv('GITHUB_RUN_ID','local'))
+        draft=reserve(state,now,page_url,args.mode,os.getenv('GITHUB_RUN_ID','local'),settings=server_settings)
         output=os.getenv('GITHUB_OUTPUT')
         if output:
             with open(output,'a',encoding='utf-8') as f:f.write('send='+('true' if draft else 'false')+'\n')

@@ -20,7 +20,7 @@
     </nav>
     <div class="sidebar-bottom">
       <a id="repoLink" class="repo-link" hidden>GitHub에서 보기 <span aria-hidden="true">↗</span></a>
-      <div class="sidebar-note"><strong>하루 한 번, 점심 브리핑.</strong><p>공개된 기회를 모으고<br>새로 확인한 소식을 전합니다.</p></div>
+      <div class="sidebar-note"><strong>하루 한 번, 선택한 시간에.</strong><p>공개된 기회를 모으고<br>새로 확인한 소식을 전합니다.</p></div>
     </div>
   </aside>
   <div class="workspace">
@@ -30,7 +30,7 @@
       <div id="staleBanner" class="banner warn" hidden role="status"></div>
       <section class="hero" id="overview" aria-labelledby="pageTitle">
         <div class="hero-copy"><h1 id="pageTitle">공모전 모아보기<span class="title-dot" aria-hidden="true">.</span></h1><p>관심 있는 대회의 일정과 참가 정보를 한눈에.<br>인하대·캠퍼스픽·AI 대회 플랫폼을 함께 살펴보세요.</p></div>
-        <aside class="schedule" aria-label="일일 알림 일정"><div class="schedule-heading"><span class="clock-mark" aria-hidden="true">◷</span><span>일일 알림 목표</span></div><strong>12:00 <small>한국시간</small></strong><p>11:40 수집 시작 · ntfy 정오 예약</p><p class="schedule-note">서비스 상태에 따라 지연·누락될 수 있습니다.</p></aside>
+        <aside class="schedule" aria-label="일일 알림 일정"><div class="schedule-heading"><span class="clock-mark" aria-hidden="true">◷</span><span>일일 알림 목표</span></div><strong><span id="notificationClock">12:00</span> <small>한국시간</small></strong><p>알림 전 수집 · ntfy 예약 전달</p><a class="detail-link" href="#notification-settings" id="openNotificationSettings">알림 시간 변경</a><p class="schedule-note">서비스 상태에 따라 지연·누락될 수 있습니다.</p></aside>
       </section>
       <details class="runtime-panel" id="runtime-panel"><summary>실행·배포 상태 <span id="runtimeSummary">상태 확인 중</span></summary><dl class="runtime-grid" id="runtimeDetails"></dl><p id="workflowLive" class="detail-note"></p></details>
       <section class="stats" aria-label="공고 요약">
@@ -44,6 +44,7 @@
         <p id="comparisonRange" class="comparison-range"></p><div id="dailySourceCounts" class="source-chips" aria-label="출처별 신규 공고 수"></div>
         <p id="comparisonNote" class="comparison-note">전날 저장한 목록과 비교합니다. 실제 게시일이나 고유한 대회 수와는 다를 수 있습니다.</p>
       </section>
+      <div id="qualityAlertBanner" class="banner warn" hidden role="status"></div>
       <section class="panel" id="opportunities" aria-labelledby="listTitle">
         <div class="panel-heading"><div><h2 id="listTitle">공고 모아보기</h2><p id="updatedAt">아직 수집 전</p></div><button class="secondary" id="csvButton" type="button">CSV 저장 <span aria-hidden="true">↓</span></button></div>
         <div class="group-tabs" role="group" aria-label="출처 구분"><button type="button" class="tab selected" data-group="all" aria-pressed="true">전체</button><button type="button" class="tab" data-group="inha" aria-pressed="false">인하대 게시판</button><button type="button" class="tab" data-group="external" aria-pressed="false">교외 플랫폼</button></div>
@@ -55,9 +56,16 @@
         </div>
         <label class="kind-control">종류 <select id="kindFilter" aria-label="공고 종류"><option value="all">대회·프로그램 전체</option><option value="contest">공모전·경진대회</option><option value="program">프로그램·교육</option><option value="other">기타 참여 기회</option></select></label>
         <label class="kind-control">기술 분야 <select id="fieldFilter" aria-label="기술 분야"><option value="all">모든 기술 분야</option><option value="data_analysis">데이터 분석</option><option value="model_development">AI 모델 개발</option><option value="service_development">AI 서비스 개발</option><option value="creative_ai">AI 영상·디자인</option><option value="general_ai">AI·데이터 일반</option></select></label>
-        <div class="personal-toolbar"><label class="new-toggle"><input id="favoriteOnly" type="checkbox">관심 공고만 <span id="favoriteCount">0</span></label><div class="personal-actions"><button id="exportPersonal" class="secondary" type="button">관심·필터 내보내기</button><button id="importPersonal" class="secondary" type="button">가져오기</button><input id="importPersonalFile" type="file" accept=".json,application/json" hidden></div></div>
+        
+<details class="eligibility-filters"><summary>참가 조건 필터 <small>미확인은 기본적으로 함께 표시합니다.</small></summary>
+<div id="eligibilityControls" class="form-grid"></div>
+<label class="check-row"><input type="checkbox" id="includeUnknown" checked>조건이 미확인인 공고도 보기</label>
+<p class="detail-note">명시된 조건의 탐색 도구입니다. 나이·지역·전공 등 추가 제한과 최종 참가 자격은 원문을 확인하세요. 선택값은 이 브라우저에만 저장됩니다.</p></details>
+<div class="personal-toolbar"><label class="new-toggle"><input id="favoriteOnly" type="checkbox">관심 공고만 <span id="favoriteCount">0</span></label><div class="personal-actions"><button id="exportPersonal" class="secondary" type="button">관심·필터 내보내기</button><button id="importPersonal" class="secondary" type="button">가져오기</button><input id="importPersonalFile" type="file" accept=".json,application/json" hidden></div></div>
         <p class="personal-note" id="personalNotice" role="status">관심 공고·필터는 이 브라우저에만 저장됩니다. 다른 기기로 옮기려면 내보내기·가져오기를 사용하세요.</p>
-        <section id="urgentFavorites" class="urgent-favorites" hidden aria-labelledby="urgentTitle"><h3 id="urgentTitle">관심 공고 중 7일 이내 마감</h3><div id="urgentItems"></div></section>
+        
+<div class="personal-actions v8-backup"><button id="exportPlanner" type="button" class="secondary">진행·메모 백업</button><button id="importPlanner" type="button" class="secondary">진행·메모 가져오기</button><input id="plannerFile" type="file" accept=".json" hidden><span id="plannerNotice" class="detail-note" role="status"></span></div>
+<section id="urgentFavorites" class="urgent-favorites" hidden aria-labelledby="urgentTitle"><h3 id="urgentTitle">관심 공고 중 7일 이내 마감</h3><div id="urgentItems"></div></section>
         <p class="sort-guidance">기본: 마감이 많이 남은 순 · 미확인과 이미 마감한 공고는 아래에 표시합니다.</p>
         <div class="results-meta"><span id="resultCount" aria-live="polite">0개 공고</span><label class="new-toggle"><input type="checkbox" id="newOnly"><span id="newOnlyLabel">어제 대비 신규만</span></label></div>
         <div id="loading" class="loading" role="status">저장된 공고 목록을 불러오는 중입니다.</div>
@@ -66,12 +74,50 @@
         <div id="empty" class="empty" hidden><span class="empty-symbol" aria-hidden="true">⌕</span><h3>조건에 맞는 공고가 없습니다.</h3><p>검색어나 필터를 바꿔보세요.<br>수집 오류가 없는지는 아래에서 확인할 수 있습니다.</p><button id="resetFilters" type="button" class="secondary">검색·필터 초기화</button></div>
         <p class="list-note">인하대 게시판에는 교외 대회 홍보도 포함됩니다. 접수기간과 대회기간은 구분해 표시하며, 최종 정보는 원문이 기준입니다.</p>
       </section>
-      <details class="health" id="reviewSection"><summary><span>관련성 확인 대기 <span id="reviewCount">0</span></span><span class="health-hint">확정 목록·신규 집계·알림에는 포함하지 않습니다.</span></summary><div id="reviewItems"></div><p class="list-note">자동 검사로 주제를 확정하지 못한 공고입니다. 원문을 확인한 뒤 추가 수집 또는 수집 기준을 조정하세요. 이 화면에서 원격 데이터를 변경하지는 않습니다.</p></details>
+      
+<section class="panel settings-panel" id="notification-settings" aria-labelledby="settingsTitle">
+<div class="panel-heading"><div><h2 id="settingsTitle">알림 시간 · 서버 설정</h2><p id="serverRevision">현재 적용 설정 확인 중</p></div><span class="basis-tag">소유자 인증 필요</span></div>
+<p class="list-note">이 사이트가 사용하는 ntfy 채널의 공통 설정입니다. 페이지에서 선택한 뒤 GitHub에 로그인하여 요청 이슈를 제출하면, 저장소 소유자의 요청만 적용됩니다. 토픽·비밀번호를 이 페이지에 입력하지 마세요.</p>
+<form id="notificationForm" class="form-grid">
+<label>매일 알림 시간 (한국시간)<input id="notificationTime" type="time" value="12:00" required></label>
+<label class="check-row"><input id="notificationEnabled" type="checkbox" checked>일일 알림 켜기</label>
+<button class="secondary primary" type="submit">GitHub에서 시간 적용</button>
+</form>
+<p class="detail-note">서버가 20분 간격으로 설정을 확인하고 알림 전에 수집합니다. 정확한 정시 수신은 보장되지 않습니다. 오늘 알림을 이미 예약·시도한 뒤 시간을 바꾸면 다음 날부터 적용됩니다.</p>
+<div class="sync-row"><button id="syncWatchlist" type="button" class="secondary">현재 관심 목록을 알림에 반영</button><button id="clearWatchlist" type="button" class="secondary">서버 관심 목록 비우기</button><span id="serverWatchlistCount"></span></div>
+<label class="check-row"><input id="syncConsent" type="checkbox">선택한 공고 ID가 공개 이슈·저장소에 기록됨을 확인했습니다. 개인 메모·진행 상태는 보내지 않습니다.</label>
+<p class="detail-note">기술 분야 필터가 하나 선택되어 있으면 해당 분야의 신규 건수도 브리핑에 추가합니다. 브라우저 관심 저장만으로는 서버 알림 설정이 바뀌지 않습니다.</p>
+<div id="requestStatus" role="status" class="request-status"></div>
+</section>
+<section class="panel settings-panel" id="manual-notice" aria-labelledby="manualTitle">
+<div class="panel-heading"><div><h2 id="manualTitle">공고 직접 추가 · 정보 수정</h2><p>원문 근거를 확인한 공개 정보만 등록하세요.</p></div></div>
+<form id="manualNoticeForm">
+<div class="form-grid">
+<label>요청 종류<select id="manualKind"><option value="add_notice">공고 직접 추가</option><option value="correct_notice">기존 공고 제목·날짜 수정</option></select></label>
+<label>공고 원문 주소<input id="manualURL" type="url" placeholder="https://..." required maxlength="1800"></label>
+<label>대회명<input id="manualTitleInput" maxlength="180" required></label>
+<label>접수 시작일 (선택)<input id="manualStart" type="date"></label>
+<label>접수 마감일 (선택)<input id="manualDeadline" type="date"></label>
+<label>마감 시각 (확인된 경우만)<input id="manualClock" type="time"></label>
+<label>근거를 확인한 날짜<input id="manualChecked" type="date" required></label>
+<label class="span-full">주제 또는 수정 사유<textarea id="manualSummary" maxlength="300" required rows="2"></textarea></label>
+</div>
+<label class="check-row"><input id="manualEvidence" type="checkbox" required>위 원문에서 입력한 날짜·제목·내용을 직접 확인했습니다.</label>
+<button type="submit" class="secondary">GitHub에 검토 요청</button>
+</form>
+<p class="detail-note">소유자가 직접 제출한 요청은 자동 반영됩니다. 다른 사용자의 제안은 소유자 검토 후 재제출해야 합니다. 입력 URL을 무조건 방문하는 수집기는 아니며, 확인한 공개 정보를 수동 카드로 추가합니다.</p>
+</section>
+<dialog id="reportDialog" aria-labelledby="reportTitle"><form id="reportForm"><h2 id="reportTitle">정보가 달라요</h2><p id="reportContest"></p>
+<label>유형<select id="reportCategory"><option value="date">날짜 오류</option><option value="title">제목 오류</option><option value="irrelevant">관련 없는 공고</option><option value="duplicate">중복</option><option value="broken_link">링크 접속 불가</option><option value="other">기타</option></select></label>
+<label>설명<textarea id="reportDescription" rows="3" maxlength="500" required></textarea></label>
+<p class="detail-note">공개 GitHub 이슈로 전달합니다. 개인정보를 쓰지 마세요. 제출만으로 원본 정보가 자동 변경되지는 않습니다.</p>
+<div class="personal-actions"><button type="button" class="secondary" id="closeReport">취소</button><button type="submit" class="secondary">GitHub에 신고</button></div></form></dialog>
+<details class="health" id="reviewSection"><summary><span>관련성 확인 대기 <span id="reviewCount">0</span></span><span class="health-hint">확정 목록·신규 집계·알림에는 포함하지 않습니다.</span></summary><div id="reviewItems"></div><p class="list-note">자동 검사로 주제를 확정하지 못한 공고입니다. 원문을 확인한 뒤 추가 수집 또는 수집 기준을 조정하세요. 이 화면에서 원격 데이터를 변경하지는 않습니다.</p></details>
       <details class="health" id="qualitySection"><summary><span>날짜 품질 진단</span><span class="health-hint" id="qualitySummary">수집 결과를 기다리는 중</span></summary><p class="list-note" id="qualityBasis"></p><div id="qualityDetails"></div></details>
       <details class="health" id="source-status" open><summary><span>출처별 수집 상태</span><span class="health-hint">‘새 공고 없음’과 ‘수집 실패’는 다릅니다.</span></summary><div id="sourceHealth"></div></details>
-      <footer><strong>CONTEST MONITOR · v7</strong><p>개인용 공개 공고 모음 · 지정 게시판의 일부 페이지만 확인합니다.</p><p>목록은 일일 수집 또는 수동 실행 때 갱신됩니다. 이 페이지를 열어도 새 수집이 시작되지는 않습니다.</p></footer>
+      <footer><strong>CONTEST MONITOR · v8</strong><p>개인용 공개 공고 모음 · 지정 게시판의 일부 페이지만 확인합니다.</p><p>목록은 일일 수집 또는 수동 실행 때 갱신됩니다. 이 페이지를 열어도 새 수집이 시작되지는 않습니다.</p></footer>
     </main>
   </div>
 </div>
-<script id="app-data" type="application/json">/*__DATA__*/</script><script>/*__RUNTIME__*/</script><script>/*__PERSONAL__*/</script><script>/*__APP__*/</script>
+<script id="app-data" type="application/json">/*__DATA__*/</script><script>/*__RUNTIME__*/</script><script>/*__PERSONAL__*/</script><script>/*__PLANNER__*/</script><script>/*__FEATURES__*/</script><script>/*__APP__*/</script>
 </body></html>

@@ -205,6 +205,7 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
         # This keeps the existing 18-minute workflow and free-host usage modest.
         extra_left=config.get('max_extra_detail_requests',18)
         browser_left=config.get('max_browser_detail_requests',16)
+        attachment_left=config.get('max_attachment_requests',3) if config.get('text_attachments',True) else 0
         stop_at=time.monotonic()+config.get('detail_time_budget_seconds',360)
         for item in due:
             report=state['sources'][item['source_id']]
@@ -272,6 +273,27 @@ def collect_all(config:dict,state:dict,now:datetime,client:Client|None=None)->di
                     except FetchError as exc:
                         trace('schedule_http','error',exc.code);item['date_failure_code']='schedule_error'
                         report['schedule_errors']=report.get('schedule_errors',0)+1
+                if not fields.get('deadline') and not fields.get('registration_ambiguous') and attachment_left>0 and hasattr(client,'session') and time.monotonic()<stop_at:
+                    from .attachments import links as attachment_links,fetch as fetch_attachment,bounded_extract
+                    import html as html_tools
+                    for attachment in attachment_links(html,item['url']):
+                        if attachment_left<=0 or time.monotonic()>=stop_at:break
+                        attachment_left-=1
+                        try:
+                            blob=fetch_attachment(client,attachment)
+                            kind=urlsplit(attachment).path.rsplit('.',1)[-1].lower()
+                            result=bounded_extract(blob,kind)
+                            item['attachment_status']=result['status'];item['attachment_source_url']=attachment
+                            trace('attachment_text',result['status'])
+                            if result['status']!='ok':continue
+                            document='<article><h1>'+html_tools.escape(preferred_title(item))+'</h1><pre>'+html_tools.escape(result['text'])+'</pre></article>'
+                            extra=detail_fields(document,attachment,'',preferred_title(item))
+                            # An attachment is evidence for dates, not a replacement title.
+                            extra={k:v for k,v in extra.items() if k in ('deadline','registration_start','deadline_time','registration_start_time','registration_ambiguous','registration_time_ambiguous','date_status','date_note','date_evidence','date_source_url','registration_text','milestones')}
+                            fields=blend(fields,extra)
+                            if fields.get('deadline'):break
+                        except Exception:
+                            item['attachment_status']='access_or_parse_error';trace('attachment_text','error','attachment_failed')
                 fields['date_status']=fields.get('date_status') or ('complete' if not needs_dates(fields) else 'partial' if fields.get('deadline') or fields.get('registration_start') else 'missing')
                 item.update(fields)
                 trace('date_parse','ok' if fields.get('deadline') else 'unconfirmed',text_length=fields.get('detail_text_length'))
