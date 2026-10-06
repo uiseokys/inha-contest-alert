@@ -7,11 +7,11 @@
     "build": {
       "version": "8.0.0",
       "fingerprint": "bc7b030aa188",
-      "commit": "9adec80bfbd0537af9f24dd6ef5046254fffb80a",
+      "commit": "ff7ded7c7927125c60540b4a47b7036adb950e3d",
       "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/37442200735",
       "run_id": "37442200735"
     },
-    "generated_at": "2026-10-06T18:23:06.980218+09:00",
+    "generated_at": "2026-10-06T18:23:09.617237+09:00",
     "collection": {
       "version": "8.0.0",
       "fingerprint": "bc7b030aa188",
@@ -28,15 +28,15 @@
     "last_complete_at": "2026-10-06T18:23:06.965061+09:00",
     "notification": {
       "status": "accepted",
-      "day": "2026-10-05",
-      "at": "2026-10-05T15:55:04.411334+09:00",
-      "accepted_at": "2026-10-05T15:55:06.222549+09:00"
+      "day": "2026-10-06",
+      "at": "2026-10-06T18:23:07.181600+09:00",
+      "accepted_at": "2026-10-06T18:23:09.443452+09:00"
     },
     "notification_note": "ntfy 수락은 휴대폰 표시 성공이 아닙니다."
   },
   "quality": {
     "version": 1,
-    "generated_at": "2026-10-06T18:23:06.980218+09:00",
+    "generated_at": "2026-10-06T18:23:09.617237+09:00",
     "observation_at": "2026-10-06T18:20:27.076506+09:00",
     "basis": "저장된 AI·데이터 관련 공고 주소 기준(마감 포함). 관리자 보정 포함 여부를 구분하며, 목록 접근 성공과 날짜 추출 성공은 별개입니다.",
     "manual_count": 0,
