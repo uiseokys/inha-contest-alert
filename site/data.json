@@ -7,25 +7,25 @@
     "build": {
       "version": "8.0.0",
       "fingerprint": "bc7b030aa188",
-      "commit": "717b011131ca7a234e9735b5549098eec08de118",
-      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/38521178867",
-      "run_id": "38521178867"
+      "commit": "020bacea4f4f26ebf181803d2961ff5e61265f1f",
+      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/38681262917",
+      "run_id": "38681262917"
     },
-    "generated_at": "2026-10-14T15:19:04.081677+09:00",
+    "generated_at": "2026-10-15T13:27:23.405841+09:00",
     "collection": {
       "version": "8.0.0",
       "fingerprint": "bc7b030aa188",
-      "commit": "18e08e4a51d782bb6ef040dd3150bf4d0db8dd9e",
-      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/38521178867",
-      "run_id": "38521178867",
+      "commit": "020bacea4f4f26ebf181803d2961ff5e61265f1f",
+      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/38681262917",
+      "run_id": "38681262917",
       "status": "complete",
-      "attempted_at": "2026-10-14T15:16:15.271082+09:00",
-      "finished_at": "2026-10-14T15:19:01.877822+09:00",
+      "attempted_at": "2026-10-15T13:24:45.375333+09:00",
+      "finished_at": "2026-10-15T13:27:23.381601+09:00",
       "enabled_sources": 8,
       "ok_sources": 8
     },
-    "last_usable_at": "2026-10-14T15:19:01.877822+09:00",
-    "last_complete_at": "2026-10-14T15:19:01.877822+09:00",
+    "last_usable_at": "2026-10-15T13:27:23.381601+09:00",
+    "last_complete_at": "2026-10-15T13:27:23.381601+09:00",
     "notification": {
       "status": "accepted",
       "day": "2026-10-14",
@@ -36,8 +36,8 @@
   },
   "quality": {
     "version": 1,
-    "generated_at": "2026-10-14T15:19:04.081677+09:00",
-    "observation_at": "2026-10-14T15:16:15.271082+09:00",
+    "generated_at": "2026-10-15T13:27:23.405841+09:00",
+    "observation_at": "2026-10-15T13:24:45.375333+09:00",
     "basis": "저장된 AI·데이터 관련 공고 주소 기준(마감 포함). 관리자 보정 포함 여부를 구분하며, 목록 접근 성공과 날짜 추출 성공은 별개입니다.",
     "manual_count": 0,
     "automatic_deadline_known": 10,
@@ -50,7 +50,7 @@
         "id": "ds_contest",
         "name": "데이터사이언스학과 · 대회",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 1,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -70,7 +70,7 @@
             "url": "https://datascience.inha.ac.kr/bbs/datascience/2885/192799/artclView.do",
             "reason": "date_conflict",
             "label": "접수 기간 충돌·형식 미확정",
-            "last_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+            "last_attempted_at": "2026-10-15T13:24:45.375333+09:00",
             "parser_version": 8,
             "text_length": 1190,
             "evidence_hash": "5314544b64f40949",
@@ -98,7 +98,7 @@
         "id": "ds_notice",
         "name": "데이터사이언스학과 · 공지",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 1,
         "deadline_known": 1,
         "start_and_end_known": 1,
@@ -141,7 +141,7 @@
         "id": "ai_notice",
         "name": "인공지능공학과 · 공지",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 0,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -158,7 +158,7 @@
         "id": "aix",
         "name": "인공지능융합연구센터",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 4,
         "deadline_known": 1,
         "start_and_end_known": 1,
@@ -179,7 +179,7 @@
             "url": "https://aix.inha.ac.kr/news/notice/?vid=108",
             "reason": "no_explicit_date",
             "label": "명시적인 접수 날짜 미확인",
-            "last_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+            "last_attempted_at": "2026-10-15T13:24:45.375333+09:00",
             "parser_version": 8,
             "text_length": null,
             "evidence_hash": null,
@@ -187,12 +187,12 @@
               {
                 "stage": "detail_http",
                 "outcome": "ok",
-                "text_length": 109657
+                "text_length": 109675
               },
               {
                 "stage": "detail_render",
                 "outcome": "ok",
-                "text_length": 110736
+                "text_length": 110754
               },
               {
                 "stage": "date_parse",
@@ -206,7 +206,7 @@
             "url": "https://aix.inha.ac.kr/news/notice/?vid=106",
             "reason": "no_explicit_date",
             "label": "명시적인 접수 날짜 미확인",
-            "last_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+            "last_attempted_at": "2026-10-15T13:24:45.375333+09:00",
             "parser_version": 8,
             "text_length": 254,
             "evidence_hash": "bc44d06a08e836c8",
@@ -214,12 +214,12 @@
               {
                 "stage": "detail_http",
                 "outcome": "ok",
-                "text_length": 127481
+                "text_length": 127499
               },
               {
                 "stage": "detail_render",
                 "outcome": "ok",
-                "text_length": 128801
+                "text_length": 128819
               },
               {
                 "stage": "date_parse",
@@ -234,7 +234,7 @@
             "url": "https://aix.inha.ac.kr/news/notice/?vid=109",
             "reason": "no_explicit_date",
             "label": "명시적인 접수 날짜 미확인",
-            "last_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+            "last_attempted_at": "2026-10-15T13:24:45.375333+09:00",
             "parser_version": 8,
             "text_length": null,
             "evidence_hash": null,
@@ -242,12 +242,12 @@
               {
                 "stage": "detail_http",
                 "outcome": "ok",
-                "text_length": 112772
+                "text_length": 112790
               },
               {
                 "stage": "detail_render",
                 "outcome": "ok",
-                "text_length": 114092
+                "text_length": 114110
               },
               {
                 "stage": "date_parse",
@@ -289,7 +289,7 @@
         "id": "sw",
         "name": "SW중심대학사업단",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 2,
         "deadline_known": 2,
         "start_and_end_known": 1,
@@ -361,7 +361,7 @@
         "id": "inha",
         "name": "인하대학교 · 교내 공지",
         "status": "disabled",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 0,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -378,7 +378,7 @@
         "id": "dacon",
         "name": "DACON",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 4,
         "deadline_known": 4,
         "start_and_end_known": 4,
@@ -510,7 +510,7 @@
         "id": "aifactory",
         "name": "인공지능팩토리",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 2,
         "deadline_known": 2,
         "start_and_end_known": 2,
@@ -586,7 +586,7 @@
         "id": "campuspick",
         "name": "캠퍼스픽 · AI/데이터",
         "status": "ok",
-        "checked_at": "2026-10-14T15:16:15.271082+09:00",
+        "checked_at": "2026-10-15T13:24:45.375333+09:00",
         "denominator": 16,
         "deadline_known": 0,
         "start_and_end_known": 0,
@@ -608,7 +608,7 @@
             "url": "https://www.campuspick.com/contest/view?id=36243",
             "reason": "browser_denied",
             "label": "동적 화면 접근 제한",
-            "last_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+            "last_attempted_at": "2026-10-15T13:24:45.375333+09:00",
             "parser_version": 8,
             "text_length": 0,
             "evidence_hash": "e3b0c44298fc1c14",
@@ -749,9 +749,9 @@
             "id": "800598f265163b201dd9",
             "title": "AI-EDU Next Class 전국예비교원 AI 융합 수업설계 해커톤",
             "url": "https://www.campuspick.com/contest/view?id=36285",
-            "reason": "no_explicit_date",
-            "label": "명시적인 접수 날짜 미확인",
-            "last_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+            "reason": "browser_denied",
+            "label": "동적 화면 접근 제한",
+            "last_attempted_at": "2026-10-15T13:24:45.375333+09:00",
             "parser_version": 8,
             "text_length": 0,
             "evidence_hash": "e3b0c44298fc1c14",
@@ -760,6 +760,11 @@
                 "stage": "detail_http",
                 "outcome": "ok",
                 "text_length": 8559
+              },
+              {
+                "stage": "detail_render",
+                "outcome": "error",
+                "code": "browser_denied"
               },
               {
                 "stage": "date_parse",
@@ -772,9 +777,9 @@
             "id": "e9e2262091096ca55a14",
             "title": "[BytePlus x AI-Kive] Seedance2.5 AI 시리즈",
             "url": "https://www.campuspick.com/contest/view?id=36312",
-            "reason": "no_explicit_date",
-            "label": "명시적인 접수 날짜 미확인",
-            "last_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+            "reason": "browser_denied",
+            "label": "동적 화면 접근 제한",
+            "last_attempted_at": "2026-10-15T13:24:45.375333+09:00",
             "parser_version": 8,
             "text_length": 0,
             "evidence_hash": "e3b0c44298fc1c14",
@@ -783,6 +788,11 @@
                 "stage": "detail_http",
                 "outcome": "ok",
                 "text_length": 8349
+              },
+              {
+                "stage": "detail_render",
+                "outcome": "error",
+                "code": "browser_denied"
               },
               {
                 "stage": "date_parse",
@@ -797,10 +807,10 @@
   },
   "daily_comparison": {
     "status": "comparable",
-    "date": "2026-10-14",
-    "as_of": "2026-10-14T15:16:15.271082+09:00",
-    "base_date": "2026-10-13",
-    "base_at": "2026-10-13T18:18:02.000073+09:00",
+    "date": "2026-10-15",
+    "as_of": "2026-10-15T13:24:45.375333+09:00",
+    "base_date": "2026-10-14",
+    "base_at": "2026-10-14T15:16:15.271082+09:00",
     "new_count": 0,
     "new_ids": [],
     "updated_count": 0,
@@ -821,7 +831,7 @@
     "deadline_extensions": [],
     "date_correction_count": 0
   },
-  "updated_at": "2026-10-14T15:16:15.271082+09:00",
+  "updated_at": "2026-10-15T13:24:45.375333+09:00",
   "demo": false,
   "items": [
     {
@@ -888,7 +898,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-30T17:57:54.206570+09:00",
       "last_changed": "2026-10-13T18:18:02.000073+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": "2026-11-02T10:00:00+09:00",
       "registration_start_at": null,
       "status": "active",
@@ -946,7 +956,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "active",
@@ -1042,7 +1052,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36306",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-28T17:56:23.800412+09:00",
       "last_changed": "2026-09-28T17:56:23.800412+09:00",
@@ -1092,7 +1102,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36319",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-29T17:58:37.329724+09:00",
       "last_changed": "2026-09-29T17:58:37.329724+09:00",
@@ -1113,17 +1123,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8877
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -1147,7 +1152,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36399",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
@@ -1197,7 +1202,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36354",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-01T13:32:46.344458+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
@@ -1218,12 +1223,17 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "no_explicit_date",
+      "date_failure_code": "browser_denied",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8559
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "error",
+          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -1247,7 +1257,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36285",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-24T16:47:37.579039+09:00",
       "last_changed": "2026-09-24T16:47:37.579039+09:00",
@@ -1268,12 +1278,17 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "no_explicit_date",
+      "date_failure_code": "browser_denied",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8349
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "error",
+          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -1297,7 +1312,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36312",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-28T17:56:23.800412+09:00",
       "last_changed": "2026-09-28T17:56:23.800412+09:00",
@@ -1323,12 +1338,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 109657
+          "text_length": 109675
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 110736
+          "text_length": 110754
         },
         {
           "stage": "date_parse",
@@ -1346,11 +1361,11 @@
       "date_status": "missing",
       "deadline": null,
       "registration_start": null,
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1451,7 +1466,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36243",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -1515,14 +1530,14 @@
       "eligibility": "나이·소속·전공 제한 없이 개인 또는 4인 이내 팀",
       "benefits": "대상 1팀(농림축산식품부 장관상, 상금 100만 원), 우수상 4팀(한국농수산식품유통공사 사장상, 상금 각 100만 원)",
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/2885/192799/artclView.do",
-      "detail_checked_at": "2026-10-14T15:16:15.271082+09:00",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_checked_at": "2026-10-15T13:24:45.375333+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "ok",
       "deadline_time": null,
       "registration_start_time": null,
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1544,12 +1559,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 127481
+          "text_length": 127499
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 128801
+          "text_length": 128819
         },
         {
           "stage": "date_parse",
@@ -1574,12 +1589,12 @@
       "eligibility": "만 18 세 이상의 개인 또는 팀 ( 대학생 , 취업준비생 , 직장인 모두 참여 가능 ) 진행 방식 : 1 차 서류 선발 후 , 본선 참가팀은 AI 기반의 서비스 아이디어를 프로토타입 형태로 개발하여",
       "summary": "“ 맛있는 일상 , AI 로 잇다 (IT 다 )\" 목적 : AI 기술을 접목한 푸드테크 아이디어 발굴",
       "detail_source_url": "https://aix.inha.ac.kr/news/notice/?vid=106",
-      "detail_checked_at": "2026-10-14T15:16:15.271082+09:00",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_checked_at": "2026-10-15T13:24:45.375333+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1601,12 +1616,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 112772
+          "text_length": 112790
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 114092
+          "text_length": 114110
         },
         {
           "stage": "date_parse",
@@ -1626,11 +1641,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://aix.inha.ac.kr/news/notice/?vid=109",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1731,11 +1746,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36402",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -1781,7 +1796,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36345",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-30T17:57:54.206570+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
@@ -1802,17 +1817,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8852
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -1836,7 +1846,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36386",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-03T17:19:43.530067+09:00",
       "last_changed": "2026-10-03T17:19:43.530067+09:00",
@@ -1941,11 +1951,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36438",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-09T15:26:23.948945+09:00",
       "last_changed": "2026-10-09T15:26:23.948945+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "unknown",
@@ -2055,7 +2065,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": null,
       "registration_start_at": null,
       "status": "closed",
@@ -2189,7 +2199,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-13T18:18:02.000073+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": "2026-08-17T23:59:00+09:00",
       "registration_start_at": "2026-07-16T10:00:00+09:00",
       "status": "closed",
@@ -2262,7 +2272,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": "2026-09-29T10:00:00+09:00",
       "registration_start_at": "2026-08-18T10:00:00+09:00",
       "status": "closed",
@@ -2335,7 +2345,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": "2026-09-29T10:00:00+09:00",
       "registration_start_at": "2026-08-18T10:00:00+09:00",
       "status": "closed",
@@ -2408,7 +2418,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": "2026-09-29T10:00:00+09:00",
       "registration_start_at": "2026-08-18T10:00:00+09:00",
       "status": "closed",
@@ -2506,7 +2516,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": "2026-10-06T14:00:00+09:00",
       "registration_start_at": "2026-07-31T10:00:00+09:00",
       "status": "closed",
@@ -2604,7 +2614,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "deadline_at": "2026-10-06T14:00:00+09:00",
       "registration_start_at": "2026-07-31T10:00:00+09:00",
       "status": "closed",
@@ -2678,7 +2688,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-30T17:57:54.206570+09:00",
       "last_changed": "2026-10-13T18:18:02.000073+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "10f610d85c9f8e6ee1a8",
       "member_ids": [
         "10f610d85c9f8e6ee1a8"
@@ -2793,7 +2803,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "a9338c28d67faa2bfa50",
       "member_ids": [
         "a9338c28d67faa2bfa50"
@@ -3016,7 +3026,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36306",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-28T17:56:23.800412+09:00",
       "last_changed": "2026-09-28T17:56:23.800412+09:00",
@@ -3128,7 +3138,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36319",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-29T17:58:37.329724+09:00",
       "last_changed": "2026-09-29T17:58:37.329724+09:00",
@@ -3211,17 +3221,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8877
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -3245,7 +3250,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36399",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
@@ -3357,7 +3362,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36354",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-01T13:32:46.344458+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
@@ -3440,12 +3445,17 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "no_explicit_date",
+      "date_failure_code": "browser_denied",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8559
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "error",
+          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -3469,7 +3479,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36285",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-24T16:47:37.579039+09:00",
       "last_changed": "2026-09-24T16:47:37.579039+09:00",
@@ -3552,12 +3562,17 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "no_explicit_date",
+      "date_failure_code": "browser_denied",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8349
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "error",
+          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -3581,7 +3596,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36312",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-28T17:56:23.800412+09:00",
       "last_changed": "2026-09-28T17:56:23.800412+09:00",
@@ -3669,12 +3684,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 109657
+          "text_length": 109675
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 110736
+          "text_length": 110754
         },
         {
           "stage": "date_parse",
@@ -3692,11 +3707,11 @@
       "date_status": "missing",
       "deadline": null,
       "registration_start": null,
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "8bdabc7eaa5fdc81735c",
       "member_ids": [
         "8bdabc7eaa5fdc81735c"
@@ -3921,7 +3936,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36243",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -4047,14 +4062,14 @@
       "eligibility": "나이·소속·전공 제한 없이 개인 또는 4인 이내 팀",
       "benefits": "대상 1팀(농림축산식품부 장관상, 상금 100만 원), 우수상 4팀(한국농수산식품유통공사 사장상, 상금 각 100만 원)",
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/2885/192799/artclView.do",
-      "detail_checked_at": "2026-10-14T15:16:15.271082+09:00",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_checked_at": "2026-10-15T13:24:45.375333+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "ok",
       "deadline_time": null,
       "registration_start_time": null,
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "9d4d1338b3fe4b9395de",
       "member_ids": [
         "9d4d1338b3fe4b9395de"
@@ -4135,12 +4150,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 127481
+          "text_length": 127499
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 128801
+          "text_length": 128819
         },
         {
           "stage": "date_parse",
@@ -4165,12 +4180,12 @@
       "eligibility": "만 18 세 이상의 개인 또는 팀 ( 대학생 , 취업준비생 , 직장인 모두 참여 가능 ) 진행 방식 : 1 차 서류 선발 후 , 본선 참가팀은 AI 기반의 서비스 아이디어를 프로토타입 형태로 개발하여",
       "summary": "“ 맛있는 일상 , AI 로 잇다 (IT 다 )\" 목적 : AI 기술을 접목한 푸드테크 아이디어 발굴",
       "detail_source_url": "https://aix.inha.ac.kr/news/notice/?vid=106",
-      "detail_checked_at": "2026-10-14T15:16:15.271082+09:00",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_checked_at": "2026-10-15T13:24:45.375333+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "c7155fa7b56de5f46645",
       "member_ids": [
         "c7155fa7b56de5f46645"
@@ -4254,12 +4269,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 112772
+          "text_length": 112790
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 114092
+          "text_length": 114110
         },
         {
           "stage": "date_parse",
@@ -4279,11 +4294,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://aix.inha.ac.kr/news/notice/?vid=109",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "93b40e33a5034b9bef90",
       "member_ids": [
         "93b40e33a5034b9bef90"
@@ -4508,11 +4523,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36402",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "e4d37463c2aa311229d9",
       "member_ids": [
         "e4d37463c2aa311229d9"
@@ -4620,7 +4635,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36345",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-30T17:57:54.206570+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
@@ -4703,17 +4718,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8852
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -4737,7 +4747,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36386",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-03T17:19:43.530067+09:00",
       "last_changed": "2026-10-03T17:19:43.530067+09:00",
@@ -4966,11 +4976,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36438",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-09T15:26:23.948945+09:00",
       "last_changed": "2026-10-09T15:26:23.948945+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "56e8eb813666d253b7dc",
       "member_ids": [
         "56e8eb813666d253b7dc"
@@ -5205,7 +5215,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "9bf71550e1df76f86c69",
       "member_ids": [
         "9bf71550e1df76f86c69"
@@ -5462,7 +5472,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-13T18:18:02.000073+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "9b3f043cd2a127294336",
       "member_ids": [
         "9b3f043cd2a127294336"
@@ -5596,7 +5606,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "81ae9c6a7f2a2412f43b",
       "member_ids": [
         "81ae9c6a7f2a2412f43b"
@@ -5730,7 +5740,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "6f8f9451b6636bd7476e",
       "member_ids": [
         "6f8f9451b6636bd7476e"
@@ -5864,7 +5874,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "7f6e9999a4808a78b583",
       "member_ids": [
         "7f6e9999a4808a78b583"
@@ -6023,7 +6033,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "68f060fa2d76de81ee51",
       "member_ids": [
         "68f060fa2d76de81ee51"
@@ -6157,7 +6167,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00",
+      "last_seen": "2026-10-15T13:24:45.375333+09:00",
       "notice_id": "48d87172618e84c2f520",
       "member_ids": [
         "48d87172618e84c2f520"
@@ -6245,11 +6255,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/191630/artclView.do",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00"
+      "last_seen": "2026-10-15T13:24:45.375333+09:00"
     },
     {
       "id": "e3a61f53d7db6e527e53",
@@ -6293,11 +6303,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/191627/artclView.do",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00"
+      "last_seen": "2026-10-15T13:24:45.375333+09:00"
     },
     {
       "id": "57210b8aec2b457edd1f",
@@ -6341,7 +6351,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/190909/artclView.do",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -6389,7 +6399,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/190688/artclView.do",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -6480,11 +6490,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://doai.inha.ac.kr/bbs/doai/731/191467/artclView.do",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00"
+      "last_seen": "2026-10-15T13:24:45.375333+09:00"
     },
     {
       "id": "36e73267afa3a96bb136",
@@ -6500,12 +6510,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 109757
+          "text_length": 109775
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 110836
+          "text_length": 110854
         },
         {
           "stage": "date_parse",
@@ -6522,11 +6532,11 @@
       "date_status": "missing",
       "deadline": null,
       "registration_start": null,
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T23:54:54.413884+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00"
+      "last_seen": "2026-10-15T13:24:45.375333+09:00"
     },
     {
       "id": "b1ba3a9d6aec8a2e41d4",
@@ -6570,11 +6580,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/192150/artclView.do",
-      "detail_attempted_at": "2026-10-14T15:16:15.271082+09:00",
+      "detail_attempted_at": "2026-10-15T13:24:45.375333+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-23T16:56:47.873320+09:00",
       "last_changed": "2026-09-23T16:56:47.873320+09:00",
-      "last_seen": "2026-10-14T15:16:15.271082+09:00"
+      "last_seen": "2026-10-15T13:24:45.375333+09:00"
     }
   ],
   "field_labels": {
@@ -6591,7 +6601,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 15,
       "retained": 1,
       "pages": 2,
@@ -6608,7 +6618,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 22,
       "retained": 1,
       "pages": 2,
@@ -6626,7 +6636,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 13,
       "retained": 0,
       "pages": 2,
@@ -6644,7 +6654,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 40,
       "retained": 4,
       "pages": 2,
@@ -6662,7 +6672,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 29,
       "retained": 1,
       "pages": 2,
@@ -6679,7 +6689,7 @@
       "group": "inha",
       "status": "disabled",
       "message": "인하대 대표 홈페이지: 자동 수집 대상에서 제외했습니다. 학과·센터 게시판은 계속 수집합니다.",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 0,
       "retained": 0,
       "pages": 0,
@@ -6696,7 +6706,7 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 14,
       "retained": 4,
       "pages": 1,
@@ -6713,7 +6723,7 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 112,
       "retained": 2,
       "pages": 1,
@@ -6730,9 +6740,9 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-14T15:16:15.271082+09:00",
+      "checked_at": "2026-10-15T13:24:45.375333+09:00",
       "recognized": 24,
-      "retained": 3,
+      "retained": 2,
       "pages": 1,
       "detail_render_errors": 5,
       "detail_unconfirmed": 11,
@@ -6741,7 +6751,7 @@
       "topic_pending": 0,
       "dates_complete": 0,
       "dates_partial": 0,
-      "dates_missing": 3
+      "dates_missing": 2
     }
   ],
   "repo_url": "https://github.com/uiseokys/inha-contest-alert",
