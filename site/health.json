@@ -4,25 +4,25 @@
   "build": {
     "version": "8.0.0",
     "fingerprint": "bc7b030aa188",
-    "commit": "a95f4c923f99ff37501ee42e6ee0bf49322e9ca6",
-    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/39001575441",
-    "run_id": "39001575441"
+    "commit": "edd1cbcf94e063a91419658d541976dd6f3ee6c9",
+    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/39101527896",
+    "run_id": "39101527896"
   },
-  "generated_at": "2026-10-17T13:14:03.237513+09:00",
+  "generated_at": "2026-10-18T14:46:26.890595+09:00",
   "collection": {
     "version": "8.0.0",
     "fingerprint": "bc7b030aa188",
-    "commit": "41d1477b8632d170ff7c7463d1d8b35ff099bc0f",
-    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/39001575441",
-    "run_id": "39001575441",
+    "commit": "edd1cbcf94e063a91419658d541976dd6f3ee6c9",
+    "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/39101527896",
+    "run_id": "39101527896",
     "status": "complete",
-    "attempted_at": "2026-10-17T13:11:19.642253+09:00",
-    "finished_at": "2026-10-17T13:14:00.973748+09:00",
+    "attempted_at": "2026-10-18T14:44:02.455720+09:00",
+    "finished_at": "2026-10-18T14:46:26.873293+09:00",
     "enabled_sources": 8,
     "ok_sources": 8
   },
-  "last_usable_at": "2026-10-17T13:14:00.973748+09:00",
-  "last_complete_at": "2026-10-17T13:14:00.973748+09:00",
+  "last_usable_at": "2026-10-18T14:46:26.873293+09:00",
+  "last_complete_at": "2026-10-18T14:46:26.873293+09:00",
   "notification": {
     "status": "accepted",
     "day": "2026-10-17",
