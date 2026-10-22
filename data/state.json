@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-10-21T14:56:56.076811+09:00",
+  "updated_at": "2026-10-22T16:28:25.615909+09:00",
   "items": {
     "8cd2af09f098f8e04f71": {
       "id": "8cd2af09f098f8e04f71",
@@ -37,7 +37,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "ab81876d64ff6793a330": {
       "id": "ab81876d64ff6793a330",
@@ -81,7 +81,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/191630/artclView.do",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -129,7 +129,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/191627/artclView.do",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -210,8 +210,8 @@
       "registration_ambiguous": false,
       "eligibility": "데이터·AI 활용에 관심있는 대한민국 국민 누구나(개인 또는 5인 이내 팀)",
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/191151/artclView.do",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -231,21 +231,21 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 25666
+          "text_length": 25898
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 25482
+          "text_length": 25713
         },
         {
           "stage": "date_parse",
           "outcome": "unconfirmed",
-          "text_length": 531
+          "text_length": 593
         }
       ],
-      "detail_content_hash": "8bef2a8f422444c9",
-      "detail_text_length": 531,
+      "detail_content_hash": "c309a3fe66ebf84d",
+      "detail_text_length": 593,
       "detail_parser_version": 8,
       "detail_title": "AWS 클라우드 온라인 교육",
       "title_raw": "AWS 클라우드 온라인 교육",
@@ -259,7 +259,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/190909/artclView.do",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -302,7 +302,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/190688/artclView.do",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
@@ -423,11 +423,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://doai.inha.ac.kr/bbs/doai/731/191467/artclView.do",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "93b40e33a5034b9bef90": {
       "id": "93b40e33a5034b9bef90",
@@ -468,11 +468,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://aix.inha.ac.kr/news/notice/?vid=109",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "8bdabc7eaa5fdc81735c": {
       "id": "8bdabc7eaa5fdc81735c",
@@ -511,11 +511,11 @@
       "date_status": "missing",
       "deadline": null,
       "registration_start": null,
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "9b3f043cd2a127294336": {
       "id": "9b3f043cd2a127294336",
@@ -526,21 +526,12 @@
       "group": "inha",
       "posted_at": "2026-07-09",
       "platform_status": null,
-      "opportunity_kind": "contest",
-      "title_raw": "[행사] 2026 인하 인공지능 챌린지 개최 안내",
-      "listing_title": "[행사] 2026 인하 인공지능 챌린지 개최 안내",
-      "relevance_status": "included",
-      "relevance_evidence": "2026 인하 인공지능 챌린지",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": "2026-08-17",
-      "registration_start": "2026-07-16",
       "date_failure_code": "confirmed",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 126019
+          "text_length": 125862
         },
         {
           "stage": "schedule_http",
@@ -553,10 +544,17 @@
           "text_length": 855
         }
       ],
-      "detail_content_hash": "d76402962e46c755",
+      "detail_content_hash": "460be3fa4af183c0",
       "detail_text_length": 855,
+      "opportunity_kind": "contest",
       "detail_parser_version": 8,
       "detail_title": "2026 인하 인공지능 챌린지",
+      "title_raw": "[행사] 2026 인하 인공지능 챌린지 개최 안내",
+      "listing_title": "[행사] 2026 인하 인공지능 챌린지 개최 안내",
+      "relevance_status": "included",
+      "relevance_evidence": "2026 인하 인공지능 챌린지",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "deadline_time": "23:59",
       "registration_start_time": "10:00",
       "registration_time_ambiguous": false,
@@ -565,6 +563,8 @@
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-08-17",
+      "registration_start": "2026-07-16",
       "registration_text": "2026.07.16 (목) 오전 10시 ~ 2026.08.17 (월) 오후 11시 59분",
       "registration_ambiguous": false,
       "event_start": "2026-07-16",
@@ -572,16 +572,16 @@
       "event_ambiguous": false,
       "schedule_text": "2026.07.16 (목) 오전 10시 ~ 2026.08.20 (목) 오후 6시",
       "eligibility": "인하대 학부 및 대학원 재학생 팀 ( 팀당 2~5 인 ) ★ 팀원 중 1명 이상 대학원생이 포함된 경우 \"대학원생팀\"으로 간주함",
-      "benefits": "900만 원 237명 마감 연습 대회안내 데이터 코드 공유 토크",
+      "benefits": "900만 원 238명 마감 연습 대회안내 데이터 코드 공유 토크",
       "summary": "로봇 미래 행동 영상 생성 : 월드 모델 챌린지 2.",
       "website_url": "https://dacon.io/competitions/official/236736/overview/",
       "detail_source_url": "https://dacon.io/competitions/official/236736/overview/",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
-      "last_changed": "2026-10-13T18:18:02.000073+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_changed": "2026-10-22T16:28:25.615909+09:00",
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "c7155fa7b56de5f46645": {
       "id": "c7155fa7b56de5f46645",
@@ -627,12 +627,12 @@
       "eligibility": "만 18 세 이상의 개인 또는 팀 ( 대학생 , 취업준비생 , 직장인 모두 참여 가능 ) 진행 방식 : 1 차 서류 선발 후 , 본선 참가팀은 AI 기반의 서비스 아이디어를 프로토타입 형태로 개발하여",
       "summary": "“ 맛있는 일상 , AI 로 잇다 (IT 다 )\" 목적 : AI 기술을 접목한 푸드테크 아이디어 발굴",
       "detail_source_url": "https://aix.inha.ac.kr/news/notice/?vid=106",
-      "detail_checked_at": "2026-10-21T14:56:56.076811+09:00",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "b8d2e189f38c3d97de93": {
       "id": "b8d2e189f38c3d97de93",
@@ -758,7 +758,7 @@
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "3a7952856f05b88d265f": {
       "id": "3a7952856f05b88d265f",
@@ -791,7 +791,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "d0d306bf506eaa30988e": {
       "id": "d0d306bf506eaa30988e",
@@ -827,7 +827,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-22T16:18:23.684311+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "9bf71550e1df76f86c69": {
       "id": "9bf71550e1df76f86c69",
@@ -838,15 +838,6 @@
       "group": "inha",
       "posted_at": "2026-08-21",
       "platform_status": null,
-      "opportunity_kind": "program",
-      "title_raw": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
-      "listing_title": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
-      "relevance_status": "included",
-      "relevance_evidence": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": "2026-09-16",
-      "registration_start": "2026-09-10",
       "date_failure_code": "confirmed",
       "detail_trace": [
         {
@@ -862,26 +853,35 @@
       ],
       "detail_content_hash": "b2d467e8966afd28",
       "detail_text_length": 2202,
+      "opportunity_kind": "program",
       "detail_parser_version": 8,
       "detail_title": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
-      "deadline_time": null,
-      "registration_start_time": null,
+      "title_raw": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
+      "listing_title": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
+      "relevance_status": "included",
+      "relevance_evidence": "2026 AI-POT 자격증 취득 지원 프로그램(4차) 참여 신청 (9/10~9/16)",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "registration_time_ambiguous": false,
       "date_source_url": "https://swuniv.inha.ac.kr/bbs/swuniv/3113/188992/artclView.do",
       "date_evidence": "∙ 신청 기간: 2026. 9. 10.(목) ~ 9. 16.(수) *온라인 원서접수 기간과 동일",
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-09-16",
+      "registration_start": "2026-09-10",
       "registration_text": "2026. 9. 10.(목) ~ 9. 16.(수) *온라인 원서접수 기간과 동일 ∙ 최종 참여자",
       "registration_ambiguous": false,
       "eligibility": "인하대학교 학부 재학생 중 아래 요건을 충족하는 자",
       "detail_source_url": "https://swuniv.inha.ac.kr/bbs/swuniv/3113/188992/artclView.do",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
+      "deadline_time": null,
+      "registration_start_time": null,
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-09-23T01:51:51.131569+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "a8d1c8bc81a78c82adad": {
       "id": "a8d1c8bc81a78c82adad",
@@ -1005,26 +1005,17 @@
       "group": "external",
       "posted_at": null,
       "platform_status": "closed",
-      "opportunity_kind": "contest",
-      "title_raw": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
-      "listing_title": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
-      "relevance_status": "included",
-      "relevance_evidence": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": "2026-09-29",
-      "registration_start": "2026-08-18",
       "date_failure_code": "confirmed",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 954065
+          "text_length": 953424
         },
         {
           "stage": "schedule_http",
           "outcome": "ok",
-          "text_length": 949326
+          "text_length": 948685
         },
         {
           "stage": "date_parse",
@@ -1034,8 +1025,15 @@
       ],
       "detail_content_hash": "aaf82fb28d4c951f",
       "detail_text_length": 1009,
+      "opportunity_kind": "contest",
       "detail_parser_version": 8,
       "detail_title": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
+      "title_raw": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
+      "listing_title": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
+      "relevance_status": "included",
+      "relevance_evidence": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "deadline_time": "10:00",
       "registration_start_time": "10:00",
       "registration_time_ambiguous": false,
@@ -1044,6 +1042,8 @@
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-09-29",
+      "registration_start": "2026-08-18",
       "registration_text": "2026년 08월 18일(화) 10:00 ~ 2026년 09월 29일(화) 10:00",
       "registration_ambiguous": false,
       "event_start": "2026-08-26",
@@ -1056,12 +1056,12 @@
       "summary": "신종 보이스피싱 범죄 대응을 위한 AI 딥보이스 탐지 모델 개발",
       "website_url": "https://dacon.io/competitions/official/236749/overview/",
       "detail_source_url": "https://dacon.io/competitions/official/236749/overview/",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-19T13:56:48.140059+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "7f6e9999a4808a78b583": {
       "id": "7f6e9999a4808a78b583",
@@ -1072,15 +1072,6 @@
       "group": "external",
       "posted_at": null,
       "platform_status": "closed",
-      "opportunity_kind": "contest",
-      "title_raw": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
-      "listing_title": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
-      "relevance_status": "included",
-      "relevance_evidence": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": "2026-09-29",
-      "registration_start": "2026-08-18",
       "date_failure_code": "confirmed",
       "detail_trace": [
         {
@@ -1101,8 +1092,15 @@
       ],
       "detail_content_hash": "a920f6d9f17cf6fc",
       "detail_text_length": 1021,
+      "opportunity_kind": "contest",
       "detail_parser_version": 8,
       "detail_title": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
+      "title_raw": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
+      "listing_title": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
+      "relevance_status": "included",
+      "relevance_evidence": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "deadline_time": "10:00",
       "registration_start_time": "10:00",
       "registration_time_ambiguous": false,
@@ -1111,6 +1109,8 @@
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-09-29",
+      "registration_start": "2026-08-18",
       "registration_text": "2026년 08월 18일(화) 10:00 ~ 2026년 09월 29일(화) 10:00",
       "registration_ambiguous": false,
       "event_start": "2026-08-26",
@@ -1123,12 +1123,12 @@
       "summary": "블랙박스 영상 기반 재녹화 여부 판별 및 교통사고 주요상황·차량 거동 분석 AI 모델 개발",
       "website_url": "https://dacon.io/competitions/official/236753/overview/",
       "detail_source_url": "https://dacon.io/competitions/official/236753/overview/",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-19T13:56:48.140059+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "81ae9c6a7f2a2412f43b": {
       "id": "81ae9c6a7f2a2412f43b",
@@ -1139,26 +1139,17 @@
       "group": "external",
       "posted_at": null,
       "platform_status": "closed",
-      "opportunity_kind": "contest",
-      "title_raw": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
-      "listing_title": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
-      "relevance_status": "included",
-      "relevance_evidence": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": "2026-09-29",
-      "registration_start": "2026-08-18",
       "date_failure_code": "confirmed",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 837229
+          "text_length": 837870
         },
         {
           "stage": "schedule_http",
           "outcome": "ok",
-          "text_length": 831236
+          "text_length": 831877
         },
         {
           "stage": "date_parse",
@@ -1168,8 +1159,15 @@
       ],
       "detail_content_hash": "10a85e1fe1eb282c",
       "detail_text_length": 1204,
+      "opportunity_kind": "contest",
       "detail_parser_version": 8,
       "detail_title": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
+      "title_raw": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
+      "listing_title": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
+      "relevance_status": "included",
+      "relevance_evidence": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "deadline_time": "10:00",
       "registration_start_time": "10:00",
       "registration_time_ambiguous": false,
@@ -1178,6 +1176,8 @@
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-09-29",
+      "registration_start": "2026-08-18",
       "registration_text": "2026년 08월 18일(화) 10:00 ~ 2026년 09월 29일(화) 10:00",
       "registration_ambiguous": false,
       "event_start": "2026-08-26",
@@ -1190,12 +1190,12 @@
       "summary": "나라장터 자체입찰 공고의 법령 위반사항 판정 및 판단 근거 제시 AI 모델 개발",
       "website_url": "https://dacon.io/competitions/official/236754/overview/",
       "detail_source_url": "https://dacon.io/competitions/official/236754/overview/",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-19T13:56:48.140059+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "68f060fa2d76de81ee51": {
       "id": "68f060fa2d76de81ee51",
@@ -1206,15 +1206,6 @@
       "group": "external",
       "posted_at": null,
       "platform_status": "closed",
-      "opportunity_kind": "contest",
-      "title_raw": "경진대회",
-      "listing_title": "경진대회",
-      "relevance_status": "included",
-      "relevance_evidence": "켜내기에는 한계가 있으며, 그 한계를 보완할 기술이 바로 여러분이 만들 위성영상·AI 기반 모니터링 모델입니다.",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": "2026-10-06",
-      "registration_start": "2026-07-31",
       "conditions": {
         "audience": {
           "value": [
@@ -1246,12 +1237,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 236151
+          "text_length": 233786
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 232278
+          "text_length": 232281
         },
         {
           "stage": "date_parse",
@@ -1259,10 +1250,17 @@
           "text_length": 6352
         }
       ],
-      "detail_content_hash": "4aef076f1cf5a56c",
+      "detail_content_hash": "1c68a9b079f43027",
       "detail_text_length": 6352,
+      "opportunity_kind": "contest",
       "detail_parser_version": 8,
       "detail_title": "주제 3: 국립공원 내 시설물 변화 탐지",
+      "title_raw": "경진대회",
+      "listing_title": "경진대회",
+      "relevance_status": "included",
+      "relevance_evidence": "켜내기에는 한계가 있으며, 그 한계를 보완할 기술이 바로 여러분이 만들 위성영상·AI 기반 모니터링 모델입니다.",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "deadline_time": "14:00",
       "registration_start_time": "10:00",
       "registration_time_ambiguous": false,
@@ -1271,6 +1269,8 @@
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-10-06",
+      "registration_start": "2026-07-31",
       "registration_text": "2026.07.31 10:00 ~ 2026.10.06 14:00 대회 페이지 상단의 참가 신청하기 버튼으로",
       "registration_ambiguous": false,
       "event_start": "2026-09-14",
@@ -1282,12 +1282,12 @@
       "benefits": "총상금 600만원 / 대상 국립공원공단 이사장상 1팀 350만 원 최우수상 - 1팀 150만 원 우수상 - 1팀 100만 원",
       "summary": "3: 국립공원 내 시설물 변화 탐지 기간 2026.09.14 - 2026.10.06 / 우리의 국립공원은 지금도 기후변화와 각종 환경 훼손의 영향을 받으며 조금씩 변해가고 있습니다. 넓은 자연을 인력 중심의 순찰만으로 지켜내기에는 한계가 있으며, 그 한계를 보완할 기술이 바로 여러분이 만들 위성영상·AI 기반 모니터링 모델입니다. 이번 대회에서는 1) 기후변화 지표종, 2) 산사태, 3) 불…",
       "detail_source_url": "https://aifactory.space/ko/competitions/9306",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "48d87172618e84c2f520": {
       "id": "48d87172618e84c2f520",
@@ -1298,15 +1298,6 @@
       "group": "external",
       "posted_at": null,
       "platform_status": "closed",
-      "opportunity_kind": "contest",
-      "title_raw": "경진대회",
-      "listing_title": "경진대회",
-      "relevance_status": "included",
-      "relevance_evidence": "켜내기에는 한계가 있으며, 그 한계를 보완할 기술이 바로 여러분이 만들 위성영상·AI 기반 모니터링 모델입니다.",
-      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
-      "relevance_version": 6,
-      "deadline": "2026-10-06",
-      "registration_start": "2026-07-31",
       "conditions": {
         "audience": {
           "value": [
@@ -1338,12 +1329,12 @@
         {
           "stage": "detail_http",
           "outcome": "ok",
-          "text_length": 232541
+          "text_length": 234734
         },
         {
           "stage": "detail_render",
           "outcome": "ok",
-          "text_length": 231945
+          "text_length": 231019
         },
         {
           "stage": "date_parse",
@@ -1351,10 +1342,17 @@
           "text_length": 6101
         }
       ],
-      "detail_content_hash": "19b79b4e6f919ebc",
+      "detail_content_hash": "4cd168b15284ea82",
       "detail_text_length": 6101,
+      "opportunity_kind": "contest",
       "detail_parser_version": 8,
       "detail_title": "주제 4: 해안 쓰레기 탐지 및 규모 추정",
+      "title_raw": "경진대회",
+      "listing_title": "경진대회",
+      "relevance_status": "included",
+      "relevance_evidence": "켜내기에는 한계가 있으며, 그 한계를 보완할 기술이 바로 여러분이 만들 위성영상·AI 기반 모니터링 모델입니다.",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
       "deadline_time": "14:00",
       "registration_start_time": "10:00",
       "registration_time_ambiguous": false,
@@ -1363,6 +1361,8 @@
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-10-06",
+      "registration_start": "2026-07-31",
       "registration_text": "2026.07.31 10:00 ~ 2026.10.06 14:00 대회 페이지 상단의 참가 신청하기 버튼으로",
       "registration_ambiguous": false,
       "event_start": "2026-09-14",
@@ -1374,12 +1374,12 @@
       "benefits": "총상금 600만원 / 대상 국립공원공단 이사장상 1팀 350만 원 최우수상 - 1팀 150만 원 우수상 - 1팀 100만 원",
       "summary": "4: 해안 쓰레기 탐지 및 규모 추정 기간 2026.09.14 - 2026.10.06 / 우리의 국립공원은 지금도 기후변화와 각종 환경 훼손의 영향을 받으며 조금씩 변해가고 있습니다. 넓은 자연을 인력 중심의 순찰만으로 지켜내기에는 한계가 있으며, 그 한계를 보완할 기술이 바로 여러분이 만들 위성영상·AI 기반 모니터링 모델입니다. 이번 대회에서는 1) 기후변화 지표종, 2) 산사태, 3) …",
       "detail_source_url": "https://aifactory.space/ko/competitions/9307",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-22T16:18:23.684311+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "a9c7989bbc28cdf6846b": {
       "id": "a9c7989bbc28cdf6846b",
@@ -1679,7 +1679,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-22T23:54:54.413884+09:00",
       "last_changed": "2026-09-22T23:54:54.413884+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "36e73267afa3a96bb136": {
       "id": "36e73267afa3a96bb136",
@@ -1717,11 +1717,11 @@
       "date_status": "missing",
       "deadline": null,
       "registration_start": null,
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-22T23:54:54.413884+09:00",
       "last_changed": "2026-10-07T16:07:31.064241+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "b1ba3a9d6aec8a2e41d4": {
       "id": "b1ba3a9d6aec8a2e41d4",
@@ -1765,11 +1765,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/192150/artclView.do",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-23T16:56:47.873320+09:00",
       "last_changed": "2026-09-23T16:56:47.873320+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "800598f265163b201dd9": {
       "id": "800598f265163b201dd9",
@@ -1868,7 +1868,7 @@
       "detail_status": "ok",
       "first_seen": "2026-09-28T17:56:23.800412+09:00",
       "last_changed": "2026-09-28T17:56:23.800412+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "e9e2262091096ca55a14": {
       "id": "e9e2262091096ca55a14",
@@ -1977,17 +1977,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 9081
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -2011,7 +2006,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36319",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-29T17:58:37.329724+09:00",
       "last_changed": "2026-09-29T17:58:37.329724+09:00",
@@ -2026,37 +2021,35 @@
       "group": "external",
       "posted_at": null,
       "platform_status": "open",
+      "date_failure_code": "confirmed",
+      "detail_trace": [
+        {
+          "stage": "detail_http",
+          "outcome": "ok",
+          "text_length": 939483
+        },
+        {
+          "stage": "schedule_http",
+          "outcome": "ok",
+          "text_length": 953531
+        },
+        {
+          "stage": "date_parse",
+          "outcome": "ok",
+          "text_length": 1031
+        }
+      ],
+      "detail_content_hash": "a50a9d6ee71adf80",
+      "detail_text_length": 1031,
       "opportunity_kind": "contest",
+      "detail_parser_version": 8,
+      "detail_title": "항만 문제해결을 위한 AI 기술 공모전",
       "title_raw": "항만 문제해결을 위한 AI 기술 공모전",
       "listing_title": "항만 문제해결을 위한 AI 기술 공모전",
       "relevance_status": "included",
       "relevance_evidence": "항만 문제해결을 위한 AI 기술 공모전",
       "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
       "relevance_version": 6,
-      "deadline": "2026-11-02",
-      "registration_start": "2026-09-30",
-      "date_failure_code": "confirmed",
-      "detail_trace": [
-        {
-          "stage": "detail_http",
-          "outcome": "ok",
-          "text_length": 940204
-        },
-        {
-          "stage": "schedule_http",
-          "outcome": "ok",
-          "text_length": 954220
-        },
-        {
-          "stage": "date_parse",
-          "outcome": "ok",
-          "text_length": 1032
-        }
-      ],
-      "detail_content_hash": "237b775e600d7144",
-      "detail_text_length": 1032,
-      "detail_parser_version": 8,
-      "detail_title": "항만 문제해결을 위한 AI 기술 공모전",
       "deadline_time": "10:00",
       "registration_time_ambiguous": false,
       "date_source_url": "https://dacon.io/competitions/official/236771/overview/schedule",
@@ -2064,6 +2057,8 @@
       "date_note": "",
       "date_parser_version": 8,
       "date_status": "complete",
+      "deadline": "2026-11-02",
+      "registration_start": "2026-09-30",
       "registration_text": "2026년 09월 30일(수) ~ 2026년 11월 02일(월) 10:00",
       "registration_ambiguous": false,
       "event_start": "2026-10-12",
@@ -2072,16 +2067,16 @@
       "schedule_text": "2026년 10월 12일(월) 10:00 ~ 2026년 11월 02일(월) 10:00",
       "organizer": "해양수산부 / 울산항만공사 / 한국정보산업연합회",
       "eligibility": "국내외 고등·대학교(원) 재학생, 미취업자",
-      "benefits": "950 만원 791명 종료까지 D-14 참여 대회안내 데이터 코드 공유 토크 리더보드 팀",
+      "benefits": "950 만원 910명 종료까지 D-11 참여 대회안내 데이터 코드 공유 토크 리더보드 팀",
       "summary": "AI를 활용한 선박 정보 표기 차이 해소",
       "website_url": "https://dacon.io/competitions/official/236771/overview/",
       "detail_source_url": "https://dacon.io/competitions/official/236771/overview/",
-      "detail_checked_at": "2026-10-19T13:56:48.140059+09:00",
-      "detail_attempted_at": "2026-10-19T13:56:48.140059+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "first_seen": "2026-09-30T17:57:54.206570+09:00",
-      "last_changed": "2026-10-19T13:56:48.140059+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_changed": "2026-10-22T16:28:25.615909+09:00",
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "c5f6a3760adccb3baa6b": {
       "id": "c5f6a3760adccb3baa6b",
@@ -2092,17 +2087,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 9848
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -2126,7 +2116,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36345",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-09-30T17:57:54.206570+09:00",
       "last_changed": "2026-09-30T17:57:54.206570+09:00",
@@ -2141,17 +2131,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 8643
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -2175,7 +2160,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36354",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-01T13:32:46.344458+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
@@ -2190,17 +2175,12 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "browser_denied",
+      "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
           "stage": "detail_http",
           "outcome": "ok",
           "text_length": 9021
-        },
-        {
-          "stage": "detail_render",
-          "outcome": "error",
-          "code": "browser_denied"
         },
         {
           "stage": "date_parse",
@@ -2224,7 +2204,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36386",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-03T17:19:43.530067+09:00",
       "last_changed": "2026-10-03T17:19:43.530067+09:00",
@@ -2282,14 +2262,14 @@
       "eligibility": "나이·소속·전공 제한 없이 개인 또는 4인 이내 팀",
       "benefits": "대상 1팀(농림축산식품부 장관상, 상금 100만 원), 우수상 4팀(한국농수산식품유통공사 사장상, 상금 각 100만 원)",
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/2885/192799/artclView.do",
-      "detail_checked_at": "2026-10-21T14:56:56.076811+09:00",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "ok",
       "deadline_time": null,
       "registration_start_time": null,
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "e4d37463c2aa311229d9": {
       "id": "e4d37463c2aa311229d9",
@@ -2329,7 +2309,7 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36402",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-06T18:20:27.076506+09:00",
       "last_changed": "2026-10-06T18:20:27.076506+09:00",
@@ -2388,7 +2368,7 @@
       "group": "external",
       "posted_at": null,
       "platform_status": null,
-      "date_failure_code": "no_explicit_date",
+      "date_failure_code": "budget_deferred",
       "detail_trace": [
         {
           "stage": "detail_http",
@@ -2494,7 +2474,7 @@
       "detail_status": "ok",
       "first_seen": "2026-10-16T13:44:44.868241+09:00",
       "last_changed": "2026-10-16T13:44:44.868241+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "b3b2ea9ba3bed334b69d": {
       "id": "b3b2ea9ba3bed334b69d",
@@ -2539,11 +2519,11 @@
       "deadline": null,
       "registration_start": null,
       "detail_source_url": "https://www.campuspick.com/contest/view?id=36601",
-      "detail_attempted_at": "2026-10-21T14:56:56.076811+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
       "detail_status": "unconfirmed",
       "first_seen": "2026-10-20T14:21:48.390969+09:00",
       "last_changed": "2026-10-20T14:21:48.390969+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     },
     "7245bbc46b55709bf8bd": {
       "id": "7245bbc46b55709bf8bd",
@@ -2554,6 +2534,14 @@
       "group": "inha",
       "posted_at": "2026-10-20",
       "platform_status": null,
+      "title_raw": "[교육기획팀] 전공능력 진단 시행 안내 (~11월 20일) (참여자 전원 비교과 마일리지",
+      "listing_title": "[교육기획팀] 전공능력 진단 시행 안내 (~11월 20일) (참여자 전원 비교과 마일리지",
+      "relevance_status": "excluded",
+      "relevance_evidence": "",
+      "relevance_reason": "공고 자체에서 AI·데이터 관련 근거를 찾지 못함",
+      "relevance_version": 6,
+      "deadline": null,
+      "registration_start": null,
       "date_failure_code": "no_explicit_date",
       "detail_trace": [
         {
@@ -2576,16 +2564,8 @@
       "detail_text_length": 352,
       "detail_parser_version": 8,
       "detail_title": "[교육기획팀] 전공능력 진단 시행 안내 (~11월 20일) (참여자 전원 비교과 마일리지 1점 부여)",
-      "title_raw": "[교육기획팀] 전공능력 진단 시행 안내 (~11월 20일) (참여자 전원 비교과 마일리지",
-      "listing_title": "[교육기획팀] 전공능력 진단 시행 안내 (~11월 20일) (참여자 전원 비교과 마일리지",
-      "relevance_status": "excluded",
-      "relevance_evidence": "",
-      "relevance_reason": "공고 자체에서 AI·데이터 관련 근거를 찾지 못함",
-      "relevance_version": 6,
       "date_parser_version": 8,
       "date_status": "missing",
-      "deadline": null,
-      "registration_start": null,
       "eligibility": "26-2학기 재학생 나. 기간 : ~ 11. 20.(금)까지 다.",
       "benefits": "1) 비교과 마일리지 1점 부여 (참여 전원) 2)기프트콘 추첨 증정 (학년별, 학과별 선착순) 라. 참여방법 : https://britg.inha.ac.kr/ 접속!",
       "detail_source_url": "https://datascience.inha.ac.kr/bbs/datascience/746/193686/artclView.do",
@@ -2594,7 +2574,231 @@
       "detail_status": "ok",
       "first_seen": "2026-10-21T14:56:56.076811+09:00",
       "last_changed": "2026-10-21T14:56:56.076811+09:00",
-      "last_seen": "2026-10-21T14:56:56.076811+09:00"
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
+    },
+    "f6054616e17d09ca3a4f": {
+      "id": "f6054616e17d09ca3a4f",
+      "title": "2026 INHA AX-EDU HACKATHON 참가자 모집(11.6.(금)까지)",
+      "url": "https://swuniv.inha.ac.kr/bbs/swuniv/3113/193810/artclView.do",
+      "source_id": "sw",
+      "source_name": "SW중심대학사업단",
+      "group": "inha",
+      "posted_at": "2026-10-22",
+      "platform_status": null,
+      "conditions": {
+        "audience": {
+          "value": "unknown",
+          "evidence": "참여 대상 및 팀 구성"
+        },
+        "affiliation": {
+          "value": "unknown",
+          "evidence": "참여 대상 및 팀 구성"
+        },
+        "team": {
+          "value": "unknown",
+          "evidence": "참여 대상 및 팀 구성"
+        },
+        "mode": {
+          "value": "unknown",
+          "evidence": ""
+        },
+        "cost": {
+          "value": "unknown",
+          "evidence": ""
+        }
+      },
+      "date_failure_code": "no_explicit_date",
+      "detail_trace": [
+        {
+          "stage": "detail_http",
+          "outcome": "ok",
+          "text_length": 36848
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "ok",
+          "text_length": 36636
+        },
+        {
+          "stage": "date_parse",
+          "outcome": "unconfirmed",
+          "text_length": 963
+        }
+      ],
+      "detail_content_hash": "849ab0da65ee7a23",
+      "detail_text_length": 963,
+      "opportunity_kind": "contest",
+      "detail_parser_version": 8,
+      "detail_title": "2026 INHA AX-EDU HACKATHON 참가자 모집(11.6.(금)까지)",
+      "title_raw": "2026 INHA AX-EDU HACKATHON 참가자 모집(11.6.(금)까지)",
+      "listing_title": "2026 INHA AX-EDU HACKATHON 참가자 모집(11.6.(금)까지)",
+      "relevance_status": "included",
+      "relevance_evidence": "AI",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
+      "date_parser_version": 8,
+      "date_status": "missing",
+      "deadline": null,
+      "registration_start": null,
+      "eligibility": "및 팀 구성",
+      "summary": "토론 및 아이디어링 2) 2 일차 (11/14): 해커톤 활동 , 전문가 멘토링 , 발표 평가 및",
+      "detail_source_url": "https://swuniv.inha.ac.kr/bbs/swuniv/3113/193810/artclView.do",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_status": "ok",
+      "first_seen": "2026-10-22T16:28:25.615909+09:00",
+      "last_changed": "2026-10-22T16:28:25.615909+09:00",
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
+    },
+    "4451dff18e817376629d": {
+      "id": "4451dff18e817376629d",
+      "title": "나무엑스 AI 숏폼 공모전",
+      "url": "https://www.campuspick.com/contest/view?id=36648",
+      "source_id": "campuspick",
+      "source_name": "캠퍼스픽 · AI/데이터",
+      "group": "external",
+      "posted_at": null,
+      "platform_status": null,
+      "date_failure_code": "confirmed",
+      "detail_trace": [
+        {
+          "stage": "detail_http",
+          "outcome": "ok",
+          "text_length": 8742
+        },
+        {
+          "stage": "date_parse",
+          "outcome": "ok",
+          "text_length": 81
+        }
+      ],
+      "detail_content_hash": "eef3a9c0992cd6e4",
+      "detail_text_length": 81,
+      "opportunity_kind": "contest",
+      "detail_parser_version": 8,
+      "detail_title": "나무엑스 AI 숏폼 공모전",
+      "title_raw": "나무엑스 AI 숏폼 공모전",
+      "listing_title": "나무엑스 AI 숏폼 공모전",
+      "relevance_status": "included",
+      "relevance_evidence": "나무엑스 AI 숏폼 공모전",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
+      "deadline_time": "18:00",
+      "registration_time_ambiguous": false,
+      "date_source_url": "https://www.campuspick.com/contest/view?id=36648",
+      "date_evidence": "2026년 10월 19일(월) ~ 11월 22일(일) 오후 6시 참가 대상 AI 콘텐츠 제작에 관심 있는 대학생 및 일반인 - 나무",
+      "date_note": "",
+      "date_parser_version": 8,
+      "date_status": "complete",
+      "deadline": "2026-11-22",
+      "registration_start": "2026-10-19",
+      "registration_text": "2026년 10월 19일(월) ~ 11월 22일(일) 오후 6시 참가 대상 AI 콘텐츠 제작에 관심 있는 대학생 및 일반인 - 나무",
+      "registration_ambiguous": false,
+      "detail_source_url": "https://www.campuspick.com/contest/view?id=36648",
+      "detail_checked_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_status": "ok",
+      "first_seen": "2026-10-22T16:28:25.615909+09:00",
+      "last_changed": "2026-10-22T16:28:25.615909+09:00",
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
+    },
+    "7650aea4af97440a8916": {
+      "id": "7650aea4af97440a8916",
+      "title": "🚀 HI-5 AI 2026 페스티벌 | 30 seconds 릴스 챌린지",
+      "url": "https://www.campuspick.com/contest/view?id=36644",
+      "source_id": "campuspick",
+      "source_name": "캠퍼스픽 · AI/데이터",
+      "group": "external",
+      "posted_at": null,
+      "platform_status": null,
+      "date_failure_code": "browser_denied",
+      "detail_trace": [
+        {
+          "stage": "detail_http",
+          "outcome": "ok",
+          "text_length": 8303
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "error",
+          "code": "browser_denied"
+        },
+        {
+          "stage": "date_parse",
+          "outcome": "unconfirmed",
+          "text_length": 0
+        }
+      ],
+      "detail_content_hash": "e3b0c44298fc1c14",
+      "detail_text_length": 0,
+      "opportunity_kind": "contest",
+      "detail_parser_version": 8,
+      "detail_title": "🚀 HI-5 AI 2026 페스티벌 | 30 seconds 릴스 챌린지",
+      "title_raw": "🚀 HI-5 AI 2026 페스티벌 | 30 seconds 릴스 챌린지",
+      "listing_title": "🚀 HI-5 AI 2026 페스티벌 | 30 seconds 릴스 챌린지",
+      "relevance_status": "included",
+      "relevance_evidence": "🚀 HI-5 AI 2026 페스티벌 | 30 seconds 릴스 챌린지",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
+      "date_parser_version": 8,
+      "date_status": "missing",
+      "deadline": null,
+      "registration_start": null,
+      "detail_source_url": "https://www.campuspick.com/contest/view?id=36644",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_status": "unconfirmed",
+      "first_seen": "2026-10-22T16:28:25.615909+09:00",
+      "last_changed": "2026-10-22T16:28:25.615909+09:00",
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
+    },
+    "6870d9c73a6a817e2a03": {
+      "id": "6870d9c73a6a817e2a03",
+      "title": "[산사람 x AI-Kive] 진짜 오타쿠 AI MV 챌린지",
+      "url": "https://www.campuspick.com/contest/view?id=36642",
+      "source_id": "campuspick",
+      "source_name": "캠퍼스픽 · AI/데이터",
+      "group": "external",
+      "posted_at": null,
+      "platform_status": null,
+      "date_failure_code": "browser_denied",
+      "detail_trace": [
+        {
+          "stage": "detail_http",
+          "outcome": "ok",
+          "text_length": 9324
+        },
+        {
+          "stage": "detail_render",
+          "outcome": "error",
+          "code": "browser_denied"
+        },
+        {
+          "stage": "date_parse",
+          "outcome": "unconfirmed",
+          "text_length": 0
+        }
+      ],
+      "detail_content_hash": "e3b0c44298fc1c14",
+      "detail_text_length": 0,
+      "opportunity_kind": "contest",
+      "detail_parser_version": 8,
+      "detail_title": "[산사람 x AI-Kive] 진짜 오타쿠 AI MV 챌린지",
+      "title_raw": "[산사람 x AI-Kive] 진짜 오타쿠 AI MV 챌린지",
+      "listing_title": "[산사람 x AI-Kive] 진짜 오타쿠 AI MV 챌린지",
+      "relevance_status": "included",
+      "relevance_evidence": "[산사람 x AI-Kive] 진짜 오타쿠 AI MV 챌린지",
+      "relevance_reason": "공고 자체의 AI·데이터 주제 확인",
+      "relevance_version": 6,
+      "date_parser_version": 8,
+      "date_status": "missing",
+      "deadline": null,
+      "registration_start": null,
+      "detail_source_url": "https://www.campuspick.com/contest/view?id=36642",
+      "detail_attempted_at": "2026-10-22T16:28:25.615909+09:00",
+      "detail_status": "unconfirmed",
+      "first_seen": "2026-10-22T16:28:25.615909+09:00",
+      "last_changed": "2026-10-22T16:28:25.615909+09:00",
+      "last_seen": "2026-10-22T16:28:25.615909+09:00"
     }
   },
   "sources": {
@@ -2604,7 +2808,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 15,
       "retained": 1,
       "pages": 2,
@@ -2621,7 +2825,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 23,
       "retained": 0,
       "pages": 2,
@@ -2639,7 +2843,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 13,
       "retained": 0,
       "pages": 2,
@@ -2657,7 +2861,7 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 40,
       "retained": 4,
       "pages": 2,
@@ -2675,16 +2879,16 @@
       "group": "inha",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 29,
-      "retained": 1,
+      "retained": 2,
       "pages": 2,
       "duplicates_hidden": 3,
       "excluded": 8,
       "topic_pending": 0,
       "dates_complete": 1,
       "dates_partial": 0,
-      "dates_missing": 0
+      "dates_missing": 1
     },
     "inha": {
       "name": "인하대학교 · 교내 공지",
@@ -2692,7 +2896,7 @@
       "group": "inha",
       "status": "disabled",
       "message": "인하대 대표 홈페이지: 자동 수집 대상에서 제외했습니다. 학과·센터 게시판은 계속 수집합니다.",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 0,
       "retained": 0,
       "pages": 0,
@@ -2709,7 +2913,7 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 14,
       "retained": 4,
       "pages": 1,
@@ -2726,7 +2930,7 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 112,
       "retained": 2,
       "pages": 1,
@@ -2743,18 +2947,19 @@
       "group": "external",
       "status": "ok",
       "message": "설정된 범위 수집 완료 · 전체 게시판 전수 수집 아님",
-      "checked_at": "2026-10-21T14:56:56.076811+09:00",
+      "checked_at": "2026-10-22T16:28:25.615909+09:00",
       "recognized": 24,
-      "retained": 1,
+      "retained": 4,
       "pages": 1,
-      "detail_render_errors": 5,
-      "detail_unconfirmed": 7,
+      "detail_deferred": 1,
+      "detail_render_errors": 3,
+      "detail_unconfirmed": 8,
       "duplicates_hidden": 0,
       "excluded": 0,
       "topic_pending": 0,
-      "dates_complete": 0,
+      "dates_complete": 1,
       "dates_partial": 0,
-      "dates_missing": 1
+      "dates_missing": 3
     }
   },
   "claims": {
@@ -2957,6 +3162,12 @@
       "run_id": "39552406516",
       "target_at": "2026-10-21T12:00:00+09:00",
       "accepted_at": "2026-10-21T14:59:31.868787+09:00"
+    },
+    "2026-10-22": {
+      "status": "reserved",
+      "at": "2026-10-22T16:31:21.870876+09:00",
+      "run_id": "39740646099",
+      "target_at": "2026-10-22T12:00:00+09:00"
     }
   },
   "changes": [
@@ -3519,6 +3730,36 @@
       "id": "7245bbc46b55709bf8bd",
       "kind": "new",
       "at": "2026-10-21T14:56:56.076811+09:00"
+    },
+    {
+      "id": "9b3f043cd2a127294336",
+      "kind": "updated",
+      "at": "2026-10-22T16:28:25.615909+09:00"
+    },
+    {
+      "id": "f6054616e17d09ca3a4f",
+      "kind": "new",
+      "at": "2026-10-22T16:28:25.615909+09:00"
+    },
+    {
+      "id": "10f610d85c9f8e6ee1a8",
+      "kind": "updated",
+      "at": "2026-10-22T16:28:25.615909+09:00"
+    },
+    {
+      "id": "4451dff18e817376629d",
+      "kind": "new",
+      "at": "2026-10-22T16:28:25.615909+09:00"
+    },
+    {
+      "id": "7650aea4af97440a8916",
+      "kind": "new",
+      "at": "2026-10-22T16:28:25.615909+09:00"
+    },
+    {
+      "id": "6870d9c73a6a817e2a03",
+      "kind": "new",
+      "at": "2026-10-22T16:28:25.615909+09:00"
     }
   ],
   "initialized_sources": [
@@ -5728,6 +5969,90 @@
         "aifactory": "ok",
         "campuspick": "ok"
       }
+    },
+    "2026-10-22": {
+      "at": "2026-10-22T16:28:25.615909+09:00",
+      "ids": [
+        "0e602e1accf876c5794a",
+        "10f610d85c9f8e6ee1a8",
+        "1b3f98fc88d009a90dfe",
+        "2233fbd20bd6fb1578fd",
+        "28f463e664cbaf448aa0",
+        "31108919aaf4474a4201",
+        "36e73267afa3a96bb136",
+        "3a7952856f05b88d265f",
+        "3f7d8d2a4770babfdf7b",
+        "4451dff18e817376629d",
+        "48d87172618e84c2f520",
+        "56e8eb813666d253b7dc",
+        "57210b8aec2b457edd1f",
+        "603410737f1171332f2b",
+        "62996c0a7316e76797c9",
+        "632cafcdcf7057846030",
+        "6870d9c73a6a817e2a03",
+        "68f060fa2d76de81ee51",
+        "6f8f9451b6636bd7476e",
+        "7245bbc46b55709bf8bd",
+        "73605dab99292ed11980",
+        "7650aea4af97440a8916",
+        "7888411c786f2b11482c",
+        "7f6e9999a4808a78b583",
+        "800598f265163b201dd9",
+        "814c426a252328dc8dfa",
+        "81ae9c6a7f2a2412f43b",
+        "8bdabc7eaa5fdc81735c",
+        "8cd2af09f098f8e04f71",
+        "93b40e33a5034b9bef90",
+        "975756cb4987f447e046",
+        "9b3f043cd2a127294336",
+        "9bf71550e1df76f86c69",
+        "9d4d1338b3fe4b9395de",
+        "a61ec4deaae42aa56334",
+        "a794d520f32bc9781a52",
+        "a86abc88d80d504621a7",
+        "a8d1c8bc81a78c82adad",
+        "a9338c28d67faa2bfa50",
+        "a9c7989bbc28cdf6846b",
+        "ab81876d64ff6793a330",
+        "b1ba3a9d6aec8a2e41d4",
+        "b3b2ea9ba3bed334b69d",
+        "b72f7a3754ddb56e49c2",
+        "b8d2e189f38c3d97de93",
+        "bfc8fcfbdebd08b4d2a8",
+        "c5f6a3760adccb3baa6b",
+        "c7155fa7b56de5f46645",
+        "c9cded70569ce729317a",
+        "d0d306bf506eaa30988e",
+        "e3a61f53d7db6e527e53",
+        "e4d37463c2aa311229d9",
+        "e9e2262091096ca55a14",
+        "ee870c32e8aeb39458bd",
+        "ef0727d16eacef3658e4",
+        "effd6b07b9f76014f2cb",
+        "f54644b3e83ec78370b7",
+        "f6054616e17d09ca3a4f"
+      ],
+      "initialized_sources": [
+        "ai_notice",
+        "aifactory",
+        "aix",
+        "campuspick",
+        "dacon",
+        "ds_contest",
+        "ds_notice",
+        "sw"
+      ],
+      "source_statuses": {
+        "ds_contest": "ok",
+        "ds_notice": "ok",
+        "ai_notice": "ok",
+        "aix": "ok",
+        "sw": "ok",
+        "inha": "disabled",
+        "dacon": "ok",
+        "aifactory": "ok",
+        "campuspick": "ok"
+      }
     }
   },
   "digest_cursor": "2026-10-21T14:56:56.076811+09:00",
@@ -5740,17 +6065,17 @@
     "collection": {
       "version": "8.0.0",
       "fingerprint": "bc7b030aa188",
-      "commit": "cf2040a4558dfee99099aac7fb8d18cda31cc336",
-      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/39552406516",
-      "run_id": "39552406516",
+      "commit": "213c120c3f0140a54cc72f7d295ac5c5fd1fd499",
+      "run_url": "https://github.com/uiseokys/inha-contest-alert/actions/runs/39740646099",
+      "run_id": "39740646099",
       "status": "complete",
-      "attempted_at": "2026-10-21T14:56:56.076811+09:00",
-      "finished_at": "2026-10-21T14:59:29.619301+09:00",
+      "attempted_at": "2026-10-22T16:28:25.615909+09:00",
+      "finished_at": "2026-10-22T16:31:21.521635+09:00",
       "enabled_sources": 8,
       "ok_sources": 8
     },
-    "last_usable_at": "2026-10-21T14:59:29.619301+09:00",
-    "last_complete_at": "2026-10-21T14:59:29.619301+09:00"
+    "last_usable_at": "2026-10-22T16:31:21.521635+09:00",
+    "last_complete_at": "2026-10-22T16:31:21.521635+09:00"
   },
   "correction_tracking": {},
   "event_registry": {
@@ -5784,112 +6109,14 @@
     "e4d37463c2aa311229d9": "evt_e4d37463c2aa311229d9",
     "c9cded70569ce729317a": "evt_c9cded70569ce729317a",
     "56e8eb813666d253b7dc": "evt_56e8eb813666d253b7dc",
-    "b3b2ea9ba3bed334b69d": "evt_b3b2ea9ba3bed334b69d"
+    "b3b2ea9ba3bed334b69d": "evt_b3b2ea9ba3bed334b69d",
+    "f6054616e17d09ca3a4f": "evt_f6054616e17d09ca3a4f",
+    "4451dff18e817376629d": "evt_4451dff18e817376629d",
+    "7650aea4af97440a8916": "evt_7650aea4af97440a8916",
+    "6870d9c73a6a817e2a03": "evt_6870d9c73a6a817e2a03"
   },
   "event_aliases": {},
   "quality_history": {
-    "2026-10-08": {
-      "ds_notice": {
-        "items": 1,
-        "known": 1,
-        "ids": [
-          "a9338c28d67faa2bfa50"
-        ],
-        "known_ids": [
-          "a9338c28d67faa2bfa50"
-        ],
-        "status": "ok"
-      },
-      "aix": {
-        "items": 4,
-        "known": 1,
-        "ids": [
-          "93b40e33a5034b9bef90",
-          "8bdabc7eaa5fdc81735c",
-          "9b3f043cd2a127294336",
-          "c7155fa7b56de5f46645"
-        ],
-        "known_ids": [
-          "9b3f043cd2a127294336"
-        ],
-        "status": "ok"
-      },
-      "sw": {
-        "items": 2,
-        "known": 2,
-        "ids": [
-          "9bf71550e1df76f86c69",
-          "a8d1c8bc81a78c82adad"
-        ],
-        "known_ids": [
-          "9bf71550e1df76f86c69",
-          "a8d1c8bc81a78c82adad"
-        ],
-        "status": "ok"
-      },
-      "dacon": {
-        "items": 4,
-        "known": 4,
-        "ids": [
-          "6f8f9451b6636bd7476e",
-          "7f6e9999a4808a78b583",
-          "81ae9c6a7f2a2412f43b",
-          "10f610d85c9f8e6ee1a8"
-        ],
-        "known_ids": [
-          "6f8f9451b6636bd7476e",
-          "7f6e9999a4808a78b583",
-          "81ae9c6a7f2a2412f43b",
-          "10f610d85c9f8e6ee1a8"
-        ],
-        "status": "ok"
-      },
-      "aifactory": {
-        "items": 2,
-        "known": 2,
-        "ids": [
-          "68f060fa2d76de81ee51",
-          "48d87172618e84c2f520"
-        ],
-        "known_ids": [
-          "68f060fa2d76de81ee51",
-          "48d87172618e84c2f520"
-        ],
-        "status": "ok"
-      },
-      "campuspick": {
-        "items": 15,
-        "known": 0,
-        "ids": [
-          "a9c7989bbc28cdf6846b",
-          "603410737f1171332f2b",
-          "3f7d8d2a4770babfdf7b",
-          "a61ec4deaae42aa56334",
-          "a86abc88d80d504621a7",
-          "ef0727d16eacef3658e4",
-          "800598f265163b201dd9",
-          "e9e2262091096ca55a14",
-          "2233fbd20bd6fb1578fd",
-          "7888411c786f2b11482c",
-          "c5f6a3760adccb3baa6b",
-          "814c426a252328dc8dfa",
-          "bfc8fcfbdebd08b4d2a8",
-          "e4d37463c2aa311229d9",
-          "c9cded70569ce729317a"
-        ],
-        "known_ids": [],
-        "status": "ok"
-      },
-      "ds_contest": {
-        "items": 1,
-        "known": 0,
-        "ids": [
-          "9d4d1338b3fe4b9395de"
-        ],
-        "known_ids": [],
-        "status": "ok"
-      }
-    },
     "2026-10-09": {
       "ds_notice": {
         "items": 1,
@@ -7230,6 +7457,116 @@
         "known_ids": [],
         "status": "ok"
       }
+    },
+    "2026-10-22": {
+      "ds_notice": {
+        "items": 1,
+        "known": 1,
+        "ids": [
+          "a9338c28d67faa2bfa50"
+        ],
+        "known_ids": [
+          "a9338c28d67faa2bfa50"
+        ],
+        "status": "ok"
+      },
+      "aix": {
+        "items": 4,
+        "known": 1,
+        "ids": [
+          "93b40e33a5034b9bef90",
+          "8bdabc7eaa5fdc81735c",
+          "9b3f043cd2a127294336",
+          "c7155fa7b56de5f46645"
+        ],
+        "known_ids": [
+          "9b3f043cd2a127294336"
+        ],
+        "status": "ok"
+      },
+      "sw": {
+        "items": 3,
+        "known": 2,
+        "ids": [
+          "9bf71550e1df76f86c69",
+          "a8d1c8bc81a78c82adad",
+          "f6054616e17d09ca3a4f"
+        ],
+        "known_ids": [
+          "9bf71550e1df76f86c69",
+          "a8d1c8bc81a78c82adad"
+        ],
+        "status": "ok"
+      },
+      "dacon": {
+        "items": 4,
+        "known": 4,
+        "ids": [
+          "6f8f9451b6636bd7476e",
+          "7f6e9999a4808a78b583",
+          "81ae9c6a7f2a2412f43b",
+          "10f610d85c9f8e6ee1a8"
+        ],
+        "known_ids": [
+          "6f8f9451b6636bd7476e",
+          "7f6e9999a4808a78b583",
+          "81ae9c6a7f2a2412f43b",
+          "10f610d85c9f8e6ee1a8"
+        ],
+        "status": "ok"
+      },
+      "aifactory": {
+        "items": 2,
+        "known": 2,
+        "ids": [
+          "68f060fa2d76de81ee51",
+          "48d87172618e84c2f520"
+        ],
+        "known_ids": [
+          "68f060fa2d76de81ee51",
+          "48d87172618e84c2f520"
+        ],
+        "status": "ok"
+      },
+      "campuspick": {
+        "items": 20,
+        "known": 1,
+        "ids": [
+          "a9c7989bbc28cdf6846b",
+          "603410737f1171332f2b",
+          "3f7d8d2a4770babfdf7b",
+          "a61ec4deaae42aa56334",
+          "a86abc88d80d504621a7",
+          "ef0727d16eacef3658e4",
+          "800598f265163b201dd9",
+          "e9e2262091096ca55a14",
+          "2233fbd20bd6fb1578fd",
+          "7888411c786f2b11482c",
+          "c5f6a3760adccb3baa6b",
+          "814c426a252328dc8dfa",
+          "bfc8fcfbdebd08b4d2a8",
+          "e4d37463c2aa311229d9",
+          "c9cded70569ce729317a",
+          "56e8eb813666d253b7dc",
+          "b3b2ea9ba3bed334b69d",
+          "4451dff18e817376629d",
+          "7650aea4af97440a8916",
+          "6870d9c73a6a817e2a03"
+        ],
+        "known_ids": [
+          "4451dff18e817376629d"
+        ],
+        "status": "ok"
+      },
+      "ds_contest": {
+        "items": 1,
+        "known": 0,
+        "ids": [
+          "9d4d1338b3fe4b9395de"
+        ],
+        "known_ids": [],
+        "status": "ok"
+      }
     }
   },
   "quality_alerts": [],
@@ -7253,6 +7590,7 @@
     "2026-10-18": "2026-10-18T14:44:02.455720+09:00",
     "2026-10-19": "2026-10-19T13:56:48.140059+09:00",
     "2026-10-20": "2026-10-20T14:21:48.390969+09:00",
-    "2026-10-21": "2026-10-21T14:56:56.076811+09:00"
+    "2026-10-21": "2026-10-21T14:56:56.076811+09:00",
+    "2026-10-22": "2026-10-22T16:28:25.615909+09:00"
   }
 }
